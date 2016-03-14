@@ -1,0 +1,42 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="MEdiText" parent="Widget.AppCompat.EditText"/>
+
+    <!-- normal -->
+    <style name="MEdiText.Normal" parent="MEdiText">
+        <!--默认颜色-->
+        <item name="met_baseColor">?attr/colorPrimary</item>
+        <!--激活状态颜色-->
+        <item name="met_primaryColor">?attr/colorAccent</item>
+        <item name="met_clearButton">true</item>
+    </style>
+    <!-- 带头部提示文本-->
+    <style name="MEdiText.FloatingLabel" parent="MEdiText.Normal">
+        <!--头部提示文本设置  none normal highlight-->
+        <item name="met_floatingLabel">highlight</item>
+    </style>
+    <!--带底部提示文本-->
+    <style name="MEdiText.HelperText" parent="MEdiText.Normal">
+        <!--met_helperText: 底部的 helper text。-->
+        <!--met_helperTextAlwaysShown: 是否总是显示 helper text， 而不仅仅是在获得焦点状态时。默认为 false。-->
+        <!--met_helperTextColor: Helper text 的字体颜色。-->
+        <!--met_errorColor: Error text 的字体颜色。-->
+        <!--met_bottomTextSize: 底部文字（Helper/Error text）的字体大小。默认为12sp。-->
+        <!--met_minBottomTextLines:底部为文字预留的行数，不管是否有 Helper/Error text 正在显示。-->
+    </style>
+
+</resources>

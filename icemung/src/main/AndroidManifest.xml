@@ -1,0 +1,11 @@
+<manifest package="org.github.xxbld.icemung"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application android:allowBackup="true"
+                 android:label="@string/app_name"
+                 android:supportsRtl="true">
+        <meta-data
+            android:name="org.github.xxbld.icemung.glide.GlideConfiguration"
+            android:value="GlideModule" />
+    </application>
+</manifest>

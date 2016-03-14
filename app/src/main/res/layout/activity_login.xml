@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/login_root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.github.xxbld.icemungs.ui.activity.LoginActivity">
+
+    <include layout="@layout/common_toolbar"/>
+
+    <LinearLayout
+        android:layout_centerInParent="true"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/login_edt_username"
+            style="@style/MEdiText.FloatingLabel"
+            app:met_floatingLabelText="请输入用户名或邮箱"
+            app:met_floatingLabelAlwaysShown="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/login_edt_password"
+            style="@style/MEdiText.FloatingLabel"
+            app:met_floatingLabelText="请输入密码"
+            app:met_floatingLabelAlwaysShown="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/login_btn_login"
+            android:text="Login"
+            android:layout_margin="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

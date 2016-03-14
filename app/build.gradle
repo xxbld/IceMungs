@@ -1,0 +1,32 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "org.github.xxbld.icemungs"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile project(':icemung')
+
+    compile 'cn.bmob.android:bmob-sdk:3.4.5'
+
+    compile "com.dev.sacot41:scviewpager:0.0.4"   //SCViewPager for welcome page
+    compile 'com.wdullaer:materialdatetimepicker:2.2.0'  //datetime picker
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'  //material text view
+}
