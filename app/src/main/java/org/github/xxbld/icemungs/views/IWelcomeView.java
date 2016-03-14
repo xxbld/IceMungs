@@ -1,6 +1,6 @@
 package org.github.xxbld.icemungs.views;
 
-import com.dev.sacot41.scviewpager.SCViewPagerAdapter;
+import org.github.xxbld.icemung.base.mvp.IMvpView;
 
 /**
  * Created by xxbld on 2016/2/23
@@ -8,15 +8,11 @@ import com.dev.sacot41.scviewpager.SCViewPagerAdapter;
  *
  * @descript ：
  */
-public interface IWelcomeView {
-
-    /**
-     * set translucent status bar and fitSystem false
-     */
-    void setTranslucentStatus();
+public interface IWelcomeView extends IMvpView {
 
     /**
      * init dotsView
+     *
      * @param resIdSelected
      * @param resIdUnSelected
      * @param pageNum
@@ -25,12 +21,13 @@ public interface IWelcomeView {
 
     /**
      * init viewPager
-     * @param scViewPagerAdapter
+     *
+     * @param pageNum
      */
-    void initViewPager(SCViewPagerAdapter scViewPagerAdapter);
+    void initViewPager(int pageNum);
 
     /**
-     * go main Activity
+     * go login or home Activity
      */
     void goLoginOrHome();
 }

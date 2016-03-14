@@ -4,10 +4,9 @@ import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.github.xxbld.icemungs.presenters.IPresenter;
 import org.github.xxbld.icemung.utils.StatusBarUtil;
 import org.github.xxbld.icemungs.R;
-import org.github.xxbld.icemungs.presenters.impl.SplashPresenterImpl;
+import org.github.xxbld.icemungs.presenters.SplashIPresenter;
 import org.github.xxbld.icemungs.ui.base.BaseActivity;
 import org.github.xxbld.icemungs.views.ISplashView;
 
@@ -22,8 +21,9 @@ public class SplashActivity extends BaseActivity implements ISplashView {
     @Bind(R.id.splash_txt_copyright)
     TextView mTxtCopyright;
 
-    private IPresenter mSplashPresenter;
-    private Handler handler =new Handler(){};
+    private SplashIPresenter mSplashPresenter;
+    private Handler handler = new Handler() {
+    };
 
     @Override
     protected int getContentViewLayoutResID() {
@@ -32,15 +32,19 @@ public class SplashActivity extends BaseActivity implements ISplashView {
 
     @Override
     protected void initViewsAndEvents() {
-        mSplashPresenter = new SplashPresenterImpl(this, this);
+        mSplashPresenter = new SplashIPresenter(this);
+        mSplashPresenter.attachView(this);
         mSplashPresenter.initialized();
-        StatusBarUtil.setTranslucent(this,false);
+        StatusBarUtil.setTranslucent(this, false);
     }
-//==========ISplashView Implements Method================
+
     @Override
-    public void setTranslucentStatus() {
-        StatusBarUtil.setTranslucent(this,false);
+    protected void onDestroy() {
+        super.onDestroy();
+        mSplashPresenter.detachView();
     }
+
+    //==========ISplashView Implements Method================
 
     @Override
     public void initViews(String copyright, String versionName, int bgResId) {

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.github.xxbld.icemung.base.BaseAppCompatActivity;
+import org.github.xxbld.icemung.base.mvp.IMvpView;
 import org.github.xxbld.icemung.netsatus.NetUtils;
 import org.github.xxbld.icemungs.R;
 
@@ -17,7 +18,7 @@ import butterknife.ButterKnife;
  *
  * @descript ：
  */
-public abstract class BaseActivity extends BaseAppCompatActivity {
+public abstract class BaseActivity extends BaseAppCompatActivity implements IMvpView {
 
     protected Toolbar mToolbar;
 
@@ -110,7 +111,32 @@ public abstract class BaseActivity extends BaseAppCompatActivity {
         if (mToolbar != null) {
             setSupportActionBar(mToolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+//            getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         }
+    }
+    //====================impls
+    @Override
+    public void showLoading(String msg) {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showError(String msg) {
+
+    }
+
+    @Override
+    public void showException(String msg) {
+
+    }
+
+    @Override
+    public void showNetError() {
+
     }
 }

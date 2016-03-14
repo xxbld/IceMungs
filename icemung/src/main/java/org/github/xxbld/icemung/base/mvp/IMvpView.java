@@ -1,12 +1,12 @@
-package org.github.xxbld.icemungs.views.base;
+package org.github.xxbld.icemung.base.mvp;
 
 /**
- * Created by xxbld on 2016/2/22
+ * Created by xxbld on 2016/3/1
  * you can contact me at: 1024920618@qq.com
  *
- * @descript ：mvp base view
+ * @descript ：
  */
-public interface IBaseView {
+public interface IMvpView {
     /**
      * show loading
      * @param msg

@@ -1,20 +1,18 @@
 package org.github.xxbld.icemungs.views;
 
+import org.github.xxbld.icemung.base.mvp.IMvpView;
+
 /**
  * Created by xxbld on 2016/2/23
  * you can contact me at: 1024920618@qq.com
  *
  * @descript ：
  */
-public interface ISplashView {
-
-    /**
-     * 设置状态栏为半透明，fit，，为false
-     */
-    void setTranslucentStatus();
+public interface ISplashView extends IMvpView {
 
     /**
      * 初始化views 设置
+     *
      * @param copyright
      * @param versionName
      * @param bgResId

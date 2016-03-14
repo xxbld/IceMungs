@@ -6,9 +6,10 @@ package org.github.xxbld.icemung.base.mvp;
  *
  * @descript ：
  */
-public interface Presenter<T extends MvpView> {
+public interface IPresenter<T extends IMvpView> {
     /**
      * 关联 MVP view
+     *
      * @param mvpView
      */
     void attachView(T mvpView);
@@ -17,4 +18,9 @@ public interface Presenter<T extends MvpView> {
      * 解除关联
      */
     void detachView();
+
+    /**
+     * 初始操作
+     */
+    void initialized();
 }

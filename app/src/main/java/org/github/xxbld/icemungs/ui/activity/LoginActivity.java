@@ -8,6 +8,7 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.github.xxbld.icemung.utils.StatusBarUtil;
 import org.github.xxbld.icemungs.R;
+import org.github.xxbld.icemungs.presenters.LoginIPresenter;
 import org.github.xxbld.icemungs.ui.base.BaseActivity;
 import org.github.xxbld.icemungs.views.ILoginView;
 
@@ -24,6 +25,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     @Bind(R.id.login_btn_login)
     Button mBtnLogin;
 
+    private LoginIPresenter loginPresenter;
     private Handler mHandler = new Handler() {
     };
 
@@ -35,11 +37,13 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 //    @Override
 //    protected View getLoadingTargetView() {
 ////        return mRootView;
-////        return ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
 //    }
 
     @Override
     protected void initViewsAndEvents() {
+        loginPresenter = new LoginIPresenter();
+        loginPresenter.attachView(this);
+
         mToolbar.setTitle("Login");
         mToolbar.setLogo(R.mipmap.ic_launcher);
         setSupportActionBar(mToolbar);
@@ -48,46 +52,20 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showLoading("loading...");
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        hideLoading();
-                        goHome();
-                    }
-                }, 2000);
+                loginPresenter.login(mEdtUsername.getText().toString(), mEdtPassword.getText().toString());
             }
         });
     }
 
-    //    ===============ILoginView Implement Methods====================
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        loginPresenter.detachView();
+    }
+
+    //================impls
     @Override
     public void goHome() {
-        go(MainActivity.class);
-    }
-
-    @Override
-    public void showLoading(String msg) {
-        this.toggleShowLoading(true, msg);
-    }
-
-    @Override
-    public void hideLoading() {
-        this.toggleShowLoading(false, null);
-    }
-
-    @Override
-    public void showError(String msg) {
-
-    }
-
-    @Override
-    public void showException(String msg) {
-
-    }
-
-    @Override
-    public void showNetError() {
-
+        LoginActivity.this.go(MainActivity.class);
     }
 }

@@ -4,11 +4,16 @@ package org.github.xxbld.icemung.base.mvp;
  * Created by xxbld on 2016/3/1
  * you can contact me at: 1024920618@qq.com
  *
- * @descript ：BasePresenter
+ * @descript ：BaseIPresenter
  */
-public class BasePresenter<T extends MvpView> implements Presenter<T> {
+public class BaseIPresenter<T extends IMvpView> implements IPresenter<T> {
 
     private T mMvpView;
+
+    @Override
+    public void initialized() {
+        checkViewAttached();
+    }
 
     @Override
     public void attachView(T mvpView) {
@@ -44,8 +49,8 @@ public class BasePresenter<T extends MvpView> implements Presenter<T> {
 
     public static class MvpViewNoAttachedException extends RuntimeException {
         public MvpViewNoAttachedException() {
-            super("Please call Presenter.attachView(MvpView) before" +
-                    " requesting data to the Presenter");
+            super("Please call IPresenter.attachView(IMvpView) before" +
+                    " requesting data to the IPresenter");
         }
     }
 }
