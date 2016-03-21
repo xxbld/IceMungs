@@ -11,8 +11,8 @@ import org.github.xxbld.icemungs.views.ILoginView;
  *
  * @descript ：
  */
-public class LoginIPresenter extends BaseIPresenter<ILoginView> {
-    public LoginIPresenter() {
+public class LoginPresenter extends BaseIPresenter<ILoginView> {
+    public LoginPresenter() {
     }
 
     @Override

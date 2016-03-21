@@ -11,7 +11,7 @@ import okhttp3.Request;
  *
  * @description :
  */
-public class OkHttpHelper {
+public class OkHttpSamples {
     public static void demoGet() {
 //        http://blog.csdn.net/lmj623565791/article/details/49734867
         String url = "http://www.csdn.net/";

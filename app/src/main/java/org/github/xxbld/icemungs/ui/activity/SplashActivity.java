@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import org.github.xxbld.icemung.utils.StatusBarUtil;
 import org.github.xxbld.icemungs.R;
-import org.github.xxbld.icemungs.presenters.SplashIPresenter;
+import org.github.xxbld.icemungs.presenters.SplashPresenter;
 import org.github.xxbld.icemungs.ui.base.BaseActivity;
 import org.github.xxbld.icemungs.views.ISplashView;
 
@@ -21,7 +21,7 @@ public class SplashActivity extends BaseActivity implements ISplashView {
     @Bind(R.id.splash_txt_copyright)
     TextView mTxtCopyright;
 
-    private SplashIPresenter mSplashPresenter;
+    private SplashPresenter mSplashPresenter;
     private Handler handler = new Handler() {
     };
 
@@ -32,7 +32,7 @@ public class SplashActivity extends BaseActivity implements ISplashView {
 
     @Override
     protected void initViewsAndEvents() {
-        mSplashPresenter = new SplashIPresenter(this);
+        mSplashPresenter = new SplashPresenter(this);
         mSplashPresenter.attachView(this);
         mSplashPresenter.initialized();
         StatusBarUtil.setTranslucent(this, false);

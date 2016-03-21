@@ -6,7 +6,7 @@ package org.github.xxbld.icemung.base.mvp;
  *
  * @descript ：
  */
-public interface IPresenter<T extends IMvpView> {
+public interface   IPresenter<T extends IMvpView> {
     /**
      * 关联 MVP view
      *

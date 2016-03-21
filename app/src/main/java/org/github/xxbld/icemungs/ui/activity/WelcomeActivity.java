@@ -14,7 +14,7 @@ import com.dev.sacot41.scviewpager.SCViewPagerAdapter;
 
 import org.github.xxbld.icemung.utils.StatusBarUtil;
 import org.github.xxbld.icemungs.R;
-import org.github.xxbld.icemungs.presenters.WelcomeIPresenter;
+import org.github.xxbld.icemungs.presenters.WelcomePresenter;
 import org.github.xxbld.icemungs.ui.base.BaseActivity;
 import org.github.xxbld.icemungs.views.IWelcomeView;
 
@@ -30,7 +30,7 @@ public class WelcomeActivity extends BaseActivity implements IWelcomeView {
     @Bind(R.id.welcome_btn_home)
     Button mBtnToHome;
 
-    private WelcomeIPresenter mWelcomePresenter;
+    private WelcomePresenter mWelcomePresenter;
     private SCViewPagerAdapter mSCViewPagerAdapter;
 
     @Override
@@ -42,7 +42,7 @@ public class WelcomeActivity extends BaseActivity implements IWelcomeView {
     protected void initViewsAndEvents() {
         StatusBarUtil.setTranslucent(this, false);
 
-        mWelcomePresenter = new WelcomeIPresenter();
+        mWelcomePresenter = new WelcomePresenter();
         mWelcomePresenter.attachView(this);
         mWelcomePresenter.initialized();
 

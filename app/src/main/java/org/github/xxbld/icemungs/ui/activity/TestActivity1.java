@@ -33,11 +33,11 @@ public class TestActivity1 extends BaseActivity {
     }
 
     @Override
-    protected void initViewsAndEvents(){
+    protected void initViewsAndEvents() {
 
         StatusBarUtil.setTranslucent(this);
 
-       final SystemBarTintManager tintManager= new SystemBarTintManager(TestActivity1.this);
+        final SystemBarTintManager tintManager = new SystemBarTintManager(TestActivity1.this);
         tintManager.setStatusBarTintEnabled(true);
         tintManager.setNavigationBarTintEnabled(true);
         mBtn1.setOnClickListener(new View.OnClickListener() {

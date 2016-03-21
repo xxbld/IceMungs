@@ -15,10 +15,10 @@ import java.util.Calendar;
  *
  * @descript ：
  */
-public class SplashIPresenter extends BaseIPresenter<ISplashView> {
+public class SplashPresenter extends BaseIPresenter<ISplashView> {
     private Context mContext;
 
-    public SplashIPresenter(Context context) {
+    public SplashPresenter(Context context) {
         this.mContext = context;
     }
 

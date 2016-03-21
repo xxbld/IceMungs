@@ -10,11 +10,11 @@ import org.github.xxbld.icemungs.views.IWelcomeView;
  *
  * @descript ：
  */
-public class WelcomeIPresenter extends BaseIPresenter<IWelcomeView> {
+public class WelcomePresenter extends BaseIPresenter<IWelcomeView> {
 
     private static final int PAGE_NUM = 5;
 
-    public WelcomeIPresenter() {
+    public WelcomePresenter() {
     }
 
     @Override

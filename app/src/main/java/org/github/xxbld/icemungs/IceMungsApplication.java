@@ -11,12 +11,23 @@ import cn.bmob.v3.Bmob;
  * @descript ：
  */
 public class IceMungsApplication extends BaseApplication {
+    /**
+     * log common tag
+     */
+    private final static String LOG_COMMON_TAG = "IceMungs";
+
 
     @Override
     public void onCreate() {
         super.onCreate();
         //初始化Bmob SDK
         Bmob.initialize(this, "468e2678c4bff9cbf234f74f15731aad");
+
+    }
+
+    @Override
+    protected void registerYourSingletons() {
+
     }
 
     @Override
@@ -36,6 +47,6 @@ public class IceMungsApplication extends BaseApplication {
 
     @Override
     protected String getCommonTag() {
-        return "IceMungs";
+        return LOG_COMMON_TAG;
     }
 }

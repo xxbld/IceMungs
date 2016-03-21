@@ -66,7 +66,7 @@ public class WebServicesTask extends AsyncTask<WebServicesParameter, Integer, We
         // 将 soapObject对象设置为SoapSerializationEnvelope对象的传出SOAP消息
         envelop.bodyOut = soapObject;
         envelop.dotNet = parameter.dotNet;
-        envelop.setOutputSoapObject(soapObject);
+//        envelop.setOutputSoapObject(soapObject);
 
         HttpTransportSE trans = new HttpTransportSE(parameter.webserviceUrl);
         trans.debug = true;

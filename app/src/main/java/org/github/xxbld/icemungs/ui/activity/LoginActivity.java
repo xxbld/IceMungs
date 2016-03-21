@@ -8,7 +8,7 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.github.xxbld.icemung.utils.StatusBarUtil;
 import org.github.xxbld.icemungs.R;
-import org.github.xxbld.icemungs.presenters.LoginIPresenter;
+import org.github.xxbld.icemungs.presenters.LoginPresenter;
 import org.github.xxbld.icemungs.ui.base.BaseActivity;
 import org.github.xxbld.icemungs.views.ILoginView;
 
@@ -23,9 +23,10 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     @Bind(R.id.login_edt_password)
     MaterialEditText mEdtPassword;
     @Bind(R.id.login_btn_login)
+
     Button mBtnLogin;
 
-    private LoginIPresenter loginPresenter;
+    private LoginPresenter loginPresenter;
     private Handler mHandler = new Handler() {
     };
 
@@ -41,7 +42,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Override
     protected void initViewsAndEvents() {
-        loginPresenter = new LoginIPresenter();
+        loginPresenter = new LoginPresenter();
         loginPresenter.attachView(this);
 
         mToolbar.setTitle("Login");
