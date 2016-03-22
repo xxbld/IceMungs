@@ -5,4 +5,6 @@
     <string name="navigation_drawer_close">navigation_drawer_close</string>
 
     <string name="splash_copyright">copyright 2016 Jxust xxbld</string>
+    <!--main activity-->
+    <string name="main_tab_title">flash</string>
 </resources>

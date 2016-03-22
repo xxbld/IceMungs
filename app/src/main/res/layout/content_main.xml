@@ -22,24 +22,12 @@
             android:fillViewport="false"/>
 
     </android.support.design.widget.AppBarLayout>
-    <LinearLayout
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/content_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <CheckBox
-            android:id="@+id/cb_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="translucent"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="go"
-            android:id="@+id/btn_go"
-            android:layout_gravity="center_horizontal"/>
-
-    </LinearLayout>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/content_fab"

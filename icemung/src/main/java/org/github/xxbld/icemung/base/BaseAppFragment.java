@@ -33,10 +33,6 @@ public abstract class BaseAppFragment extends Fragment {
     protected int mScreenWidth = 0;
     protected int mScreenHeight = 0;
     protected float mScreenDensity = 0.0f;
-
-    /**
-     * context
-     */
     protected Context mContext = null;
 
     private boolean isFirstResume = true;

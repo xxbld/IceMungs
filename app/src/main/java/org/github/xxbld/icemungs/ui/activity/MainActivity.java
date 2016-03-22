@@ -1,39 +1,44 @@
 package org.github.xxbld.icemungs.ui.activity;
 
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
 
-import org.github.xxbld.icemung.utils.MLog;
 import org.github.xxbld.icemung.utils.StatusBarUtil;
 import org.github.xxbld.icemungs.R;
+import org.github.xxbld.icemungs.presenters.MainPresenter;
+import org.github.xxbld.icemungs.ui.adapter.MainFragmentAdapter;
 import org.github.xxbld.icemungs.ui.base.BaseActivity;
+import org.github.xxbld.icemungs.views.IMainView;
+
+import java.util.List;
 
 import butterknife.Bind;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements IMainView {
 
-    @Bind(R.id.content_fab)
-    FloatingActionButton mFab;
     @Bind(R.id.main_nav)
     NavigationView mNavigationView;
     @Bind(R.id.main_drawer)
     DrawerLayout mDrawerLayout;
 
-    @Bind(R.id.cb_1)
-    CheckBox mCheckBox;
-    @Bind(R.id.content_coo)
-    CoordinatorLayout mCoordinatorLayout;
-    @Bind(R.id.btn_go)
-    Button mButton;
+    @Bind(R.id.content_fab)
+    FloatingActionButton mFab;
+    @Bind(R.id.content_viewpager)
+    ViewPager mViewPager;
+    @Bind(R.id.content_tab)
+    TabLayout mTabLayout;
+
+    MainPresenter mMainPresenter;
+    MainFragmentAdapter mMainFragmentAdapter;
 
     @Override
     protected int getContentViewLayoutResID() {
@@ -42,15 +47,14 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initViewsAndEvents() {
-        //item 的icon颜色也有
-        mNavigationView.setItemIconTintList(null);
+        mMainPresenter = new MainPresenter();
+        mMainPresenter.attachView(this);
+        mMainPresenter.initialized();
+
         StatusBarUtil.setColorForDrawerLayout(this, mDrawerLayout, getResources().getColor(R.color.colorPrimary));
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        mDrawerLayout.setDrawerListener(toggle);
-        toggle.syncState();
 
+        setNav();
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,26 +63,35 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+    }
 
-        mCheckBox.setOnClickListener(new View.OnClickListener() {
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mMainPresenter.detachView();
+    }
+
+    private void setNav(){
+        //item 的icon颜色也有
+        mNavigationView.setItemIconTintList(null);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerLayout.setDrawerListener(toggle);
+        toggle.syncState();
+
+        //item click listener
+        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                MLog.e(TAG, "click:" + mCheckBox.isChecked());
-                if (mCheckBox.isChecked()) {
-                    mCoordinatorLayout.setBackgroundResource(R.mipmap.material_design_1);
-                    mToolbar.setBackgroundColor(getResources().getColor(R.color.transparent));
-                } else {
-                    mCoordinatorLayout.setBackgroundResource(0);
-                    mToolbar.setBackgroundColor(getResources().getColor(R.color.md_red_A400));
-                }
+            public boolean onNavigationItemSelected(MenuItem item) {
+                int id = item.getItemId();
+                mDrawerLayout.closeDrawers();
+                return false;
             }
         });
-        mButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                go(TestActivity1.class);
-            }
-        });
+    }
+    private void setToolbar(){
+
     }
 
     @Override
@@ -101,5 +114,18 @@ public class MainActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //===================impl
+    @Override
+    public void initTabLayout(List<String> tabTitles, List<Fragment> fragments) {
+        mMainFragmentAdapter =  new MainFragmentAdapter(getSupportFragmentManager(), fragments, tabTitles);
+        for (int i = 0 ;i < tabTitles.size(); i++) {
+            mTabLayout.addTab(mTabLayout.newTab().setText(tabTitles.get(i)));
+        }
+
+        mViewPager.setAdapter(mMainFragmentAdapter);
+        mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.setTabsFromPagerAdapter(mMainFragmentAdapter);
     }
 }

@@ -2,7 +2,7 @@ package org.github.xxbld.icemungs.presenters;
 
 import android.content.Context;
 
-import org.github.xxbld.icemung.base.mvp.BaseIPresenter;
+import org.github.xxbld.icemung.base.mvp.BasePresenter;
 import org.github.xxbld.icemung.utils.AppUtil;
 import org.github.xxbld.icemungs.R;
 import org.github.xxbld.icemungs.views.ISplashView;
@@ -15,7 +15,7 @@ import java.util.Calendar;
  *
  * @descript ：
  */
-public class SplashPresenter extends BaseIPresenter<ISplashView> {
+public class SplashPresenter extends BasePresenter<ISplashView> {
     private Context mContext;
 
     public SplashPresenter(Context context) {

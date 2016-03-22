@@ -2,7 +2,7 @@ package org.github.xxbld.icemungs.presenters;
 
 import android.os.Handler;
 
-import org.github.xxbld.icemung.base.mvp.BaseIPresenter;
+import org.github.xxbld.icemung.base.mvp.BasePresenter;
 import org.github.xxbld.icemungs.views.ILoginView;
 
 /**
@@ -11,7 +11,7 @@ import org.github.xxbld.icemungs.views.ILoginView;
  *
  * @descript ：
  */
-public class LoginPresenter extends BaseIPresenter<ILoginView> {
+public class LoginPresenter extends BasePresenter<ILoginView> {
     public LoginPresenter() {
     }
 

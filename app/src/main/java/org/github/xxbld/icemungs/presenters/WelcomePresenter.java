@@ -1,6 +1,6 @@
 package org.github.xxbld.icemungs.presenters;
 
-import org.github.xxbld.icemung.base.mvp.BaseIPresenter;
+import org.github.xxbld.icemung.base.mvp.BasePresenter;
 import org.github.xxbld.icemungs.R;
 import org.github.xxbld.icemungs.views.IWelcomeView;
 
@@ -10,7 +10,7 @@ import org.github.xxbld.icemungs.views.IWelcomeView;
  *
  * @descript ：
  */
-public class WelcomePresenter extends BaseIPresenter<IWelcomeView> {
+public class WelcomePresenter extends BasePresenter<IWelcomeView> {
 
     private static final int PAGE_NUM = 5;
 

@@ -4,9 +4,9 @@ package org.github.xxbld.icemung.base.mvp;
  * Created by xxbld on 2016/3/1
  * you can contact me at: 1024920618@qq.com
  *
- * @descript ：BaseIPresenter
+ * @descript ：BasePresenter
  */
-public class BaseIPresenter<T extends IMvpView> implements IPresenter<T> {
+public class BasePresenter<T extends IMvpView> implements IPresenter<T> {
 
     private T mMvpView;
 
