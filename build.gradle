@@ -18,13 +18,14 @@ allprojects {
         //Bmob的maven仓库地址，必须填写
         maven { url "https://raw.github.com/bmob/bmob-android-sdk/master" }
         maven { url "https://jitpack.io" }
+        maven { url 'http://esri.bintray.com/arcgis' }
     }
 }
 
-ext{
+ext {
     compileSdkVersion = 23
     buildToolsVersion = "23.0.2"
-    minSdkVersion = 14
+    minSdkVersion = 15
     targetSdkVersion = compileSdkVersion
 }
 

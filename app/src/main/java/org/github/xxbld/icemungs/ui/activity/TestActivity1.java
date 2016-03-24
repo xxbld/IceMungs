@@ -1,6 +1,9 @@
 package org.github.xxbld.icemungs.ui.activity;
 
 import android.graphics.Color;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -9,7 +12,12 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import org.github.xxbld.icemung.utils.StatusBarUtil;
 import org.github.xxbld.icemungs.R;
+import org.github.xxbld.icemungs.ui.adapter.MainFragmentAdapter;
 import org.github.xxbld.icemungs.ui.base.BaseActivity;
+import org.github.xxbld.icemungs.ui.fragment.FlashFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 
@@ -26,6 +34,11 @@ public class TestActivity1 extends BaseActivity {
     Button mBtn2;
     @Bind(R.id.linear)
     LinearLayout mLayout;
+
+    @Bind(R.id.test_tab)
+    TabLayout mTestTab;
+    @Bind(R.id.test_viewpager)
+    ViewPager mTestViewpager;
 
     @Override
     protected int getContentViewLayoutResID() {
@@ -58,7 +71,27 @@ public class TestActivity1 extends BaseActivity {
                 mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             }
         });
+        initTabLayout(getTitles(),getTabFragments());
+    }
+    private void initTabLayout(List<String> tabTitles, List<Fragment> fragments) {
+        MainFragmentAdapter mMainFragmentAdapter =  new MainFragmentAdapter(getSupportFragmentManager(), fragments, tabTitles);
+        mTestViewpager.setAdapter(mMainFragmentAdapter);
+        //必须在viewpager.setAdapter之后
+        mTestTab.setupWithViewPager(mTestViewpager);
+    }
+    private List<String> getTitles(){
+        List<String> titles = new ArrayList<>();
+        titles.add("新鲜事");
+        titles.add("新鲜事");
+        titles.add("新鲜事");
+        return titles;
     }
 
-
+    private List<Fragment> getTabFragments() {
+        List<Fragment> fragments = new ArrayList<>();
+        fragments.add(new FlashFragment());
+        fragments.add(new FlashFragment());
+        fragments.add(new FlashFragment());
+        return  fragments;
+    }
 }

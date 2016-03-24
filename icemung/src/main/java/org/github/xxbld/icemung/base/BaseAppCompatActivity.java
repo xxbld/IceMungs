@@ -6,22 +6,20 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import org.github.xxbld.icemung.R;
-import org.github.xxbld.icemung.widget.loading.VaryViewHelperController;
 import org.github.xxbld.icemung.netsatus.NetStatusObserver;
 import org.github.xxbld.icemung.netsatus.NetStatusReceiver;
 import org.github.xxbld.icemung.netsatus.NetUtils;
 import org.github.xxbld.icemung.utils.TextUtil;
+import org.github.xxbld.icemung.widget.loading.VaryViewHelperController;
 
 import butterknife.ButterKnife;
 
@@ -56,7 +54,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
      * Activity 切换模式
      */
     public enum TransitionMode {
-        TOP, BOTTOM, LEFT, RIGHT, SCALE, FADE,RIGHT_LEFT,LEFT_RIGHT,TOP_BOTTOM,BOTTOM_TOP
+        TOP, BOTTOM, LEFT, RIGHT, SCALE, FADE, RIGHT_LEFT, LEFT_RIGHT, TOP_BOTTOM, BOTTOM_TOP
     }
 
 
@@ -81,34 +79,10 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
         mScreenHeight = displayMetrics.heightPixels;
         mScreenWidth = displayMetrics.widthPixels;
 
-
         if (getContentViewLayoutResID() != 0) {
             setContentView(getContentViewLayoutResID());
         } else {
             throw new IllegalArgumentException("you must return a right layout resource id");
-        }
-
-        if (isSetStatusBar()) {
-            //这里不再使用  使用 StatusBarUtil
-            setTranslucentStatus(isSetStatusBar());
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                // 设置根布局的参数 在setContentView()之后
-                //获取布局的根节点
-                ViewGroup rootView = (ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
-                if (rootView instanceof DrawerLayout){
-                    //如果根节点是DrawerLayout,则找到drawerLayout的第一个childView 即内容视图
-                    ViewGroup drawerChild1 = (ViewGroup) rootView.getChildAt(0);
-                    //设置参数
-                    drawerChild1.setFitsSystemWindows(true);
-                    drawerChild1.setClipToPadding(false);
-                }
-                else {
-                    rootView.setFitsSystemWindows(true);
-                    rootView.setClipToPadding(false);
-                }
-            }
-            setFirstStatusBar();
         }
 
         mNetStatusObserver = new NetStatusObserver() {
@@ -299,14 +273,12 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     }
 
     /**
-     *  get SystemBarTintManager Enable
+     * get SystemBarTintManager Enable
+     *
      * @param activity
      * @return
      */
-    protected SystemBarTintManager getSystemBarTintManagerEnable(Activity activity,boolean isNeedNavigation) {
-        if (!isSetStatusBar()){
-            return null;
-        }
+    protected SystemBarTintManager getSystemBarTintManagerEnable(Activity activity, boolean isNeedNavigation) {
         SystemBarTintManager mTintManager = new SystemBarTintManager(activity);
         mTintManager.setStatusBarTintEnabled(true);
         mTintManager.setNavigationBarTintEnabled(isNeedNavigation);
@@ -318,6 +290,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
      *
      * @param on
      */
+    @Deprecated
     private void setTranslucentStatus(boolean on) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window win = getWindow();
@@ -391,15 +364,6 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
      * @return TransitionMode
      */
     protected abstract TransitionMode getOverridePendingTransitionMode();
-
-    /**
-     * is applyStatusBarTranslucency
-     *
-     * @return
-     */
-    protected abstract boolean isSetStatusBar();
-
-    protected abstract void setFirstStatusBar();
 
     /**
      * 设置 layout res id

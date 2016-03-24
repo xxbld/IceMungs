@@ -11,6 +11,12 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    //arcgis setting
+    packagingOptions{
+        exclude 'META-INF/LGPL2.1'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -34,4 +40,5 @@ dependencies {
     compile('com.github.afollestad.material-dialogs:core:0.8.5.7@aar') {
         transitive = true
     }
+    compile 'com.esri.arcgis.android:arcgis-android:10.2.7'
 }

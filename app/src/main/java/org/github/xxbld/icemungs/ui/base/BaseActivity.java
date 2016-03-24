@@ -3,7 +3,6 @@ package org.github.xxbld.icemungs.ui.base;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewGroup;
 
 import org.github.xxbld.icemung.base.BaseAppCompatActivity;
 import org.github.xxbld.icemung.base.mvp.IMvpView;
@@ -42,23 +41,6 @@ public abstract class BaseActivity extends BaseAppCompatActivity implements IMvp
         return TransitionMode.RIGHT_LEFT;
     }
 
-    /**
-     * not use
-     *
-     * @return
-     */
-    @Override
-    protected boolean isSetStatusBar() {
-        return false;
-    }
-
-    /**
-     * not use
-     */
-    @Override
-    protected void setFirstStatusBar() {
-    }
-
     @Override
     protected int getContentViewLayoutResID() {
         return 0;
@@ -71,7 +53,8 @@ public abstract class BaseActivity extends BaseAppCompatActivity implements IMvp
      */
     @Override
     protected View getLoadingTargetView() {
-        return ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
+        return null;
+//        return ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
     }
 
     @Override
@@ -114,6 +97,7 @@ public abstract class BaseActivity extends BaseAppCompatActivity implements IMvp
 //            getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         }
     }
+
     //====================impls
     @Override
     public void showLoading(String msg) {

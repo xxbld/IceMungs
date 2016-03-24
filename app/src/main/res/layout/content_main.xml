@@ -19,6 +19,7 @@
             android:id="@+id/content_tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="@dimen/title_toolbar_elevation"
             android:fillViewport="false"/>
 
     </android.support.design.widget.AppBarLayout>

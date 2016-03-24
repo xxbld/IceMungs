@@ -18,4 +18,12 @@
         android:layout_height="wrap_content"
         android:text="设置颜色"
         android:id="@+id/btn2"/>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/test_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/test_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

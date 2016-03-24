@@ -32,10 +32,12 @@ public class SplashActivity extends BaseActivity implements ISplashView {
 
     @Override
     protected void initViewsAndEvents() {
+        mToolbar = null;
+        StatusBarUtil.setTranslucent(this, false);
+
         mSplashPresenter = new SplashPresenter(this);
         mSplashPresenter.attachView(this);
         mSplashPresenter.initialized();
-        StatusBarUtil.setTranslucent(this, false);
     }
 
     @Override
@@ -58,7 +60,7 @@ public class SplashActivity extends BaseActivity implements ISplashView {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                go(WelcomeActivity.class);
+                goThenKill(WelcomeActivity.class);
             }
         }, 2000);
     }

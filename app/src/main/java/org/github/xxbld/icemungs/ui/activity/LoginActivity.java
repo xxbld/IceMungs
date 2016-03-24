@@ -50,6 +50,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         setSupportActionBar(mToolbar);
 
         StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
+
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

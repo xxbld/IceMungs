@@ -40,6 +40,7 @@ public class WelcomeActivity extends BaseActivity implements IWelcomeView {
 
     @Override
     protected void initViewsAndEvents() {
+        mToolbar = null;
         StatusBarUtil.setTranslucent(this, false);
 
         mWelcomePresenter = new WelcomePresenter();
@@ -95,7 +96,7 @@ public class WelcomeActivity extends BaseActivity implements IWelcomeView {
 
     @Override
     public void goLoginOrHome() {
-        go(LoginActivity.class);
+        goThenKill(LoginActivity.class);
     }
 
     private void initPage() {

@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 
 import org.github.xxbld.icemung.base.mvp.BasePresenter;
 import org.github.xxbld.icemungs.ui.fragment.FlashFragment;
+import org.github.xxbld.icemungs.ui.fragment.TestArcgisFragment;
 import org.github.xxbld.icemungs.views.IMainView;
 
 import java.util.ArrayList;
@@ -22,8 +23,7 @@ public class MainPresenter extends BasePresenter<IMainView> {
 
     @Override
     public void initialized() {
-        super.initialized();
-        getMvpView().initTabLayout(getTitles(),getTabFragments());
+        this.getMvpView().initTabLayout(getTitles(),getTabFragments());
     }
 
 
@@ -50,7 +50,7 @@ public class MainPresenter extends BasePresenter<IMainView> {
     private List<Fragment> getTabFragments() {
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new FlashFragment());
-        fragments.add(new FlashFragment());
+        fragments.add(new TestArcgisFragment());
         fragments.add(new FlashFragment());
         return  fragments;
     }

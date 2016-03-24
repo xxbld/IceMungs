@@ -53,7 +53,6 @@ public class MainActivity extends BaseActivity implements IMainView {
 
         StatusBarUtil.setColorForDrawerLayout(this, mDrawerLayout, getResources().getColor(R.color.colorPrimary));
 
-
         setNav();
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +70,7 @@ public class MainActivity extends BaseActivity implements IMainView {
         mMainPresenter.detachView();
     }
 
-    private void setNav(){
+    private void setNav() {
         //item 的icon颜色也有
         mNavigationView.setItemIconTintList(null);
 
@@ -90,7 +89,8 @@ public class MainActivity extends BaseActivity implements IMainView {
             }
         });
     }
-    private void setToolbar(){
+
+    private void setToolbar() {
 
     }
 
@@ -119,13 +119,9 @@ public class MainActivity extends BaseActivity implements IMainView {
     //===================impl
     @Override
     public void initTabLayout(List<String> tabTitles, List<Fragment> fragments) {
-        mMainFragmentAdapter =  new MainFragmentAdapter(getSupportFragmentManager(), fragments, tabTitles);
-        for (int i = 0 ;i < tabTitles.size(); i++) {
-            mTabLayout.addTab(mTabLayout.newTab().setText(tabTitles.get(i)));
-        }
-
+        mMainFragmentAdapter = new MainFragmentAdapter(getSupportFragmentManager(), fragments, tabTitles);
         mViewPager.setAdapter(mMainFragmentAdapter);
+        //必须在viewpager.setAdapter之后
         mTabLayout.setupWithViewPager(mViewPager);
-        mTabLayout.setTabsFromPagerAdapter(mMainFragmentAdapter);
     }
 }
