@@ -91,7 +91,6 @@ public class MainActivity extends BaseActivity implements IMainView {
     }
 
     private void setToolbar() {
-
     }
 
     @Override

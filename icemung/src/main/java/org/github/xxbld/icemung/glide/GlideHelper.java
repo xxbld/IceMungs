@@ -15,7 +15,7 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
  *
  * @description :
  */
-public class GlideHelper {
+public class  GlideHelper {
     //    Glide.with(myFragment)
 //         .load(url)
 //         .centerCrop()//居中

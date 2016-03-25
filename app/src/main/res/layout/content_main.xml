@@ -13,14 +13,11 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <include layout="@layout/common_toolbar"/>
+        <include layout="@layout/merge_toolbar"/>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/content_tab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="@dimen/title_toolbar_elevation"
-            android:fillViewport="false"/>
+            style="@style/IceMung.Widget.TabLayout"/>
 
     </android.support.design.widget.AppBarLayout>
 

@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     tools:context="org.github.xxbld.icemungs.ui.activity.LoginActivity">
 
-    <include layout="@layout/common_toolbar"/>
+    <include layout="@layout/merge_toolbar"/>
 
     <LinearLayout
         android:layout_centerInParent="true"

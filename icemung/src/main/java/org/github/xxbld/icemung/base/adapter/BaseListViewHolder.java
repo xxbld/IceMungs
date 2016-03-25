@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 /**
  * Created by xxbld on 2016/1/19.
  * you can contact me at: 1024920618@qq.com
@@ -19,11 +21,13 @@ public class BaseListViewHolder {
     private final SparseArray<View> mViews;
     private int mPosition;
     private View mConvertView;
+    private Context mContext;
 
     private BaseListViewHolder(Context context, ViewGroup parent, int layoutId,
                                int position) {
         this.mPosition = position;
-        this.mViews = new SparseArray<View>();
+        this.mViews = new SparseArray<>();
+        this.mContext = context;
         mConvertView = LayoutInflater.from(context).inflate(layoutId, parent,
                 false);
         // setTag
@@ -41,7 +45,7 @@ public class BaseListViewHolder {
      * @return
      */
     public static BaseListViewHolder get(Context context, View convertView,
-                                 ViewGroup parent, int layoutId, int position) {
+                                         ViewGroup parent, int layoutId, int position) {
         if (convertView == null) {
             return new BaseListViewHolder(context, parent, layoutId, position);
         }
@@ -115,6 +119,7 @@ public class BaseListViewHolder {
      * @return
      */
     public BaseListViewHolder setImageByNetUrl(int viewId, String netUrl) {
+        Glide.with(mContext).load(netUrl).into((ImageView) getView(viewId));
         return this;
     }
 
