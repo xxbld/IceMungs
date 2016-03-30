@@ -1,6 +1,7 @@
 package org.github.xxbld.icemungs.ui.activity;
 
 import android.os.Handler;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
@@ -18,12 +19,14 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Bind(R.id.login_root)
     View mRootView;
+    @Bind(R.id.common_toolbar)
+    Toolbar mToolbar;
     @Bind(R.id.login_edt_username)
     MaterialEditText mEdtUsername;
     @Bind(R.id.login_edt_password)
     MaterialEditText mEdtPassword;
-    @Bind(R.id.login_btn_login)
 
+    @Bind(R.id.login_btn_login)
     Button mBtnLogin;
 
     private LoginPresenter loginPresenter;
@@ -45,9 +48,6 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         loginPresenter = new LoginPresenter();
         loginPresenter.attachView(this);
 
-        mToolbar.setTitle("Login");
-        mToolbar.setLogo(R.mipmap.ic_launcher);
-        setSupportActionBar(mToolbar);
 
         StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
 
@@ -57,6 +57,13 @@ public class LoginActivity extends BaseActivity implements ILoginView {
                 loginPresenter.login(mEdtUsername.getText().toString(), mEdtPassword.getText().toString());
             }
         });
+    }
+
+    @Override
+    protected void setToolbar() {
+        mToolbar.setTitle("Login");
+        mToolbar.setLogo(R.mipmap.ic_launcher);
+        setSupportActionBar(mToolbar);
     }
 
     @Override

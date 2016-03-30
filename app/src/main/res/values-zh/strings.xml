@@ -1,3 +1,13 @@
 <resources>
+    <string name="app_name">小小冰绿豆</string>
+
     <string name="main_tab_title">新鲜事</string>
+
+    <string name="nav_menu_school">校园</string>
+    <string name="nav_menu_daily">日常</string>
+    <string name="nav_menu_verbose">吐槽</string>
+    <string name="nav_menu_resume">履历</string>
+    <string name="nav_about">关于</string>
+    <string name="nav_theme">主题</string>
+    <string name="nav_setting">设置</string>
 </resources>

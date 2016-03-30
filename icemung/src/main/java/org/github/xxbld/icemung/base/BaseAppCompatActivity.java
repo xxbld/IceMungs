@@ -32,9 +32,9 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     /**
      * ScreenInfo
      */
-    protected int mScreenWidth = 0;
-    protected int mScreenHeight = 0;
-    protected float mScreenDensity = 0.0f;
+    protected static int mScreenWidth = 0;
+    protected static int mScreenHeight = 0;
+    protected static float mScreenDensity = 0.0f;
     /**
      * Context
      */
@@ -73,11 +73,13 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
         TAG = this.getClass().getSimpleName();
         ActivityManager.getInstance().addActivity(this);
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        mScreenDensity = displayMetrics.density;
-        mScreenHeight = displayMetrics.heightPixels;
-        mScreenWidth = displayMetrics.widthPixels;
+        if (mScreenDensity == 0.0f && mScreenHeight == 0 && mScreenWidth == 0) {
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+            mScreenDensity = displayMetrics.density;
+            mScreenHeight = displayMetrics.heightPixels;
+            mScreenWidth = displayMetrics.widthPixels;
+        }
 
         if (getContentViewLayoutResID() != 0) {
             setContentView(getContentViewLayoutResID());

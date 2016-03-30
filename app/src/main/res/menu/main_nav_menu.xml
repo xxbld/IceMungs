@@ -4,31 +4,33 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_school"
             android:icon="@mipmap/ic_launcher"
-            android:title="CC Talk" />
+            android:title="@string/nav_menu_school"/>
         <item
-            android:id="@+id/nav_messages"
+            android:id="@+id/nav_daily"
             android:icon="@mipmap/ic_launcher"
-            android:title="HJ Class" />
+            android:title="@string/nav_menu_daily"/>
         <item
-            android:id="@+id/nav_friends"
+            android:id="@+id/nav_verbose"
             android:icon="@mipmap/ic_launcher"
-            android:title="Words" />
+            android:title="@string/nav_menu_verbose"/>
         <item
-            android:id="@+id/nav_discussion"
+            android:id="@+id/nav_resume"
             android:icon="@mipmap/ic_launcher"
-            android:title="Big HJ" />
+            android:title="@string/nav_menu_resume"/>
 
-    <item android:title="Version">
-        <menu>
-            <item
-                android:icon="@mipmap/ic_launcher"
-                android:title="Android" />
-            <item
-                android:icon="@mipmap/ic_launcher"
-                android:title="iOS" />
-        </menu>
-    </item>
+        <item android:title="@string/nav_about">
+            <menu>
+                <item
+                    android:id="@+id/nav_theme"
+                    android:icon="@mipmap/ic_launcher"
+                    android:title="@string/nav_theme"/>
+                <item
+                    android:id="@+id/nav_setting"
+                    android:icon="@mipmap/ic_launcher"
+                    android:title="@string/nav_setting"/>
+            </menu>
+        </item>
     </group>
 </menu>

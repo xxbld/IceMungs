@@ -73,12 +73,13 @@ public abstract class BaseAppFragment extends Fragment {
             mVaryViewHelperController = new VaryViewHelperController(getLoadingTargetView());
         }
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
-        mScreenDensity = displayMetrics.density;
-        mScreenHeight = displayMetrics.heightPixels;
-        mScreenWidth = displayMetrics.widthPixels;
+        if (mScreenDensity == 0.0f && mScreenHeight == 0 && mScreenWidth == 0) {
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+            mScreenDensity = displayMetrics.density;
+            mScreenHeight = displayMetrics.heightPixels;
+            mScreenWidth = displayMetrics.widthPixels;
+        }
 
         initViewsAndEvents();
     }

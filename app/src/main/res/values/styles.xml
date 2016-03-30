@@ -29,7 +29,8 @@
         <item name="android:titleTextColor" tools:ignore="NewApi">?attr/titleToolBarColor</item>
         <item name="android:elevation" tools:ignore="NewApi">@dimen/title_toolbar_elevation</item>
     </style>
-    <style name="IceMung.Widget.Toolbar.Scroll" parent="IceMung.Widget.Toolbar">
+    <style name="IceMung.Widget.Toolbar.ScrollEnterAlways" parent="IceMung.Widget.Toolbar">
+        <!--必须与appbar一起使用-->
         <item name="layout_scrollFlags">scroll|enterAlways</item>
     </style>
     <!--TabLayout Style-->
@@ -39,6 +40,7 @@
         <item name="android:minHeight">?attr/actionBarSize</item>
         <item name="android:background">?attr/colorPrimary</item>
         <item name="android:elevation" tools:ignore="NewApi">@dimen/title_toolbar_elevation</item>
+        <item name="android:visibility">gone</item>
         <item name="tabMode">fixed</item>
         <item name="tabGravity">fill</item>
     </style>

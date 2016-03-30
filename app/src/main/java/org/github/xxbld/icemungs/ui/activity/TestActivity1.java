@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -12,7 +13,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import org.github.xxbld.icemung.utils.StatusBarUtil;
 import org.github.xxbld.icemungs.R;
-import org.github.xxbld.icemungs.ui.adapter.MainFragmentAdapter;
+import org.github.xxbld.icemungs.ui.adapter.SchoolFragmentAdapter;
 import org.github.xxbld.icemungs.ui.base.BaseActivity;
 import org.github.xxbld.icemungs.ui.fragment.FlashFragment;
 
@@ -28,6 +29,8 @@ import butterknife.Bind;
  * @descript ：
  */
 public class TestActivity1 extends BaseActivity {
+    @Bind(R.id.common_toolbar)
+    Toolbar mToolbar;
     @Bind(R.id.btn1)
     Button mBtn1;
     @Bind(R.id.btn2)
@@ -71,15 +74,23 @@ public class TestActivity1 extends BaseActivity {
                 mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             }
         });
-        initTabLayout(getTitles(),getTabFragments());
+        initTabLayout(getTitles(), getTabFragments());
     }
+
+    @Override
+    protected void setToolbar() {
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
     private void initTabLayout(List<String> tabTitles, List<Fragment> fragments) {
-        MainFragmentAdapter mMainFragmentAdapter =  new MainFragmentAdapter(getSupportFragmentManager(), fragments, tabTitles);
+        SchoolFragmentAdapter mMainFragmentAdapter = new SchoolFragmentAdapter(getSupportFragmentManager(), fragments, tabTitles);
         mTestViewpager.setAdapter(mMainFragmentAdapter);
         //必须在viewpager.setAdapter之后
         mTestTab.setupWithViewPager(mTestViewpager);
     }
-    private List<String> getTitles(){
+
+    private List<String> getTitles() {
         List<String> titles = new ArrayList<>();
         titles.add("新鲜事");
         titles.add("新鲜事");
@@ -92,6 +103,6 @@ public class TestActivity1 extends BaseActivity {
         fragments.add(new FlashFragment());
         fragments.add(new FlashFragment());
         fragments.add(new FlashFragment());
-        return  fragments;
+        return fragments;
     }
 }

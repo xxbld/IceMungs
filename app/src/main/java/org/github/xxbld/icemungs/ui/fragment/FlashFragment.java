@@ -12,6 +12,7 @@ import org.github.xxbld.icemungs.R;
  * @descript ：
  */
 public class FlashFragment extends BaseAppFragment {
+
     @Override
     protected void onFirstUserVisible() {
 
@@ -34,7 +35,6 @@ public class FlashFragment extends BaseAppFragment {
 
     @Override
     protected void initViewsAndEvents() {
-
     }
 
     @Override

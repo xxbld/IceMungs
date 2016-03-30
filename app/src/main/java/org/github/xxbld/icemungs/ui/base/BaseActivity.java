@@ -1,15 +1,11 @@
 package org.github.xxbld.icemungs.ui.base;
 
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import org.github.xxbld.icemung.base.BaseAppCompatActivity;
 import org.github.xxbld.icemung.base.mvp.IMvpView;
 import org.github.xxbld.icemung.netsatus.NetUtils;
-import org.github.xxbld.icemungs.R;
-
-import butterknife.ButterKnife;
 
 /**
  * Created by xxbld on 2016/2/19
@@ -19,7 +15,7 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseActivity extends BaseAppCompatActivity implements IMvpView {
 
-    protected Toolbar mToolbar;
+//    protected Toolbar mToolbar;
 
     /**
      * 开启切换动画
@@ -89,14 +85,15 @@ public abstract class BaseActivity extends BaseAppCompatActivity implements IMvp
     /**
      * set toolbar
      */
-    private void setToolbar() {
-        mToolbar = ButterKnife.findById(this, R.id.common_toolbar);
-        if (mToolbar != null) {
-            setSupportActionBar(mToolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//            getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
-        }
-    }
+//    private void setToolbar() {
+//        mToolbar = ButterKnife.findById(this, R.id.common_toolbar);
+//        if (mToolbar != null) {
+//            setSupportActionBar(mToolbar);
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+////            getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+//        }
+//    }
+    protected abstract void setToolbar();
 
     //====================impls
     @Override

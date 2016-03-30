@@ -1,10 +1,8 @@
 package org.github.xxbld.icemungs.views;
 
-import android.support.v4.app.Fragment;
-
 import org.github.xxbld.icemung.base.mvp.IMvpView;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xxbld on 2016/3/22
@@ -14,6 +12,10 @@ import java.util.List;
  */
 public interface IMainView extends IMvpView {
 
-    void initTabLayout(List<String> tabTitles, List<Fragment> fragments);
-
+    /**
+     * 设置NavigationView
+     *
+     * @param frags
+     */
+    void initNavigationViewFrags(Map<Integer, Object[]> frags);
 }

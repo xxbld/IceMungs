@@ -1,14 +1,15 @@
 package org.github.xxbld.icemungs.presenters;
 
-import android.support.v4.app.Fragment;
+import android.content.res.Resources;
 
 import org.github.xxbld.icemung.base.mvp.BasePresenter;
-import org.github.xxbld.icemungs.ui.fragment.FlashFragment;
-import org.github.xxbld.icemungs.ui.fragment.TestArcGisFragment;
+import org.github.xxbld.icemungs.R;
+import org.github.xxbld.icemungs.ui.fragment.SchoolFragment;
+import org.github.xxbld.icemungs.ui.fragment.NavFragment;
 import org.github.xxbld.icemungs.views.IMainView;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by xxbld on 2016/3/22
@@ -23,7 +24,6 @@ public class MainPresenter extends BasePresenter<IMainView> {
 
     @Override
     public void initialized() {
-        this.getMvpView().initTabLayout(getTitles(),getTabFragments());
     }
 
 
@@ -37,21 +37,28 @@ public class MainPresenter extends BasePresenter<IMainView> {
         super.detachView();
     }
 
-
-
-    private List<String> getTitles(){
-        List<String> titles = new ArrayList<>();
-        titles.add("新鲜事");
-        titles.add("新鲜事");
-        titles.add("新鲜事");
-        return titles;
+    public void initNav() {
+        this.getMvpView().initNavigationViewFrags(getNavFragmentItems());
     }
 
-    private List<Fragment> getTabFragments() {
-        List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new FlashFragment());
-        fragments.add(new TestArcGisFragment());
-        fragments.add(new FlashFragment());
-        return  fragments;
+    private Map<Integer, Object[]> getNavFragmentItems() {
+        int[] keys = {R.id.nav_school, R.id.nav_daily, R.id.nav_verbose, R.id.nav_resume};
+        int[] titles = {R.string.nav_menu_school, R.string.nav_menu_daily, R.string.nav_menu_verbose, R.string.nav_menu_resume,};
+        int[] menuIds = {R.menu.main_nav_menu_school, R.menu.main_nav_menu_daily, 0, 0};
+        Object[] fragments = new Object[]{new SchoolFragment(), new NavFragment().newInstance("B", "b"),
+                new NavFragment().newInstance("C", "c"), new NavFragment().newInstance("D", "d")};
+        Map<Integer, Object[]> fragMap = new HashMap<>();
+        for (int i = 0; i < keys.length; i++) {
+            Object[] value = new Object[3];
+            value[0] = fragments[i];
+            value[1] = titles[i];
+            value[2] = menuIds[i];
+            fragMap.put(keys[i], value);
+        }
+        return fragMap;
+    }
+
+    private String getString(int resId) {
+        return Resources.getSystem().getString(resId);
     }
 }

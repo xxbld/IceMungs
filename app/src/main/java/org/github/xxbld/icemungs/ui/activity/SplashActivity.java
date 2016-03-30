@@ -32,12 +32,15 @@ public class SplashActivity extends BaseActivity implements ISplashView {
 
     @Override
     protected void initViewsAndEvents() {
-        mToolbar = null;
         StatusBarUtil.setTranslucent(this, false);
-
         mSplashPresenter = new SplashPresenter(this);
         mSplashPresenter.attachView(this);
         mSplashPresenter.initialized();
+    }
+
+    @Override
+    protected void setToolbar() {
+
     }
 
     @Override

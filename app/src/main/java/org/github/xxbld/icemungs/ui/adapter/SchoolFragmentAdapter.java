@@ -12,12 +12,12 @@ import java.util.List;
  *
  * @descript ：
  */
-public class MainFragmentAdapter extends FragmentStatePagerAdapter {
+public class SchoolFragmentAdapter extends FragmentStatePagerAdapter {
 
     private List<Fragment> mFragments;
     private List<String> mTitles;
 
-    public MainFragmentAdapter(FragmentManager fm, List<Fragment> fragments,List<String> titles) {
+    public SchoolFragmentAdapter(FragmentManager fm, List<Fragment> fragments, List<String> titles) {
         super(fm);
         this.mFragments = fragments;
         this.mTitles = titles;
