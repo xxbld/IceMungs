@@ -6,10 +6,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.github.xxbld.icemung.utils.MLog;
 import org.github.xxbld.icemungs.R;
 
 /**
@@ -22,6 +24,7 @@ public class NavFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String TAG = NavFragment.class.getSimpleName();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -62,6 +65,20 @@ public class NavFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            MLog.i(TAG, "Action Setting Clicked !");
+            return true;
+        }
+        if (id == R.id.school_menu_item1) {
+            MLog.i(TAG, " school_menu_item1 Clicked !");
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

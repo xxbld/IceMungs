@@ -1,32 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<io.codetail.widget.RevealFrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="org.github.xxbld.icemungs.ui.activity.SplashActivity">
-
-    <ImageView
-        android:id="@+id/splash_img_bg"
+    <FrameLayout
+        android:id="@+id/splash_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@mipmap/material_design_0"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/splash_txt_versioncode"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/splash_img_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@mipmap/material_design_0"/>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="V1.3"/>
-        <TextView
-            android:id="@+id/splash_txt_copyright"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/splash_copyright"/>
-    </LinearLayout>
-</FrameLayout>
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/splash_txt_versioncode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="V1.3"/>
+            <TextView
+                android:id="@+id/splash_txt_copyright"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/splash_copyright"/>
+        </LinearLayout>
+    </FrameLayout>
+</io.codetail.widget.RevealFrameLayout>

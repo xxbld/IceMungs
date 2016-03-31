@@ -1,5 +1,7 @@
 package org.github.xxbld.icemungs.ui.adapter;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import org.github.xxbld.icemung.utils.MLog;
+import org.github.xxbld.icemung.utils.TextUtil;
 
 import java.util.Map;
 
@@ -26,6 +29,10 @@ public class NavFragmentAdapter implements NavigationView.OnNavigationItemSelect
      * 资源id为空时 id的值
      */
     private static final int RES_ID_NULL = 0;
+    /**
+     * 当前应用名
+     */
+    private static String sThisAppLabelName;
 
     private FragmentManager mFragmentManager;
     private int mFragContainerViewId;
@@ -33,13 +40,14 @@ public class NavFragmentAdapter implements NavigationView.OnNavigationItemSelect
      * object[0]=(Fragment)fragment;object[1]=(Integer)title;object[2]=(Integer)toolBarMenuResId
      */
     private Map<Integer, Object[]> mFragmentMap;
+
     private NavigationView mNav;
     private AppCompatActivity mActivity;
     private Menu mMenu;
 
     private OnNavSelectedListener mListener;
-    private boolean isFirstLoad = true;
     private Fragment mCurrentFragment = null;
+    private boolean isFirstLoad = true;
     private int mCurrentSelectedItemId = RES_ID_NULL;
 
     /**
@@ -71,6 +79,7 @@ public class NavFragmentAdapter implements NavigationView.OnNavigationItemSelect
         this.mNav = nav;
         this.mActivity = (AppCompatActivity) mNav.getContext();
         this.mMenu = menu;
+        this.sThisAppLabelName = getThisAppLabelName();
         mNav.setNavigationItemSelectedListener(this);
     }
 
@@ -121,28 +130,26 @@ public class NavFragmentAdapter implements NavigationView.OnNavigationItemSelect
      */
     private void switchFragment(int itemId) {
         Object[] item = getItem(itemId);
-        if (item == null) {
+        if (item == null || item[0] == null || !(item[0] instanceof Fragment)) {
             return;
         }
         showFragment(getFragmentTransaction(), item);
         mNav.setCheckedItem(itemId);
         mCurrentSelectedItemId = itemId;
+        if (mListener != null) {
+            mListener.onSwitchFragmentSuccess(mCurrentSelectedItemId);
+        }
     }
 
     private void showFragment(FragmentTransaction transaction, Object[] item) {
-        if (item[0] == null) {
-            return;
-        }
-        if (item[1] == null) {
-            item[1] = RES_ID_NULL;
-        }
-        if (item[2] == null) {
-            item[2] = RES_ID_NULL;
-        }
-        showFragment(transaction, (Fragment) item[0], (Integer) item[1], (Integer) item[2]);
+//        if (item[0] == null) {
+//            return;
+//        }
+        showFragment(transaction, (Fragment) item[0], item[1], item[2]);
     }
 
-    private void showFragment(FragmentTransaction transaction, Fragment fragment, int titleResId, int toolBarMenuResId) {
+
+    private void showFragment(FragmentTransaction transaction, Fragment fragment, Object title, Object toolBarMenuRes) {
         if (mCurrentFragment != null) {
             mCurrentFragment.onPause();
             transaction.hide(mCurrentFragment);
@@ -154,7 +161,7 @@ public class NavFragmentAdapter implements NavigationView.OnNavigationItemSelect
         }
         transaction.show(fragment);
         transaction.commit();
-        setToolBar(mMenu, fragment, titleResId, toolBarMenuResId);
+        setToolBar(mMenu, title, toolBarMenuRes);
         mCurrentFragment = fragment;
     }
 
@@ -162,26 +169,73 @@ public class NavFragmentAdapter implements NavigationView.OnNavigationItemSelect
      * set toolbar
      *
      * @param menu
-     * @param fragment
-     * @param titleResId
-     * @param toolBarMenuResId
+     * @param oTitle
+     * @param toolBarMenuRes
      */
-    private void setToolBar(Menu menu, Fragment fragment, int titleResId, int toolBarMenuResId) {
+    private void setToolBar(Menu menu, Object oTitle, Object toolBarMenuRes) {
         if (menu == null) {
-            MLog.i(TAG, "menu null !");
+            MLog.i(TAG, "menu is null !");
             return;
         }
-        //settoolbar
-        if (titleResId != RES_ID_NULL) {
-//            MLog.i(TAG, "set Title :" + titleResId);
-            mActivity.getSupportActionBar().setTitle(mActivity.getResources().getString(titleResId));
-        }
+        setToolbarTitle(oTitle);
+        setToolbarMenu(menu, toolBarMenuRes);
+
+    }
+
+    private void setToolbarMenu(Menu menu, Object toolBarMenuRes) {
         //set toolbar menu
         menu.clear();
-        if (toolBarMenuResId != RES_ID_NULL) {
-//            MLog.i(TAG, "set Menu :" + toolBarMenuResId);
-            mActivity.getMenuInflater().inflate(toolBarMenuResId, menu);
+        if (toolBarMenuRes != null && toolBarMenuRes instanceof Integer) {
+            int toolBarMenuResId = (int) toolBarMenuRes;
+            if (toolBarMenuResId != RES_ID_NULL) {
+                try {
+                    mActivity.getMenuInflater().inflate(toolBarMenuResId, menu);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
+    }
+
+    private void setToolbarTitle(Object oTitle) {
+        String title = null;
+        if (oTitle == null) {
+            //取应用名
+            title = sThisAppLabelName;
+        } else {
+            if (oTitle instanceof Integer) {
+                try {
+                    title = mActivity.getResources().getString((Integer) oTitle);
+                } catch (Resources.NotFoundException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (title == null) {
+                        title = sThisAppLabelName;
+                    }
+                }
+            } else {
+                if (TextUtil.isEmpty((String) oTitle)) {
+                    title = sThisAppLabelName;
+                } else {
+                    title = (String) oTitle;
+                }
+            }
+        }
+        mActivity.getSupportActionBar().setTitle(title);
+    }
+
+    /**
+     * get this app name
+     *
+     * @return
+     */
+    private String getThisAppLabelName() {
+        return getAppLabelName(mActivity);
+    }
+
+    private String getAppLabelName(Context context) {
+        int labelRes = context.getApplicationInfo().labelRes;
+        return context.getResources().getString(labelRes);
     }
 
     /**
@@ -212,11 +266,30 @@ public class NavFragmentAdapter implements NavigationView.OnNavigationItemSelect
         return transaction;
     }
 
+    /**
+     * is item contain in Map Collect
+     *
+     * @param itemId
+     * @return
+     */
     public boolean isContainItem(int itemId) {
         return mFragmentMap.containsKey(itemId);
     }
 
     public interface OnNavSelectedListener {
+        /**
+         * when item clicked or checked
+         *
+         * @param item
+         * @return
+         */
         boolean onNavSelected(MenuItem item);
+
+        /**
+         * while switch success callback
+         *
+         * @param currentItemId
+         */
+        void onSwitchFragmentSuccess(int currentItemId);
     }
 }

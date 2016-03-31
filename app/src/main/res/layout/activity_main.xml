@@ -8,7 +8,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.MainActivity">
 
-    <include layout="@layout/content_main"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/content_main"/>
+        <include layout="@layout/layout_sheet_fab"/>
+    </FrameLayout>
+
 
     <android.support.design.widget.NavigationView
         android:id="@+id/main_nav"

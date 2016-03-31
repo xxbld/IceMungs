@@ -29,21 +29,20 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile project(':icemung')
-
+    compile 'cn.bmob.android:bmob-sdk:3.4.5'
     //SCViewPager for welcome page
+    compile 'com.dev.sacot41:scviewpager:0.0.4'
     //datetime picker
+    compile 'com.wdullaer:materialdatetimepicker:2.2.0'
     //material text view
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
     //波纹效果
+    compile 'com.balysv:material-ripple:1.0.2'
     //expand layout
+    compile 'com.github.aakira:expandable-layout:1.4.3@aar'
+    compile 'com.gordonwong:material-sheet-fab:1.2.1'
     compile('com.github.afollestad.material-dialogs:core:0.8.5.7@aar') {
         transitive = true
     }
-    compile 'cn.bmob.android:bmob-sdk:3.4.5'
-    compile 'com.dev.sacot41:scviewpager:0.0.4'
-    compile 'com.wdullaer:materialdatetimepicker:2.2.0'
-    compile 'com.rengwuxian.materialedittext:library:2.1.4'
-    compile 'com.balysv:material-ripple:1.0.2'
-    compile 'com.github.aakira:expandable-layout:1.4.3@aar'
     compile 'com.esri.arcgis.android:arcgis-android:10.2.7'
-    compile 'com.android.support:support-v4:23.2.1'
 }
