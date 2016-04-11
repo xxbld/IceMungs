@@ -2,22 +2,22 @@
 <LinearLayout
     android:id="@+id/linear"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <include layout="@layout/merge_toolbar"/>
 
     <Button
+        android:id="@+id/btn1"
         android:layout_width="wrap_content"
-        android:text="设置透明"
         android:layout_height="wrap_content"
-        android:id="@+id/btn1"/>
+        android:text="设置透明"/>
     <Button
+        android:id="@+id/btn2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="设置颜色"
-        android:id="@+id/btn2"/>
+        android:text="设置颜色"/>
     <android.support.design.widget.TabLayout
         android:id="@+id/test_tab"
         android:layout_width="match_parent"

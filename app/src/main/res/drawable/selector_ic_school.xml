@@ -2,4 +2,6 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@drawable/ic_school_green_600_24dp" android:state_checked="true"></item>
     <item android:drawable="@drawable/ic_school_grey_600_24dp" android:state_checked="false"></item>
+    <item android:drawable="@drawable/ic_school_green_600_24dp" android:state_pressed="true"></item>
+    <item android:drawable="@drawable/ic_school_grey_600_24dp"></item>
 </selector>
