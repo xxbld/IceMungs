@@ -331,7 +331,7 @@ public abstract class BaseAppFragment extends Fragment {
      *
      * @param toggle
      */
-    protected void toggleNetworkError(boolean toggle, View.OnClickListener onClickListener) {
+    protected void toggleShowNetworkError(boolean toggle, View.OnClickListener onClickListener) {
         if (null == mVaryViewHelperController) {
             throw new IllegalArgumentException("You must return a right target view for loading");
         }

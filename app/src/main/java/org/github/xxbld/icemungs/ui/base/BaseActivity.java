@@ -1,11 +1,15 @@
 package org.github.xxbld.icemungs.ui.base;
 
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import org.github.xxbld.icemung.base.BaseAppCompatActivity;
 import org.github.xxbld.icemung.base.mvp.IMvpView;
 import org.github.xxbld.icemung.netsatus.NetUtils;
+import org.github.xxbld.icemungs.R;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by xxbld on 2016/2/19
@@ -15,7 +19,7 @@ import org.github.xxbld.icemung.netsatus.NetUtils;
  */
 public abstract class BaseActivity extends BaseAppCompatActivity implements IMvpView {
 
-//    protected Toolbar mToolbar;
+    protected Toolbar mToolbar = null;
 
     /**
      * 开启切换动画
@@ -79,20 +83,28 @@ public abstract class BaseActivity extends BaseAppCompatActivity implements IMvp
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
+//        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
+        setPToolbar();
         setToolbar();
     }
 
     /**
      * set toolbar
      */
-//    private void setToolbar() {
-//        mToolbar = ButterKnife.findById(this, R.id.common_toolbar);
-//        if (mToolbar != null) {
-//            setSupportActionBar(mToolbar);
+    private void setPToolbar() {
+        Toolbar toolbar1 = ButterKnife.findById(this, R.id.common_toolbar);
+        Toolbar toolbar2 = ButterKnife.findById(this, R.id.common_toolbar_scroll_enteralways);
+        if (toolbar1 != null) {
+            mToolbar = toolbar1;
+        } else if (toolbar2 != null) {
+            mToolbar = toolbar2;
+        }
+        if (mToolbar != null) {
+            setSupportActionBar(mToolbar);
 //            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-////            getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
-//        }
-//    }
+        }
+    }
+
     protected abstract void setToolbar();
 
     //====================impls

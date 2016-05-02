@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 
 import org.github.xxbld.icemung.base.mvp.BasePresenter;
 import org.github.xxbld.icemungs.ui.fragment.FlashFragment;
+import org.github.xxbld.icemungs.ui.fragment.PtrFragment;
 import org.github.xxbld.icemungs.ui.fragment.TestArcGisFragment;
 import org.github.xxbld.icemungs.views.IFragSchoolView;
 
@@ -48,7 +49,7 @@ public class FragSchoolPresenter extends BasePresenter<IFragSchoolView> {
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new FlashFragment());
         fragments.add(new TestArcGisFragment());
-        fragments.add(new FlashFragment());
+        fragments.add(new PtrFragment());
         return fragments;
     }
 }

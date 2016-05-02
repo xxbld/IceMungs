@@ -3,11 +3,12 @@ package org.github.xxbld.icemung.glide;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
+
+import org.github.xxbld.icemung.utils.BitmapUtil;
 
 /**
  * Created by xxbld on 2016/1/15.
@@ -15,7 +16,7 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
  *
  * @description :
  */
-public class  GlideHelper {
+public class GlideHelper {
     //    Glide.with(myFragment)
 //         .load(url)
 //         .centerCrop()//居中
@@ -27,6 +28,7 @@ public class  GlideHelper {
 
     /**
      * 圆形图片
+     *
      * @param context
      * @param url
      * @param imageView
@@ -35,10 +37,7 @@ public class  GlideHelper {
         Glide.with(context).load(url).asBitmap().centerCrop().into(new BitmapImageViewTarget(imageView) {
             @Override
             protected void setResource(Bitmap resource) {
-                RoundedBitmapDrawable circularBitmapDrawable =
-                        RoundedBitmapDrawableFactory.create(context.getResources(), resource);
-                circularBitmapDrawable.setCornerRadius(Math.max(resource.getWidth(), resource.getHeight()) / 2.0f);
-                circularBitmapDrawable.setAntiAlias(true); //设置反走样
+                RoundedBitmapDrawable circularBitmapDrawable = BitmapUtil.getCircleDrawable(context, resource);
                 imageView.setImageDrawable(circularBitmapDrawable);
             }
         });

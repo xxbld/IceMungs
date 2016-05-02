@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="titleToolBarColor" format="color"> </attr>
+    <attr name="titleToolBarColor" format="color"></attr>
+    <attr name="primaryTextColor" format="color"></attr>
+    <attr name="secondaryTextColor" format="color"></attr>
+    <attr name="dividerColor" format="color"></attr>
+    <attr name="iconColor" format="color"></attr>
 </resources>

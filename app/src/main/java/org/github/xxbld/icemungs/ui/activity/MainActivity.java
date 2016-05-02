@@ -1,16 +1,21 @@
 package org.github.xxbld.icemungs.ui.activity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.gordonwong.materialsheetfab.MaterialSheetFab;
 
+import org.github.xxbld.icemung.utils.BitmapUtil;
 import org.github.xxbld.icemung.utils.MLog;
 import org.github.xxbld.icemung.utils.StatusBarUtil;
 import org.github.xxbld.icemungs.R;
@@ -25,17 +30,18 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements IMainView {
+public class MainActivity extends BaseActivity implements IMainView, View.OnClickListener {
 
     @Bind(R.id.main_nav)
     NavigationView mNavigationView;
     @Bind(R.id.main_drawer)
     DrawerLayout mDrawerLayout;
-    @Bind(R.id.common_toolbar_scroll_enteralways)
-    Toolbar mToolbar;
     @Bind(R.id.fab)
     SheetFloatActionButton mFab;
 
+    View mHeadView;
+    ImageView mHeadImageView;
+    TextView mHeadNameTextView;
     MaterialSheetFab mSheetMaterialSheetFab;
     Menu mMenu;
     MainPresenter mMainPresenter;
@@ -105,6 +111,15 @@ public class MainActivity extends BaseActivity implements IMainView {
     //===================impl
 
     @Override
+    public void setHeadImageView(Bitmap headBitmap, String userName) {
+        // TODO   假的数据
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_user);
+        Drawable drawable = BitmapUtil.getCircleDrawable(mContext, bitmap);
+        mHeadImageView.setImageDrawable(drawable);
+        mHeadNameTextView.setText(userName);
+    }
+
+    @Override
     public void initNavigationViewFrags(Map<Integer, Object[]> frags) {
         setNav();
         mNavFragmentAdapter = new NavFragmentAdapter(getSupportFragmentManager(),
@@ -141,5 +156,27 @@ public class MainActivity extends BaseActivity implements IMainView {
                 this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerLayout.setDrawerListener(toggle);
         toggle.syncState();
+        setHeaderView();
+    }
+
+    private void setHeaderView() {
+        mHeadView = mNavigationView.getHeaderView(0);
+        mHeadImageView = (ImageView) mHeadView.findViewById(R.id.main_head_img);
+        mHeadNameTextView = (TextView) mHeadView.findViewById(R.id.main_head_name_textview);
+        mMainPresenter.initHeadImageViewPara();
+        mHeadImageView.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        int viewId = v.getId();
+        switch (viewId) {
+            case R.id.main_head_img:
+                //to personal center
+                this.go(PersonalCenterActivity.class);
+                break;
+            default:
+                break;
+        }
     }
 }

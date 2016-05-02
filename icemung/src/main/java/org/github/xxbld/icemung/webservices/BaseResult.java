@@ -10,8 +10,7 @@ public class BaseResult<T> {
 
 //  event为返回码，0表示成功,
 //  msg则是返回的信息，
-//  obj是返回的单个数据对象,
-//  objList是返回的数据对象数组，
+//  obj是返回的数据对象,
 //  currentPage表示当前页，
 //  pageSize则表示当前页最多对象数量，
 //  maxCount表示对象数据总量，
@@ -20,7 +19,6 @@ public class BaseResult<T> {
     private String event;
     private String msg;
     private T obj;
-    private T objList;
     private int currentPage;
     private int pageSize;
     private int maxCount;
@@ -36,7 +34,6 @@ public class BaseResult<T> {
                 "event='" + event + '\'' +
                 ", msg='" + msg + '\'' +
                 ", obj=" + obj +
-                ", objList=" + objList +
                 ", currentPage=" + currentPage +
                 ", pageSize=" + pageSize +
                 ", maxCount=" + maxCount +
@@ -66,14 +63,6 @@ public class BaseResult<T> {
 
     public void setObj(T obj) {
         this.obj = obj;
-    }
-
-    public T getObjList() {
-        return objList;
-    }
-
-    public void setObjList(T objList) {
-        this.objList = objList;
     }
 
     public int getCurrentPage() {

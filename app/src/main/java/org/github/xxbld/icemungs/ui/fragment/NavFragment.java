@@ -85,7 +85,7 @@ public class NavFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         TextView textView = new TextView(getActivity());
-        textView.setText(R.string.hello_blank_fragment + mParam1 + "id:" + mParam2);
+        textView.setText("Hello blank fragment " + mParam1 + " id: " + mParam2);
         return textView;
     }
 

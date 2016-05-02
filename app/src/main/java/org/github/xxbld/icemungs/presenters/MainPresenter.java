@@ -41,6 +41,18 @@ public class MainPresenter extends BasePresenter<IMainView> {
         this.getMvpView().initNavigationViewFrags(getNavFragmentItems());
     }
 
+    /**
+     * Head Set
+     */
+    public void initHeadImageViewPara() {
+        this.getMvpView().setHeadImageView(null, "YY");
+    }
+
+    /**
+     * Nav Set
+     *
+     * @return
+     */
     private Map<Integer, Object[]> getNavFragmentItems() {
         int[] keys = {R.id.nav_school, R.id.nav_daily, R.id.nav_verbose, R.id.nav_resume};
         int[] titles = {R.string.nav_menu_school, R.string.nav_menu_daily, R.string.nav_menu_verbose, R.string.nav_menu_resume};

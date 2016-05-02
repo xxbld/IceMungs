@@ -34,7 +34,6 @@ public abstract class BaseFragment extends BaseAppFragment implements IMvpView {
 
     @Override
     protected void initViewsAndEvents() {
-
     }
 
     @Override
@@ -45,26 +44,26 @@ public abstract class BaseFragment extends BaseAppFragment implements IMvpView {
     //===========impl
     @Override
     public void showLoading(String msg) {
-
+        this.toggleShowLoading(true, msg);
     }
 
     @Override
     public void hideLoading() {
-
+        this.toggleShowLoading(false, null);
     }
 
     @Override
     public void showError(String msg) {
-
+        this.toggleShowError(true, msg, null);
     }
 
     @Override
     public void showException(String msg) {
-
+        this.toggleShowError(true, msg, null);
     }
 
     @Override
     public void showNetError() {
-
+        this.toggleShowNetworkError(true, null);
     }
 }

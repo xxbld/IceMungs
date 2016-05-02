@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -29,8 +28,7 @@ import butterknife.Bind;
  * @descript ：
  */
 public class TestActivity1 extends BaseActivity {
-    @Bind(R.id.common_toolbar)
-    Toolbar mToolbar;
+
     @Bind(R.id.btn1)
     Button mBtn1;
     @Bind(R.id.btn2)
@@ -60,7 +58,7 @@ public class TestActivity1 extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //透明
-                mLayout.setBackgroundResource(R.mipmap.material_design_3);
+                mLayout.setBackgroundResource(R.drawable.material_design_3);
                 tintManager.setTintColor(getResources().getColor(R.color.md_red_A400));
                 mToolbar.setBackgroundColor(getResources().getColor(R.color.transparent));
             }

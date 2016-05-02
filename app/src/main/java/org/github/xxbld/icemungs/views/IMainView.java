@@ -1,5 +1,7 @@
 package org.github.xxbld.icemungs.views;
 
+import android.graphics.Bitmap;
+
 import org.github.xxbld.icemung.base.mvp.IMvpView;
 
 import java.util.Map;
@@ -18,4 +20,12 @@ public interface IMainView extends IMvpView {
      * @param frags
      */
     void initNavigationViewFrags(Map<Integer, Object[]> frags);
+
+    /**
+     * set head
+     *
+     * @param headBitmap
+     * @param userName
+     */
+    void setHeadImageView(Bitmap headBitmap, String userName);
 }

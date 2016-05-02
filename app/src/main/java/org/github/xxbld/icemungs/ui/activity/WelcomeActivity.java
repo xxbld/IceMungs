@@ -26,7 +26,6 @@ public class WelcomeActivity extends BaseActivity implements IWelcomeView {
     SCViewPager mViewPager;
     @Bind(R.id.welcome_dotsview)
     DotsView mDotsView;
-
     @Bind(R.id.welcome_btn_home)
     Button mBtnToHome;
 

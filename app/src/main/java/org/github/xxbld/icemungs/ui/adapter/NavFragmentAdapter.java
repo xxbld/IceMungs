@@ -63,8 +63,8 @@ public class NavFragmentAdapter implements NavigationView.OnNavigationItemSelect
     }
 
     /**
-     * NavFragment Adapter
-     * <p>此方法须在 onCreateOptionsMenu中(或之后)使用才能获取到menu</p>
+     * NavFragment
+     * <p>如果想要在切换Fragments时更改Menu;此方法须在 onCreateOptionsMenu中(或之后)使用才能获取到menu</p>
      *
      * @param fm
      * @param fragmentContainerId

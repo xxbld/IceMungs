@@ -31,7 +31,7 @@ public class TestArcGisFragment extends BaseFragment {
      */
     public static final String TITLEIMAGEURL = "http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer";
 
-    @Bind(R.id.mapview)
+    @Bind(R.id.common_mapview)
     MapView mMapView;
 
     @Override

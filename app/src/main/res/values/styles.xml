@@ -7,6 +7,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="titleToolBarColor">@color/white</item>
+        <item name="dividerColor">@color/divider</item>
+        <item name="primaryTextColor">@color/primary_text</item>
+        <item name="secondaryTextColor">@color/secondary_text</item>
+        <item name="iconColor">@color/icons</item>
     </style>
     <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="windowActionBar">false</item>
@@ -14,6 +18,22 @@
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <!--TextView-->
+    <style name="IceMung.Widget.TextView" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">?attr/primaryTextColor</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="IceMung.Widget.TextView.Hint" parent="IceMung.Widget.TextView">
+        <item name="android:textColor">?attr/secondaryTextColor</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="IceMung.Widget.TextView.WhiteHead" parent="IceMung.Widget.TextView">
+        <item name="android:textColor">?attr/titleToolBarColor</item>
+        <item name="android:textSize">18sp</item>
+    </style>
 
     <!--Toolbar Style-->
     <style name="IceMung.Widget.Toolbar" parent="">
@@ -74,7 +94,7 @@
         <item name="android:background">?attr/selectableItemBackground</item>
         <item name="android:clickable">true</item>
         <item name="android:textSize">@dimen/sheet_item_textsize</item>
-        <item name="android:textColor">@color/text_black_87</item>
+        <item name="android:textColor">?attr/primaryTextColor</item>
         <item name="android:drawablePadding">@dimen/sheet_item_image_spacing</item>
     </style>
 
@@ -83,7 +103,7 @@
     <!-- normal -->
     <style name="MEdiText.Normal" parent="MEdiText">
         <!--默认颜色-->
-        <item name="met_baseColor">?attr/colorPrimary</item>
+        <item name="met_baseColor">?attr/colorPrimaryDark</item>
         <!--激活状态颜色-->
         <item name="met_primaryColor">?attr/colorAccent</item>
         <item name="met_clearButton">true</item>

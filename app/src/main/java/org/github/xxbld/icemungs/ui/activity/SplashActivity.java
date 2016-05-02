@@ -96,6 +96,6 @@ public class SplashActivity extends BaseActivity implements ISplashView {
             public void run() {
                 goThenKill(WelcomeActivity.class);
             }
-        }, 2000);
+        }, 1500);
     }
 }
