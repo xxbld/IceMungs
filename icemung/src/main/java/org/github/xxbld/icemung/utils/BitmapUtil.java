@@ -12,6 +12,13 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
  * @description :
  */
 public class BitmapUtil {
+    /**
+     * 把图片变成圆形
+     *
+     * @param context
+     * @param bitmapResource
+     * @return
+     */
     public static RoundedBitmapDrawable getCircleDrawable(Context context, Bitmap bitmapResource) {
         RoundedBitmapDrawable circularBitmapDrawable =
                 RoundedBitmapDrawableFactory.create(context.getResources(), bitmapResource);

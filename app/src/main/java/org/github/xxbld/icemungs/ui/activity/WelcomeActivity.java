@@ -12,7 +12,6 @@ import com.dev.sacot41.scviewpager.SCViewAnimationUtil;
 import com.dev.sacot41.scviewpager.SCViewPager;
 import com.dev.sacot41.scviewpager.SCViewPagerAdapter;
 
-import org.github.xxbld.icemung.utils.StatusBarUtil;
 import org.github.xxbld.icemungs.R;
 import org.github.xxbld.icemungs.presenters.WelcomePresenter;
 import org.github.xxbld.icemungs.ui.base.BaseActivity;
@@ -39,8 +38,7 @@ public class WelcomeActivity extends BaseActivity implements IWelcomeView {
 
     @Override
     protected void initViewsAndEvents() {
-        StatusBarUtil.setTranslucent(this, false);
-
+        this.setStatusBarTranslucent(false);
         mWelcomePresenter = new WelcomePresenter();
         mWelcomePresenter.attachView(this);
         mWelcomePresenter.initialized();

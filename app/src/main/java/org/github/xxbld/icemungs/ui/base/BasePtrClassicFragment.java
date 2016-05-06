@@ -28,9 +28,16 @@ public abstract class BasePtrClassicFragment extends BaseFragment {
         super.initViewsAndEvents();
         mPtrClassicFrameLayout = ButterKnife.findById(getActivity(), R.id.common_ptr_frame);
         mRecyclerView = ButterKnife.findById(getActivity(), R.id.common_recycler_view);
+        if (isSetPtrLayout()) {
+            setPtr();
+        }
+
+    }
+
+    private void setPtr() {
         if (mPtrClassicFrameLayout == null) {
             throw new IllegalArgumentException("your xml layout is not contain PtrClassicFrameLayout " +
-                    "that's id is R.id.common_ptr_frame default,don't @+id/");
+                    "that's id is R.id.common_ptr_frame default,can't @+id/");
         } else {
             mPtrClassicFrameLayout.setLastUpdateTimeRelateObject(this);
             mPtrClassicFrameLayout.setPtrHandler(new PtrHandler() {
@@ -68,6 +75,8 @@ public abstract class BasePtrClassicFragment extends BaseFragment {
     protected void setPtrRefreshComplete() {
         mPtrClassicFrameLayout.refreshComplete();
     }
+
+    protected abstract boolean isSetPtrLayout();
 
     /**
      * 下拉刷新开始

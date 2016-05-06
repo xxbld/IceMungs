@@ -15,7 +15,7 @@ public abstract class BasePageAdapter extends FragmentStatePagerAdapter {
 
     private List<String> mTitles;
 
-    public BasePageAdapter(FragmentManager fm,List<String> titles ) {
+    public BasePageAdapter(FragmentManager fm, List<String> titles) {
         super(fm);
         this.mTitles = titles;
     }

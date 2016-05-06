@@ -6,7 +6,6 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.github.xxbld.icemung.utils.StatusBarUtil;
 import org.github.xxbld.icemungs.R;
 import org.github.xxbld.icemungs.presenters.SplashPresenter;
 import org.github.xxbld.icemungs.ui.base.BaseActivity;
@@ -38,7 +37,7 @@ public class SplashActivity extends BaseActivity implements ISplashView {
 
     @Override
     protected void initViewsAndEvents() {
-        StatusBarUtil.setTranslucent(this, false);
+        this.setStatusBarTranslucent(false);
         mSplashPresenter = new SplashPresenter(this);
         mSplashPresenter.attachView(this);
         mSplashPresenter.initialized();
@@ -98,4 +97,13 @@ public class SplashActivity extends BaseActivity implements ISplashView {
             }
         }, 1500);
     }
+//    private void loginTest() {
+//        BmobUser.loginByAccount(this, "小小冰绿豆", "123065", new LogInListener<BmobUser>() {
+//            @Override
+//            public void done(BmobUser student, BmobException e) {
+//
+//                MLog.i(TAG, "msg" + e.getMessage());
+//            }
+//        });
+//}
 }

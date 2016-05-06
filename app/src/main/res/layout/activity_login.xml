@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"/>
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/login_edt_password"
-            style="@style/MEdiText.FloatingLabel"
+            style="@style/MEdiText.FloatingLabel.Password"
             app:met_floatingLabelText="请输入密码"
             app:met_floatingLabelAlwaysShown="true"
             android:layout_width="match_parent"

@@ -30,6 +30,23 @@ public class GlideHelper {
      * 圆形图片
      *
      * @param context
+     * @param resId
+     * @param imageView
+     */
+    public static void tranCircleImage(final Context context, int resId, final ImageView imageView) {
+        Glide.with(context).load(resId).asBitmap().centerCrop().into(new BitmapImageViewTarget(imageView) {
+            @Override
+            protected void setResource(Bitmap resource) {
+                RoundedBitmapDrawable circularBitmapDrawable = BitmapUtil.getCircleDrawable(context, resource);
+                imageView.setImageDrawable(circularBitmapDrawable);
+            }
+        });
+    }
+
+    /**
+     * 圆形图片
+     *
+     * @param context
      * @param url
      * @param imageView
      */

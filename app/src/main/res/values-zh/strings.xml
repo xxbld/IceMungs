@@ -3,11 +3,14 @@
 
     <string name="main_tab_title">新鲜事</string>
 
-    <string name="nav_menu_school">校园</string>
-    <string name="nav_menu_daily">日常</string>
-    <string name="nav_menu_verbose">吐槽</string>
+    <string name="nav_menu_school">校园新闻</string>
+    <string name="nav_menu_daily">校园地图</string>
+    <string name="nav_menu_verbose">碎碎念</string>
     <string name="nav_menu_resume">履历</string>
     <string name="nav_about">关于</string>
     <string name="nav_theme">主题</string>
     <string name="nav_setting">设置</string>
+    <string name="login">登录</string>
+    <string name="login_username_error">用户名不能为空！</string>
+    <string name="login_pwd_error">用户密码不能为空！</string>
 </resources>

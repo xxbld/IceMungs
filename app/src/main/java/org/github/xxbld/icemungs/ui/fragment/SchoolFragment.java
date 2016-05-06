@@ -25,10 +25,10 @@ import butterknife.ButterKnife;
  */
 public class SchoolFragment extends BaseFragment implements IFragSchoolView {
 
-    TabLayout mTabLayout;
     @Bind(R.id.layout_viewpager)
     ViewPager mViewPager;
 
+    TabLayout mTabLayout;
     FragSchoolPresenter mFragSchoolPresenter;
     SchoolFragmentAdapter mSchoolFragmentAdapter;
 

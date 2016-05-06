@@ -1,9 +1,16 @@
 package org.github.xxbld.icemungs.presenters;
 
-import android.os.Handler;
+import android.content.Context;
 
 import org.github.xxbld.icemung.base.mvp.BasePresenter;
+import org.github.xxbld.icemung.utils.MLog;
+import org.github.xxbld.icemung.utils.TextUtil;
+import org.github.xxbld.icemungs.R;
+import org.github.xxbld.icemungs.data.models.Student;
+import org.github.xxbld.icemungs.listeners.OnLoginFinishedListener;
 import org.github.xxbld.icemungs.views.ILoginView;
+
+import cn.bmob.v3.listener.SaveListener;
 
 /**
  * Created by xxbld on 2016/3/14
@@ -12,6 +19,10 @@ import org.github.xxbld.icemungs.views.ILoginView;
  * @descript ：
  */
 public class LoginPresenter extends BasePresenter<ILoginView> {
+
+    Student mStudent = new Student();
+    OnLoginFinishedListener mListener;
+
     public LoginPresenter() {
     }
 
@@ -25,12 +36,51 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         super.detachView();
     }
 
-    public void login(String username, String pwd) {
-        new Handler().postDelayed(new Runnable() {
+    @Override
+    public void initialized() {
+        super.initialized();
+    }
+
+    public void login(Context context, String username, String pwd, OnLoginFinishedListener listener) {
+        //test user
+        username = "小小冰绿豆";
+        pwd = "123065";
+        if (context == null || listener == null) {
+            return;
+        }
+        this.mListener = listener;
+        boolean checkUserOK = checkUser(context, username, pwd);
+        if (!checkUserOK) {
+            return;
+        }
+        mStudent.setUsername(username);
+        mStudent.setPassword(pwd);
+        mStudent.login(context, new SaveListener() {
             @Override
-            public void run() {
-                getMvpView().goHome();
+            public void onSuccess() {
+                mListener.onSuccess(mStudent);
+                LoginPresenter.this.getMvpView().goHome();
             }
-        }, 2000);
+
+            @Override
+            public void onFailure(int i, String s) {
+                MLog.i(TAG, "code: " + i + " meg: " + s);
+                mListener.onFailure(i, s);
+            }
+        });
+    }
+
+    private boolean checkUser(Context context, String username, String pwd) {
+        boolean userNameEmpty = TextUtil.isEmpty(username);
+        boolean userPwdEmpty = TextUtil.isEmpty(pwd);
+        if (userNameEmpty) {
+            mListener.onUserNameErr(context.getString(R.string.login_username_error));
+            return false;
+        }
+        if (userPwdEmpty) {
+            mListener.onPasswordErr(context.getString(R.string.login_pwd_error));
+            return false;
+        }
+        return true;
     }
 }

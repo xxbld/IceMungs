@@ -1,4 +1,4 @@
-package org.github.xxbld.icemungs.ui.fragment;
+package org.github.xxbld.icemungs.ui.resume;
 
 import android.view.View;
 
@@ -6,24 +6,29 @@ import org.github.xxbld.icemung.utils.MLog;
 import org.github.xxbld.icemungs.R;
 import org.github.xxbld.icemungs.ui.base.BasePtrClassicFragment;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by xxbld on 2016/4/28.
  * you can contact me at: 1024920618@qq.com
  *
  * @description :
  */
-public class PtrFragment extends BasePtrClassicFragment {
+public class ResumeFragment extends BasePtrClassicFragment {
+    View tab;
 
     @Override
     protected View getLoadingTargetView() {
-        return super.getLoadingTargetView();
+        return mPtrClassicFrameLayout;
     }
 
     @Override
     protected void initViewsAndEvents() {
         super.initViewsAndEvents();
-//        boolean recNull = mRecyclerView == null;
-//        MLog.i(TAG, "recNull:" + recNull);
+        tab = ButterKnife.findById(getActivity(), R.id.content_tab);
+        if (tab != null) {
+            tab.setVisibility(View.GONE);
+        }
         mPtrClassicFrameLayout.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -31,6 +36,16 @@ public class PtrFragment extends BasePtrClassicFragment {
                 setPtrRefreshComplete();
             }
         }, 2000);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected boolean isSetPtrLayout() {
+        return true;
     }
 
     @Override

@@ -6,8 +6,9 @@ import android.widget.Button;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 
-import org.github.xxbld.icemung.utils.StatusBarUtil;
 import org.github.xxbld.icemungs.R;
+import org.github.xxbld.icemungs.data.models.Student;
+import org.github.xxbld.icemungs.listeners.OnLoginFinishedListener;
 import org.github.xxbld.icemungs.presenters.LoginPresenter;
 import org.github.xxbld.icemungs.ui.base.BaseActivity;
 import org.github.xxbld.icemungs.views.ILoginView;
@@ -35,27 +36,53 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         return R.layout.activity_login;
     }
 
-//    @Override
-//    protected View getLoadingTargetView() {
-////        return mRootView;
-//    }
+    @Override
+    protected View getLoadingTargetView() {
+        return mRootView;
+    }
 
     @Override
     protected void initViewsAndEvents() {
-        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
+        this.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
         loginPresenter = new LoginPresenter();
         loginPresenter.attachView(this);
+        loginPresenter.initialized();
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginPresenter.login(mEdtUsername.getText().toString(), mEdtPassword.getText().toString());
+                mBtnLogin.setClickable(false);
+                loginPresenter.login(LoginActivity.this, mEdtUsername.getText().toString(), mEdtPassword.getText().toString(), new OnLoginFinishedListener() {
+                    @Override
+                    public void onSuccess(Student student) {
+                        //before goHome
+                    }
+
+                    @Override
+                    public void onUserNameErr(String msg) {
+                        showToast(msg);
+                        mBtnLogin.setClickable(true);
+                    }
+
+                    @Override
+                    public void onPasswordErr(String msg) {
+                        showToast(msg);
+                        mBtnLogin.setClickable(true);
+                    }
+
+                    @Override
+                    public void onFailure(int failureCode, String msg) {
+                        showToast(msg);
+                        mBtnLogin.setClickable(true);
+                    }
+                });
             }
         });
+        goHome();
     }
 
     @Override
     protected void setToolbar() {
-        mToolbar.setTitle("Login");
+        mToolbar.setTitle(R.string.login);
         mToolbar.setLogo(R.mipmap.ic_launcher);
         setSupportActionBar(mToolbar);
     }

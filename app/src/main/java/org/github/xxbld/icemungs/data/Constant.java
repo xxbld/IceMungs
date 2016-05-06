@@ -1,4 +1,4 @@
-package org.github.xxbld.icemungs.data.models;
+package org.github.xxbld.icemungs.data;
 
 import com.esri.core.geometry.SpatialReference;
 

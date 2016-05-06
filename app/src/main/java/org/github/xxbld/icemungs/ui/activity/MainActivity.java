@@ -1,8 +1,6 @@
 package org.github.xxbld.icemungs.ui.activity;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,10 +13,11 @@ import android.widget.TextView;
 
 import com.gordonwong.materialsheetfab.MaterialSheetFab;
 
-import org.github.xxbld.icemung.utils.BitmapUtil;
+import org.github.xxbld.icemung.glide.GlideHelper;
+import org.github.xxbld.icemung.netsatus.NetStatusReceiver;
 import org.github.xxbld.icemung.utils.MLog;
-import org.github.xxbld.icemung.utils.StatusBarUtil;
 import org.github.xxbld.icemungs.R;
+import org.github.xxbld.icemungs.data.models.Student;
 import org.github.xxbld.icemungs.presenters.MainPresenter;
 import org.github.xxbld.icemungs.ui.adapter.NavFragmentAdapter;
 import org.github.xxbld.icemungs.ui.base.BaseActivity;
@@ -29,6 +28,8 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobFile;
 
 public class MainActivity extends BaseActivity implements IMainView, View.OnClickListener {
 
@@ -47,6 +48,8 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     MainPresenter mMainPresenter;
     NavFragmentAdapter mNavFragmentAdapter;
 
+    Student mCurrentStudent;
+
     @Override
     protected int getContentViewLayoutResID() {
         return R.layout.activity_main;
@@ -54,8 +57,13 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
 
     @Override
     protected void initViewsAndEvents() {
-        StatusBarUtil.setColorForDrawerLayout(this, mDrawerLayout, getResources().getColor(R.color.colorPrimary));
-        mMainPresenter = new MainPresenter();
+        //获取当前用户
+        mCurrentStudent = BmobUser.getCurrentUser(MainActivity.this, Student.class);
+        if (mCurrentStudent == null) {
+            //TODO handle null
+        }
+        this.setStatusBarColorWithDrawer(mDrawerLayout, getResources().getColor(R.color.colorPrimary));
+        mMainPresenter = new MainPresenter(mCurrentStudent);
         mMainPresenter.attachView(this);
         mMainPresenter.initialized();
         setSheetFAB();
@@ -68,8 +76,15 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     }
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        NetStatusReceiver.registerNetStatusReceiver(this);
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
+        NetStatusReceiver.unRegisterNetStatusReceiver(this);
         mMainPresenter.detachView();
     }
 
@@ -111,11 +126,16 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     //===================impl
 
     @Override
-    public void setHeadImageView(Bitmap headBitmap, String userName) {
-        // TODO   假的数据
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_user);
-        Drawable drawable = BitmapUtil.getCircleDrawable(mContext, bitmap);
-        mHeadImageView.setImageDrawable(drawable);
+    public void setHeadImageView(BmobFile headIcon, String userName) {
+        String headUrl = null;
+        if (headIcon != null) {
+            headUrl = headIcon.getFileUrl(this);
+        }
+        if (headUrl == null) {
+            GlideHelper.tranCircleImage(this.getApplicationContext(), R.drawable.ic_user, mHeadImageView);
+        } else {
+            GlideHelper.tranCircleImage(this.getApplicationContext(), headUrl, mHeadImageView);
+        }
         mHeadNameTextView.setText(userName);
     }
 
@@ -163,8 +183,8 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
         mHeadView = mNavigationView.getHeaderView(0);
         mHeadImageView = (ImageView) mHeadView.findViewById(R.id.main_head_img);
         mHeadNameTextView = (TextView) mHeadView.findViewById(R.id.main_head_name_textview);
-        mMainPresenter.initHeadImageViewPara();
         mHeadImageView.setOnClickListener(this);
+        mMainPresenter.initHeadImageViewPara();
     }
 
     @Override

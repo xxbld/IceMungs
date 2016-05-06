@@ -1,12 +1,14 @@
 package org.github.xxbld.icemungs.ui.base;
 
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import org.github.xxbld.icemung.base.BaseAppCompatActivity;
 import org.github.xxbld.icemung.base.mvp.IMvpView;
 import org.github.xxbld.icemung.netsatus.NetUtils;
+import org.github.xxbld.icemung.utils.StatusBarUtil;
 import org.github.xxbld.icemungs.R;
 
 import butterknife.ButterKnife;
@@ -103,6 +105,22 @@ public abstract class BaseActivity extends BaseAppCompatActivity implements IMvp
             setSupportActionBar(mToolbar);
 //            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    /**
+     * setStatusBarColor
+     * @param color getResource().getColor()
+     */
+    protected void setStatusBarColor(int color) {
+        StatusBarUtil.setColor(this, color);
+    }
+
+    protected void setStatusBarTranslucent(boolean isFitsSystemWindows) {
+        StatusBarUtil.setTranslucent(this, isFitsSystemWindows);
+    }
+
+    protected void setStatusBarColorWithDrawer(DrawerLayout drawer, int color) {
+        StatusBarUtil.setColorForDrawerLayout(this, drawer, color);
     }
 
     protected abstract void setToolbar();

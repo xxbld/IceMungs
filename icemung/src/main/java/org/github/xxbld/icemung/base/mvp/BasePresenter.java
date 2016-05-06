@@ -8,6 +8,7 @@ package org.github.xxbld.icemung.base.mvp;
  */
 public class BasePresenter<T extends IMvpView> implements IPresenter<T> {
 
+    protected static String TAG;
     private T mMvpView;
 
     @Override
@@ -17,6 +18,7 @@ public class BasePresenter<T extends IMvpView> implements IPresenter<T> {
 
     @Override
     public void attachView(T mvpView) {
+        this.TAG = this.getClass().getSimpleName();
         this.mMvpView = mvpView;
     }
 

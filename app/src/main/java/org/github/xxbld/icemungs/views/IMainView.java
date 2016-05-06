@@ -1,10 +1,10 @@
 package org.github.xxbld.icemungs.views;
 
-import android.graphics.Bitmap;
-
 import org.github.xxbld.icemung.base.mvp.IMvpView;
 
 import java.util.Map;
+
+import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * Created by xxbld on 2016/3/22
@@ -24,8 +24,8 @@ public interface IMainView extends IMvpView {
     /**
      * set head
      *
-     * @param headBitmap
+     * @param headIcon
      * @param userName
      */
-    void setHeadImageView(Bitmap headBitmap, String userName);
+    void setHeadImageView(BmobFile headIcon, String userName);
 }
