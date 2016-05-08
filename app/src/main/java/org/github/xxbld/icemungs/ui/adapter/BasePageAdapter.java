@@ -1,4 +1,4 @@
-package org.github.xxbld.icemungs.ui.base;
+package org.github.xxbld.icemungs.ui.adapter;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;

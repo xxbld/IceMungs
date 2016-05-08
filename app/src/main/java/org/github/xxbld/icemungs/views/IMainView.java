@@ -4,8 +4,6 @@ import org.github.xxbld.icemung.base.mvp.IMvpView;
 
 import java.util.Map;
 
-import cn.bmob.v3.datatype.BmobFile;
-
 /**
  * Created by xxbld on 2016/3/22
  * you can contact me at: 1024920618@qq.com
@@ -24,8 +22,8 @@ public interface IMainView extends IMvpView {
     /**
      * set head
      *
-     * @param headIcon
+     * @param headIconUrl
      * @param userName
      */
-    void setHeadImageView(BmobFile headIcon, String userName);
+    void setHeadImageView(String headIconUrl, String userName);
 }

@@ -26,9 +26,7 @@ public class ResumeFragment extends BasePtrClassicFragment {
     protected void initViewsAndEvents() {
         super.initViewsAndEvents();
         tab = ButterKnife.findById(getActivity(), R.id.content_tab);
-        if (tab != null) {
-            tab.setVisibility(View.GONE);
-        }
+        setTab();
         mPtrClassicFrameLayout.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -41,6 +39,15 @@ public class ResumeFragment extends BasePtrClassicFragment {
     @Override
     public void onResume() {
         super.onResume();
+//        setTab();
+    }
+
+    private void setTab() {
+        if (tab != null) {
+            if (tab.getVisibility() == View.VISIBLE) {
+                tab.setVisibility(View.GONE);
+            }
+        }
     }
 
     @Override

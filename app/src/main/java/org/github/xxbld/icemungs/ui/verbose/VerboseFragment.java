@@ -3,7 +3,7 @@ package org.github.xxbld.icemungs.ui.verbose;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import org.github.xxbld.icemungs.ui.base.BasePageAdapter;
+import org.github.xxbld.icemungs.ui.adapter.BasePageAdapter;
 import org.github.xxbld.icemungs.ui.fragment.BaseUseMainTabFragment;
 
 import java.util.List;
@@ -29,6 +29,12 @@ public class VerboseFragment extends BaseUseMainTabFragment {
         arguments.putInt(FRAG_TITLE_NAME_ID, fragTitleNameResId);
         useTabFragment.setArguments(arguments);
         return useTabFragment;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setAdapter();
     }
 
     @Override

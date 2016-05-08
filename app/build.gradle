@@ -23,6 +23,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    //为了解决部分第三方库重复打包了META-INF的问题
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+    //禁止语意报错
+    lintOptions {
+        abortOnError false
+    }
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
 }
 
 dependencies {
@@ -33,7 +46,7 @@ dependencies {
     //SCViewPager for welcome page
     compile 'com.dev.sacot41:scviewpager:0.0.4'
     //datetime picker
-    compile 'com.wdullaer:materialdatetimepicker:2.2.0'
+    compile 'com.wdullaer:materialdatetimepicker:2.3.0'
     //material text view
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     //波纹效果
@@ -46,5 +59,5 @@ dependencies {
     }
     compile 'com.esri.arcgis.android:arcgis-android:10.2.7'
     compile 'in.srain.cube:ultra-ptr:1.0.11'
-    compile 'jp.wasabeef:recyclerview-animators:2.2.3'
+//    compile 'jp.wasabeef:recyclerview-animators:2.2.3'
 }

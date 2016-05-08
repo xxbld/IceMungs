@@ -9,7 +9,7 @@ import android.view.View;
 import org.github.xxbld.icemungs.R;
 import org.github.xxbld.icemungs.presenters.FragUseMainTabPresenter;
 import org.github.xxbld.icemungs.ui.base.BaseFragment;
-import org.github.xxbld.icemungs.ui.base.BasePageAdapter;
+import org.github.xxbld.icemungs.ui.adapter.BasePageAdapter;
 import org.github.xxbld.icemungs.views.IFragUseMainTabView;
 
 import java.util.List;
@@ -21,16 +21,17 @@ import butterknife.ButterKnife;
  * Created by xxbld on 2016/4/28.
  * you can contact me at: 1024920618@qq.com
  *
- * @description : 侧边的 Fragment
+ * @description : 侧边的 Fragment 使用tab
  */
 public class UseTabFragment extends BaseFragment implements IFragUseMainTabView {
 
     private static final String FRAG_USE_MAIN_TAB_LAYOUT = "use_main_tab_layout";
     private static final String FRAG_TITLE_NAME_ID = "frag_title_name";
 
-    private boolean isUseMainTabLayout;
+    private boolean isUseMainTabLayout = true;
     private int fragTitleNameResId;
     private String fragTitleName;
+    private int currentViewpagerPage = 0;
 
     TabLayout mTabLayout;
     @Bind(R.id.layout_viewpager)
@@ -44,13 +45,11 @@ public class UseTabFragment extends BaseFragment implements IFragUseMainTabView 
 
     /**
      * @param fragTitleNameResId
-     * @param isUseMainTabLayout
      * @return
      */
-    public static UseTabFragment newInstance(int fragTitleNameResId, boolean isUseMainTabLayout) {
+    public static UseTabFragment newInstance(int fragTitleNameResId) {
         UseTabFragment useTabFragment = new UseTabFragment();
         Bundle arguments = new Bundle();
-        arguments.putBoolean(FRAG_USE_MAIN_TAB_LAYOUT, isUseMainTabLayout);
         arguments.putInt(FRAG_TITLE_NAME_ID, fragTitleNameResId);
         useTabFragment.setArguments(arguments);
         return useTabFragment;
@@ -66,7 +65,6 @@ public class UseTabFragment extends BaseFragment implements IFragUseMainTabView 
         super.onCreate(savedInstanceState);
         Bundle arguments = getArguments();
         if (arguments != null) {
-            this.isUseMainTabLayout = arguments.getBoolean(FRAG_USE_MAIN_TAB_LAYOUT, false);
             this.fragTitleNameResId = arguments.getInt(FRAG_TITLE_NAME_ID);
             this.fragTitleName = getResources().getString(fragTitleNameResId);
         }
@@ -83,6 +81,22 @@ public class UseTabFragment extends BaseFragment implements IFragUseMainTabView 
             //使用tabs
             mTabLayout.setVisibility(View.VISIBLE);
             mFragUseMainTabPresenter.initTabLayout(isUseMainTabLayout);
+            mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                }
+
+                @Override
+                public void onPageSelected(int position) {
+                    currentViewpagerPage = position;
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int state) {
+
+                }
+            });
         }
     }
 
@@ -94,11 +108,7 @@ public class UseTabFragment extends BaseFragment implements IFragUseMainTabView 
     @Override
     public void onResume() {
         super.onResume();
-        if (isUseMainTabLayout) {
-            if (mTabLayout.getVisibility() == View.GONE) {
-                mTabLayout.setVisibility(View.VISIBLE);
-            }
-        }
+        setAdapter();
     }
 
     @Override
@@ -118,8 +128,20 @@ public class UseTabFragment extends BaseFragment implements IFragUseMainTabView 
                 return fragments.get(position);
             }
         };
+        setAdapter();
+    }
+
+    private void setAdapter() {
         mViewPager.setAdapter(mBasePageAdapter);
         //必须在viewpager.setAdapter之后
         mTabLayout.setupWithViewPager(mViewPager);
+        mViewPager.setCurrentItem(currentViewpagerPage);
+//        mBasePageAdapter.notifyDataSetChanged();
+        if (isUseMainTabLayout) {
+            if (mTabLayout.getVisibility() == View.GONE) {
+                mTabLayout.setVisibility(View.VISIBLE);
+            }
+            mTabLayout.invalidate();
+        }
     }
 }

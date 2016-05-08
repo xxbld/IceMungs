@@ -2,7 +2,6 @@ package org.github.xxbld.icemungs.data.models;
 
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobDate;
-import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 
 /**
@@ -21,7 +20,7 @@ public class Vote extends BmobObject {
     //位置
     private BmobGeoPoint voteLocation;
     //大图
-    private BmobFile voteBigImage;
+    private String voteBigImageUrl;
     private BmobDate startDate;  //开始日期
     private BmobDate endDate;  //结束日期
     private String voteType;

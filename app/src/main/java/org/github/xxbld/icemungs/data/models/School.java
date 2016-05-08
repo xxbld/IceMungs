@@ -1,7 +1,6 @@
 package org.github.xxbld.icemungs.data.models;
 
 import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 import cn.bmob.v3.datatype.BmobRelation;
 
@@ -21,7 +20,7 @@ public class School extends BmobObject {
     private String schoolAddress;
     private String schoolPhoneNumber;
     private String schoolEmail;
-    private BmobFile schoolLogoImg;
+    private String schoolLogoImUrl;
     private BmobGeoPoint schoolLocation;
 
     private BmobRelation schoolMaps;  //1：多，一个学校可以有多个地图服务
@@ -67,12 +66,12 @@ public class School extends BmobObject {
         this.schoolEmail = schoolEmail;
     }
 
-    public BmobFile getSchoolLogoImg() {
-        return schoolLogoImg;
+    public String getSchoolLogoImUrl() {
+        return schoolLogoImUrl;
     }
 
-    public void setSchoolLogoImg(BmobFile schoolLogoImg) {
-        this.schoolLogoImg = schoolLogoImg;
+    public void setSchoolLogoImUrl(String schoolLogoImUrl) {
+        this.schoolLogoImUrl = schoolLogoImUrl;
     }
 
     public BmobGeoPoint getSchoolLocation() {

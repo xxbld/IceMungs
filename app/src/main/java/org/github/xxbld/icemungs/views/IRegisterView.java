@@ -8,14 +8,9 @@ import org.github.xxbld.icemung.base.mvp.IMvpView;
  *
  * @descript ：
  */
-public interface ILoginView extends IMvpView {
+public interface IRegisterView extends IMvpView {
     /**
      * go to main activity
      */
     void goHome();
-
-    /**
-     * go to goRegister activity
-     */
-    void goRegister();
 }

@@ -1,7 +1,6 @@
 package org.github.xxbld.icemungs.data.models;
 
 import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 
 /**
@@ -21,7 +20,7 @@ public class News extends BmobObject {
     //位置
     private BmobGeoPoint newsLocation;
     //大图
-    private BmobFile newsBigImage;
+    private String newsImageUrl;
     //新闻归属
     private NewsLevel newsLevel;
 
@@ -61,12 +60,12 @@ public class News extends BmobObject {
      * 新闻图片
      * <p>可以使用 getBigImage().loadImageThumbnail() 方法来加载缩略图</p>
      */
-    public BmobFile getNewsBigImage() {
-        return newsBigImage;
+    public String getNewsImageUrl() {
+        return newsImageUrl;
     }
 
-    public void setNewsBigImage(BmobFile newsBigImage) {
-        this.newsBigImage = newsBigImage;
+    public void setNewsImageUrl(String newsImageUrl) {
+        this.newsImageUrl = newsImageUrl;
     }
 
     public NewsLevel getNewsLevel() {

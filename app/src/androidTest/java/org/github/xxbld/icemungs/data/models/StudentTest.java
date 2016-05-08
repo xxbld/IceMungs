@@ -17,7 +17,7 @@ public class StudentTest extends AndroidTestCase {
         currentUser.setSex(0);
         currentUser.setAddress("江西省南昌市");
 //        getContext().getResources().getDrawable(R.drawable.ic_user);
-//        currentUser.setIcon(new BmobFile(new File()));
+//        currentUser.setIconUrl(new BmobFile(new File()));
         currentUser.update(getContext());
     }
 

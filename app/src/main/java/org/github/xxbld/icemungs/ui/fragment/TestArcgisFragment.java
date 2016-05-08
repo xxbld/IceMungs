@@ -1,5 +1,10 @@
 package org.github.xxbld.icemungs.ui.fragment;
 
+import android.location.Location;
+import android.location.LocationListener;
+import android.os.Bundle;
+
+import com.esri.android.map.LocationDisplayManager;
 import com.esri.android.map.MapView;
 import com.esri.android.map.ags.ArcGISTiledMapServiceLayer;
 import com.esri.android.map.event.OnStatusChangedListener;
@@ -76,6 +81,36 @@ public class TestArcGisFragment extends BaseFragment {
             }
         });
 
+    }
+
+    /**
+     * 定位
+     */
+    private void loc() {
+        LocationDisplayManager locationDisplayManager = mMapView.getLocationDisplayManager();
+        locationDisplayManager.setAutoPanMode(LocationDisplayManager.AutoPanMode.COMPASS);
+        locationDisplayManager.setAllowNetworkLocation(true);
+        locationDisplayManager.setLocationListener(new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        });
+        locationDisplayManager.start();
     }
 
     private void getCenterP() {

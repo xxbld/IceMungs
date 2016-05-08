@@ -19,7 +19,7 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder {
     public BaseRecyclerHolder(View itemView) {
         super(itemView);
         //一般不会超过8个吧
-        this.mViews = new SparseArray<View>(8);
+        this.mViews = new SparseArray<>(8);
     }
 
     public SparseArray<View> getAllView() {

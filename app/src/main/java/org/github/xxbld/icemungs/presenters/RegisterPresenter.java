@@ -6,28 +6,28 @@ import org.github.xxbld.icemung.base.mvp.BasePresenter;
 import org.github.xxbld.icemung.utils.MLog;
 import org.github.xxbld.icemung.utils.TextUtil;
 import org.github.xxbld.icemungs.R;
-import org.github.xxbld.icemungs.data.models.Student;
-import org.github.xxbld.icemungs.listeners.OnLoginFinishedListener;
-import org.github.xxbld.icemungs.views.ILoginView;
+import org.github.xxbld.icemungs.listeners.OnRegisterListener;
+import org.github.xxbld.icemungs.views.IRegisterView;
 
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.SaveListener;
 
 /**
  * Created by xxbld on 2016/3/14
  * you can contact me at: 1024920618@qq.com
  *
- * @descript ：
+ * @descript :RegisterPresenter
  */
-public class LoginPresenter extends BasePresenter<ILoginView> {
+public class RegisterPresenter extends BasePresenter<IRegisterView> {
 
-    Student mStudent = new Student();
-    OnLoginFinishedListener mListener;
+    BmobUser mStudent = new BmobUser();
+    OnRegisterListener mListener;
 
-    public LoginPresenter() {
+    public RegisterPresenter() {
     }
 
     @Override
-    public void attachView(ILoginView mvpView) {
+    public void attachView(IRegisterView mvpView) {
         super.attachView(mvpView);
     }
 
@@ -42,39 +42,31 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     }
 
     /**
-     * goRegister
-     */
-    public void goRegister() {
-        this.getMvpView().goRegister();
-    }
-
-    /**
-     * login
+     * register
      *
      * @param context
      * @param username
      * @param pwd
      * @param listener
      */
-    public void login(Context context, String username, String pwd, OnLoginFinishedListener listener) {
-//        username = "小小冰绿豆";
-//        pwd = "123065";
+    public void register(Context context, String username, String pwd, String pwdAgain, OnRegisterListener listener) {
+
         if (context == null || listener == null) {
             return;
         }
         this.mListener = listener;
-        boolean checkUserOK = checkUser(context, username, pwd);
+        boolean checkUserOK = checkUser(context, username, pwd, pwdAgain);
         MLog.i(TAG, "checkUserOK: " + checkUserOK);
         if (!checkUserOK) {
             return;
         }
         mStudent.setUsername(username);
         mStudent.setPassword(pwd);
-        mStudent.login(context, new SaveListener() {
+        mStudent.signUp(context, new SaveListener() {
             @Override
             public void onSuccess() {
                 mListener.onSuccess(mStudent);
-                LoginPresenter.this.getMvpView().goHome();
+                RegisterPresenter.this.getMvpView().goHome();
             }
 
             @Override
@@ -85,14 +77,23 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         });
     }
 
-    private boolean checkUser(Context context, String username, String pwd) {
+    private boolean checkUser(Context context, String username, String pwd, String pwdAgain) {
         boolean userNameEmpty = TextUtil.isEmpty(username);
         boolean userPwdEmpty = TextUtil.isEmpty(pwd);
+        boolean userPwdAgainEmpty = TextUtil.isEmpty(pwdAgain);
         if (userNameEmpty) {
             mListener.onUserNameErr(context.getString(R.string.login_username_error));
             return false;
         }
         if (userPwdEmpty) {
+            mListener.onPasswordErr(context.getString(R.string.login_pwd_error));
+            return false;
+        }
+        if (userPwdAgainEmpty) {
+            mListener.onPasswordErr(context.getString(R.string.login_pwd_error));
+            return false;
+        }
+        if (!pwd.equals(pwdAgain)) {
             mListener.onPasswordErr(context.getString(R.string.login_pwd_error));
             return false;
         }

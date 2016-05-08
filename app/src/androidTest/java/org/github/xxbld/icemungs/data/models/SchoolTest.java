@@ -34,7 +34,7 @@ public class SchoolTest extends AndroidTestCase {
         mSchool.setSchoolAddress("江西省赣州市红旗大道86号");
         mSchool.setSchoolPhoneNumber("0797-8312161");
         mSchool.setSchoolEmail(null);
-        mSchool.setSchoolLogoImg(null);
+        mSchool.setSchoolLogoImUrl(null);
         BmobRelation relation = new BmobRelation();
         relation.add(getAcademiesRelation(mSchool));
         mSchool.setAcademies(relation);
@@ -75,7 +75,7 @@ public class SchoolTest extends AndroidTestCase {
         jc.setAcademyPhoneNumber(null);
         jc.setAcademyEmail("jcxy01@126.com");
         jc.setAcademyLocation(null);
-        jc.setAcademyLogoImg(null);
+        jc.setAcademyLogoImgUrl(null);
         jc.setSchool(relaSchool);
         jc.setSpecialities(null);
         return academies;

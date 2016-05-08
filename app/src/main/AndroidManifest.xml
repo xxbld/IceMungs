@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.github.xxbld.icemungs">
+          package="org.github.xxbld.icemungs">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <!--ArcGis set OPENGL ES 渲染-->
     <!--<uses-feature
@@ -25,16 +26,17 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".ui.activity.SplashActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.MainActivity" />
-        <activity android:name=".ui.activity.TestActivity1" />
-        <activity android:name=".ui.activity.WelcomeActivity" />
-        <activity android:name=".ui.activity.LoginActivity" />
-        <activity android:name=".ui.activity.PersonalCenterActivity" />
+        <activity android:name=".ui.activity.WelcomeActivity"/>
+        <activity android:name=".ui.activity.LoginActivity"/>
+        <activity android:name=".ui.activity.RegisterActivity"/>
+        <activity android:name=".ui.activity.MainActivity"/>
+        <activity android:name=".ui.activity.TestActivity1"/>
+        <activity android:name=".ui.activity.PersonalCenterActivity"/>
     </application>
 
 </manifest>

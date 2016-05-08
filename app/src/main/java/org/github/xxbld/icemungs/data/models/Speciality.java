@@ -1,7 +1,6 @@
 package org.github.xxbld.icemungs.data.models;
 
 import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 import cn.bmob.v3.datatype.BmobRelation;
 
@@ -17,7 +16,7 @@ public class Speciality extends BmobObject {
     private String specialityIntroduction;
     private String specialityAddress;
     private String specialityPhoneNumber;
-    private BmobFile specialityLogoImg;
+    private String specialityLogoImgUrl;
     private BmobGeoPoint specialityLocation;
 
     private Academy academy;
@@ -55,12 +54,12 @@ public class Speciality extends BmobObject {
         this.specialityPhoneNumber = specialityPhoneNumber;
     }
 
-    public BmobFile getSpecialityLogoImg() {
-        return specialityLogoImg;
+    public String getSpecialityLogoImgUrl() {
+        return specialityLogoImgUrl;
     }
 
-    public void setSpecialityLogoImg(BmobFile specialityLogoImg) {
-        this.specialityLogoImg = specialityLogoImg;
+    public void setSpecialityLogoImgUrl(String specialityLogoImgUrl) {
+        this.specialityLogoImgUrl = specialityLogoImgUrl;
     }
 
     public BmobGeoPoint getSpecialityLocation() {

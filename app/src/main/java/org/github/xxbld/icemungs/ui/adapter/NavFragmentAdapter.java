@@ -150,17 +150,17 @@ public class NavFragmentAdapter implements NavigationView.OnNavigationItemSelect
 
 
     private void showFragment(FragmentTransaction transaction, Fragment fragment, Object title, Object toolBarMenuRes) {
-//        if (mCurrentFragment != null) {
-//            mCurrentFragment.onPause();
-//            transaction.hide(mCurrentFragment);
-//        }
-//        if (fragment.isAdded()) {
-//            fragment.onResume();
-//        } else {
-//            transaction.add(mFragContainerViewId, fragment);
-//        }
-//        transaction.show(fragment);
-        transaction.replace(mFragContainerViewId, fragment);
+        if (mCurrentFragment != null) {
+            mCurrentFragment.onPause();
+            transaction.hide(mCurrentFragment);
+        }
+        if (fragment.isAdded()) {
+            fragment.onResume();
+        } else {
+            transaction.add(mFragContainerViewId, fragment);
+        }
+        transaction.show(fragment);
+//        transaction.replace(mFragContainerViewId, fragment);
         transaction.commit();
         setToolBar(mMenu, title, toolBarMenuRes);
         mCurrentFragment = fragment;

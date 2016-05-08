@@ -3,7 +3,7 @@ package org.github.xxbld.icemungs.ui.schoolnews;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import org.github.xxbld.icemungs.ui.base.BasePageAdapter;
+import org.github.xxbld.icemungs.ui.adapter.BasePageAdapter;
 import org.github.xxbld.icemungs.ui.fragment.BaseUseMainTabFragment;
 
 import java.util.List;
@@ -42,4 +42,9 @@ public class SchoolNewsFragment extends BaseUseMainTabFragment {
         };
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+            setAdapter();
+    }
 }

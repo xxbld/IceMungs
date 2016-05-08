@@ -1,7 +1,6 @@
 package org.github.xxbld.icemungs.data.models;
 
 import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * Created by xxbld on 2016/5/3.
@@ -14,7 +13,7 @@ public class SchoolMap extends BmobObject {
     //地图服务名称
     private String mapName;
     //地图服务缩略图
-    private BmobFile mapThumbnails;
+    private String mapThumbnails;
     //地图服务uri
     private String mapServerUri;
     //简介
@@ -32,11 +31,11 @@ public class SchoolMap extends BmobObject {
         this.mapName = mapName;
     }
 
-    public BmobFile getMapThumbnails() {
+    public String getMapThumbnails() {
         return mapThumbnails;
     }
 
-    public void setMapThumbnails(BmobFile mapThumbnails) {
+    public void setMapThumbnails(String mapThumbnails) {
         this.mapThumbnails = mapThumbnails;
     }
 

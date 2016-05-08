@@ -2,6 +2,7 @@ package org.github.xxbld.icemungs.ui.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -29,7 +30,6 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.datatype.BmobFile;
 
 public class MainActivity extends BaseActivity implements IMainView, View.OnClickListener {
 
@@ -39,6 +39,8 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     DrawerLayout mDrawerLayout;
     @Bind(R.id.fab)
     SheetFloatActionButton mFab;
+    @Bind(R.id.content_tab)
+    TabLayout mTabLayout;
 
     View mHeadView;
     ImageView mHeadImageView;
@@ -49,6 +51,7 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     NavFragmentAdapter mNavFragmentAdapter;
 
     Student mCurrentStudent;
+    private int mCurrentFragId;
 
     @Override
     protected int getContentViewLayoutResID() {
@@ -61,6 +64,8 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
         mCurrentStudent = BmobUser.getCurrentUser(MainActivity.this, Student.class);
         if (mCurrentStudent == null) {
             //TODO handle null
+            mCurrentStudent = new Student();
+            mCurrentStudent.setUsername("YY");
         }
         this.setStatusBarColorWithDrawer(mDrawerLayout, getResources().getColor(R.color.colorPrimary));
         mMainPresenter = new MainPresenter(mCurrentStudent);
@@ -126,15 +131,11 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     //===================impl
 
     @Override
-    public void setHeadImageView(BmobFile headIcon, String userName) {
-        String headUrl = null;
-        if (headIcon != null) {
-            headUrl = headIcon.getFileUrl(this);
-        }
-        if (headUrl == null) {
+    public void setHeadImageView(String headIconUrl, String userName) {
+        if (headIconUrl == null) {
             GlideHelper.tranCircleImage(this.getApplicationContext(), R.drawable.ic_user, mHeadImageView);
         } else {
-            GlideHelper.tranCircleImage(this.getApplicationContext(), headUrl, mHeadImageView);
+            GlideHelper.tranCircleImage(this.getApplicationContext(), headIconUrl, mHeadImageView);
         }
         mHeadNameTextView.setText(userName);
     }
@@ -163,10 +164,25 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
 
             @Override
             public void onSwitchFragmentSuccess(int currentItemId) {
-
+                mCurrentFragId = currentItemId;
+                switch (currentItemId) {
+//                    case R.id.nav_school:
+//                        mTabLayout.setVisibility(View.VISIBLE);
+//                        break;
+//                    case R.id.nav_verbose:
+//                        mTabLayout.setVisibility(View.VISIBLE);
+//                        break;
+                    case R.id.nav_daily:
+                        mTabLayout.setVisibility(View.GONE);
+                        break;
+                    case R.id.nav_resume:
+                        mTabLayout.setVisibility(View.GONE);
+                        break;
+                }
             }
 
         });
+        mNavFragmentAdapter.switchToItem(R.id.nav_verbose);
     }
 
     private void setNav() {

@@ -9,7 +9,7 @@ import android.view.View;
 import org.github.xxbld.icemungs.R;
 import org.github.xxbld.icemungs.presenters.FragUseMainTabPresenter;
 import org.github.xxbld.icemungs.ui.base.BaseFragment;
-import org.github.xxbld.icemungs.ui.base.BasePageAdapter;
+import org.github.xxbld.icemungs.ui.adapter.BasePageAdapter;
 import org.github.xxbld.icemungs.views.IFragUseMainTabView;
 
 import java.util.List;
@@ -21,13 +21,14 @@ import butterknife.ButterKnife;
  * Created by xxbld on 2016/4/28.
  * you can contact me at: 1024920618@qq.com
  *
- * @description : 侧边的 Fragment 并使用tab
+ * @description : 侧边的 Fragment 并使用tab <p> un Use</p>
  */
 public abstract class BaseUseMainTabFragment extends BaseFragment implements IFragUseMainTabView {
 
     //    private static final String FRAG_USE_MAIN_TAB_LAYOUT = "use_main_tab_layout";
     protected static final String FRAG_TITLE_NAME_ID = "frag_title_name";
 
+    private int currentViewpagerPage = 0;
     private boolean isUseMainTabLayout = true;
     private int fragTitleNameResId;
     private String fragTitleName;
@@ -66,8 +67,24 @@ public abstract class BaseUseMainTabFragment extends BaseFragment implements IFr
         mFragUseMainTabPresenter.initialized();
         if (isUseMainTabLayout) {
             //使用tabs
-            mTabLayout.setVisibility(View.VISIBLE);
+//            mTabLayout.setVisibility(View.VISIBLE);
             mFragUseMainTabPresenter.initTabLayout(isUseMainTabLayout);
+            mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                }
+
+                @Override
+                public void onPageSelected(int position) {
+                    currentViewpagerPage = position;
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int state) {
+
+                }
+            });
         }
     }
 
@@ -79,11 +96,12 @@ public abstract class BaseUseMainTabFragment extends BaseFragment implements IFr
     @Override
     public void onResume() {
         super.onResume();
-        if (isUseMainTabLayout) {
-            if (mTabLayout.getVisibility() == View.GONE) {
-                mTabLayout.setVisibility(View.VISIBLE);
-            }
-        }
+//        if (isUseMainTabLayout) {
+////            if (mTabLayout.getVisibility() == View.GONE) {
+////                mTabLayout.setVisibility(View.VISIBLE);
+////            }
+//            setAdapter();
+//        }
     }
 
     @Override
@@ -98,9 +116,20 @@ public abstract class BaseUseMainTabFragment extends BaseFragment implements IFr
     @Override
     public void initTabLayout(List<String> tabTitles, final List<Fragment> fragments) {
         mBasePageAdapter = getBasePageAdapter(tabTitles, fragments);
+    }
+
+    protected void setAdapter() {
         mViewPager.setAdapter(mBasePageAdapter);
         //必须在viewpager.setAdapter之后
         mTabLayout.setupWithViewPager(mViewPager);
+        mViewPager.setCurrentItem(currentViewpagerPage);
+        mBasePageAdapter.notifyDataSetChanged();
+        if (isUseMainTabLayout) {
+            if (mTabLayout.getVisibility() == View.GONE) {
+                mTabLayout.setVisibility(View.VISIBLE);
+            }
+            mTabLayout.invalidate();
+        }
     }
 
     protected abstract BasePageAdapter getBasePageAdapter(List<String> tabTitles, List<Fragment> fragments);

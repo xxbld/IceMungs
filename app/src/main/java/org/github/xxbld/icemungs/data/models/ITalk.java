@@ -1,7 +1,6 @@
 package org.github.xxbld.icemungs.data.models;
 
 import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 
 /**
@@ -20,5 +19,5 @@ public class ITalk extends BmobObject {
     //位置
     private BmobGeoPoint iTalkLocation;
     //大图
-    private BmobFile iTalkBigImage;
+    private String iTalkBigImageUrl;
 }

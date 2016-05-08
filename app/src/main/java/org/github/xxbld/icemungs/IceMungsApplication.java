@@ -23,6 +23,7 @@ public class IceMungsApplication extends BaseApplication {
         //初始化Bmob SDK
         Bmob.initialize(this, "468e2678c4bff9cbf234f74f15731aad");
         Bmob.DEBUG = true;
+//        Bmob.initialize(this, "c9c452178afb67679d49f9e13ba6bf2f");
     }
 
     @Override

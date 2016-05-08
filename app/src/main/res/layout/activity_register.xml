@@ -2,11 +2,9 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/login_root"
+    android:id="@+id/register_root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="org.github.xxbld.icemungs.ui.activity.LoginActivity">
+    android:layout_height="match_parent">
 
     <include layout="@layout/merge_toolbar"/>
 
@@ -18,7 +16,7 @@
         android:padding="16dp">
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/login_edt_username"
+            android:id="@+id/register_edt_username"
             style="@style/MEdiText.FloatingLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,35 +24,27 @@
             app:met_floatingLabelText="请输入用户名"/>
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/login_edt_password"
+            android:id="@+id/register_edt_password"
             style="@style/MEdiText.FloatingLabel.Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:met_floatingLabelAlwaysShown="true"
             app:met_floatingLabelText="请输入密码"/>
 
-        <LinearLayout
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/register_edt_password_again"
+            style="@style/MEdiText.FloatingLabel.Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            app:met_floatingLabelAlwaysShown="true"
+            app:met_floatingLabelText="请再次输入密码"/>
 
-            <Button
-                android:id="@+id/login_btn_login"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:layout_weight="1"
-                android:text="@string/login"/>
-
-            <Button
-                android:id="@+id/login_btn_register"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:layout_weight="1"
-                android:text="@string/register"/>
-        </LinearLayout>
-
+        <Button
+            android:id="@+id/register_btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:text="@string/register"/>
     </LinearLayout>
 
 

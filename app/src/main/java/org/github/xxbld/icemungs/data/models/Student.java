@@ -1,7 +1,7 @@
 package org.github.xxbld.icemungs.data.models;
 
 import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 import cn.bmob.v3.datatype.BmobRelation;
 
@@ -36,9 +36,10 @@ public class Student extends BmobUser {
 
     private Integer sex;  // 0 男，1 女
     private Integer age;  //age range [0 - 200]
+    private BmobDate birthday;//birthday
     private BmobGeoPoint location;  //loc
     private String address;  //联系地址
-    private BmobFile icon;  //头像
+    private String iconUrl;  //头像
 
     private BmobRelation majors;
 
@@ -66,6 +67,14 @@ public class Student extends BmobUser {
         this.age = age;
     }
 
+    public BmobDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(BmobDate birthday) {
+        this.birthday = birthday;
+    }
+
     public BmobGeoPoint getLocation() {
         return location;
     }
@@ -82,12 +91,12 @@ public class Student extends BmobUser {
         this.address = address;
     }
 
-    public BmobFile getIcon() {
-        return icon;
+    public String getIconUrl() {
+        return iconUrl;
     }
 
-    public void setIcon(BmobFile icon) {
-        this.icon = icon;
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
     }
 
     public BmobRelation getMajors() {

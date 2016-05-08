@@ -122,6 +122,7 @@
     <style name="MEdiText.FloatingLabel" parent="MEdiText.Normal">
         <!--头部提示文本设置  none normal highlight-->
         <item name="met_floatingLabel">highlight</item>
+        <item name="met_singleLineEllipsis">true</item>
     </style>
 
     <style name="MEdiText.FloatingLabel.Password" parent="MEdiText.FloatingLabel">
