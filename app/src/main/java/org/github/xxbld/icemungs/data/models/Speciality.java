@@ -11,63 +11,81 @@ import cn.bmob.v3.datatype.BmobRelation;
  * @description : 专业
  */
 public class Speciality extends BmobObject {
-
-    private String specialityName;
-    private String specialityIntroduction;
-    private String specialityAddress;
-    private String specialityPhoneNumber;
-    private String specialityLogoImgUrl;
-    private BmobGeoPoint specialityLocation;
+    //字段长度不能超过20
+    private String specialName;
+    private String specialIntroduction;
+    private String specialAddress;
+    private String specialPhoneNumber;
+    private String specialEmail;
+    private String specialLogoImgUrl;
+    private String specialBgImgUrl;
+    private BmobGeoPoint specialLocation;
 
     private Academy academy;
     private BmobRelation majors;
 
-    public String getSpecialityName() {
-        return specialityName;
+    public String getSpecialName() {
+        return specialName;
     }
 
-    public void setSpecialityName(String specialityName) {
-        this.specialityName = specialityName;
+    public void setSpecialName(String specialName) {
+        this.specialName = specialName;
     }
 
-    public String getSpecialityIntroduction() {
-        return specialityIntroduction;
+    public String getSpecialIntroduction() {
+        return specialIntroduction;
     }
 
-    public void setSpecialityIntroduction(String specialityIntroduction) {
-        this.specialityIntroduction = specialityIntroduction;
+    public void setSpecialIntroduction(String specialIntroduction) {
+        this.specialIntroduction = specialIntroduction;
     }
 
-    public String getSpecialityAddress() {
-        return specialityAddress;
+    public String getSpecialAddress() {
+        return specialAddress;
     }
 
-    public void setSpecialityAddress(String specialityAddress) {
-        this.specialityAddress = specialityAddress;
+    public void setSpecialAddress(String specialAddress) {
+        this.specialAddress = specialAddress;
     }
 
-    public String getSpecialityPhoneNumber() {
-        return specialityPhoneNumber;
+    public String getSpecialPhoneNumber() {
+        return specialPhoneNumber;
     }
 
-    public void setSpecialityPhoneNumber(String specialityPhoneNumber) {
-        this.specialityPhoneNumber = specialityPhoneNumber;
+    public void setSpecialPhoneNumber(String specialPhoneNumber) {
+        this.specialPhoneNumber = specialPhoneNumber;
     }
 
-    public String getSpecialityLogoImgUrl() {
-        return specialityLogoImgUrl;
+    public String getSpecialEmail() {
+        return specialEmail;
     }
 
-    public void setSpecialityLogoImgUrl(String specialityLogoImgUrl) {
-        this.specialityLogoImgUrl = specialityLogoImgUrl;
+    public void setSpecialEmail(String specialEmail) {
+        this.specialEmail = specialEmail;
     }
 
-    public BmobGeoPoint getSpecialityLocation() {
-        return specialityLocation;
+    public String getSpecialLogoImgUrl() {
+        return specialLogoImgUrl;
     }
 
-    public void setSpecialityLocation(BmobGeoPoint specialityLocation) {
-        this.specialityLocation = specialityLocation;
+    public void setSpecialLogoImgUrl(String specialLogoImgUrl) {
+        this.specialLogoImgUrl = specialLogoImgUrl;
+    }
+
+    public String getSpecialBgImgUrl() {
+        return specialBgImgUrl;
+    }
+
+    public void setSpecialBgImgUrl(String specialBgImgUrl) {
+        this.specialBgImgUrl = specialBgImgUrl;
+    }
+
+    public BmobGeoPoint getSpecialLocation() {
+        return specialLocation;
+    }
+
+    public void setSpecialLocation(BmobGeoPoint specialLocation) {
+        this.specialLocation = specialLocation;
     }
 
     public Academy getAcademy() {

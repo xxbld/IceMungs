@@ -17,6 +17,7 @@ public class Academy extends BmobObject {
     private String academyPhoneNumber;
     private String academyEmail;
     private String academyLogoImgUrl;
+    private String academyBgImgUrl;
     private BmobGeoPoint academyLocation;
 
     private School school;
@@ -68,6 +69,14 @@ public class Academy extends BmobObject {
 
     public void setAcademyLogoImgUrl(String academyLogoImgUrl) {
         this.academyLogoImgUrl = academyLogoImgUrl;
+    }
+
+    public String getAcademyBgImgUrl() {
+        return academyBgImgUrl;
+    }
+
+    public void setAcademyBgImgUrl(String academyBgImgUrl) {
+        this.academyBgImgUrl = academyBgImgUrl;
     }
 
     public BmobGeoPoint getAcademyLocation() {

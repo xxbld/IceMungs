@@ -41,7 +41,6 @@ public class SplashActivity extends BaseActivity implements ISplashView {
         mSplashPresenter = new SplashPresenter(this);
         mSplashPresenter.attachView(this);
         mSplashPresenter.initialized();
-
     }
 
     @Override
@@ -97,13 +96,4 @@ public class SplashActivity extends BaseActivity implements ISplashView {
             }
         }, 1500);
     }
-//    private void loginTest() {
-//        BmobUser.loginByAccount(this, "小小冰绿豆", "123065", new LogInListener<BmobUser>() {
-//            @Override
-//            public void done(BmobUser student, BmobException e) {
-//
-//                MLog.i(TAG, "msg" + e.getMessage());
-//            }
-//        });
-//}
 }

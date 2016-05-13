@@ -26,10 +26,10 @@ public class IceMungsApplication extends BaseApplication {
 //        Bmob.initialize(this, "c9c452178afb67679d49f9e13ba6bf2f");
     }
 
-    @Override
-    protected void registerYourSingletons() {
-
-    }
+//    @Override
+//    protected void registerYourSingletons() {
+//
+//    }
 
     @Override
     protected boolean isInitSharedPreUtil() {

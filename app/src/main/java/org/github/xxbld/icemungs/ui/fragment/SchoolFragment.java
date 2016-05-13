@@ -79,7 +79,7 @@ public class SchoolFragment extends BaseFragment implements IFragSchoolView {
     @Override
     public void onResume() {
         super.onResume();
-        mTabLayout.setVisibility(View.VISIBLE);
+//        mTabLayout.setVisibility(View.VISIBLE);
     }
 
     //==========impls

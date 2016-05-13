@@ -6,10 +6,33 @@ import com.esri.core.geometry.SpatialReference;
  * Created by xxbld on 2016/3/28
  * you can contact me at: 1024920618@qq.com
  *
- * @descript ：
+ * @descript ： 常量
  */
 public class Constant {
-    // Spatial references used for projecting points
-    public static final SpatialReference mWm = SpatialReference.create(102100);
-    public static final SpatialReference mEgs = SpatialReference.create(4326);
+
+    /**
+     * WKID_WGS84
+     */
+    public static final SpatialReference SR_W = SpatialReference.create(SpatialReference.WKID_WGS84);
+    /**
+     * WKID_WGS84_WEB_MERCATOR
+     */
+    public static final SpatialReference SR_WWM = SpatialReference.create(SpatialReference.WKID_WGS84_WEB_MERCATOR);
+    /**
+     * WKID_WGS84_WEB_MERCATOR_AUXILIARY_SPHERE
+     */
+    public static final SpatialReference SR_WWMAS = SpatialReference.create(SpatialReference.WKID_WGS84_WEB_MERCATOR_AUXILIARY_SPHERE);
+    /**
+     * WKID_WGS84_WEB_MERCATOR_AUXILIARY_SPHERE_10
+     */
+    public static final SpatialReference SR_WWMAS10 = SpatialReference.create(SpatialReference.WKID_WGS84_WEB_MERCATOR_AUXILIARY_SPHERE_10);
+
+    /**
+     * ArcGis Onlie 矢量地图
+     */
+    public static final String ARCGIS_MAPSERVER_TITLE_URL = "http://cache1.arcgisonline.cn/arcgis/rest/services/ChinaOnlineCommunity_Mobile/MapServer";
+    /**
+     * ArcGis Onlie 栅格地图
+     */
+    public static final String ACRGIS_MAPSERVER_TITLE_IMAGE_URL = "http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer";
 }

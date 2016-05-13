@@ -42,6 +42,13 @@ public class RegisterPresenter extends BasePresenter<IRegisterView> {
     }
 
     /**
+     * go Main
+     */
+    public void goHome() {
+        this.getMvpView().goHome();
+    }
+
+    /**
      * register
      *
      * @param context

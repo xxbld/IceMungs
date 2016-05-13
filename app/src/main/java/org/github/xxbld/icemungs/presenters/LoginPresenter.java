@@ -49,6 +49,13 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     }
 
     /**
+     * goHome
+     */
+    public void goHome() {
+        this.getMvpView().goHome();
+    }
+
+    /**
      * login
      *
      * @param context
@@ -74,7 +81,6 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
             @Override
             public void onSuccess() {
                 mListener.onSuccess(mStudent);
-                LoginPresenter.this.getMvpView().goHome();
             }
 
             @Override

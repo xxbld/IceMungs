@@ -20,7 +20,8 @@ public class School extends BmobObject {
     private String schoolAddress;
     private String schoolPhoneNumber;
     private String schoolEmail;
-    private String schoolLogoImUrl;
+    private String schoolLogoImgUrl;
+    private String schoolBgImgUrl;
     private BmobGeoPoint schoolLocation;
 
     private BmobRelation schoolMaps;  //1：多，一个学校可以有多个地图服务
@@ -66,12 +67,20 @@ public class School extends BmobObject {
         this.schoolEmail = schoolEmail;
     }
 
-    public String getSchoolLogoImUrl() {
-        return schoolLogoImUrl;
+    public String getSchoolLogoImgUrl() {
+        return schoolLogoImgUrl;
     }
 
-    public void setSchoolLogoImUrl(String schoolLogoImUrl) {
-        this.schoolLogoImUrl = schoolLogoImUrl;
+    public void setSchoolLogoImgUrl(String schoolLogoImgUrl) {
+        this.schoolLogoImgUrl = schoolLogoImgUrl;
+    }
+
+    public String getSchoolBgImgUrl() {
+        return schoolBgImgUrl;
+    }
+
+    public void setSchoolBgImgUrl(String schoolBgImgUrl) {
+        this.schoolBgImgUrl = schoolBgImgUrl;
     }
 
     public BmobGeoPoint getSchoolLocation() {

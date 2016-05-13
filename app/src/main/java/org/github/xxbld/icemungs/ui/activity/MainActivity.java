@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.gordonwong.materialsheetfab.MaterialSheetFab;
 
 import org.github.xxbld.icemung.glide.GlideHelper;
@@ -22,6 +23,7 @@ import org.github.xxbld.icemungs.data.models.Student;
 import org.github.xxbld.icemungs.presenters.MainPresenter;
 import org.github.xxbld.icemungs.ui.adapter.NavFragmentAdapter;
 import org.github.xxbld.icemungs.ui.base.BaseActivity;
+import org.github.xxbld.icemungs.ui.fragment.UseTabFragment;
 import org.github.xxbld.icemungs.ui.widgets.SheetFloatActionButton;
 import org.github.xxbld.icemungs.views.IMainView;
 
@@ -41,14 +43,17 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     SheetFloatActionButton mFab;
     @Bind(R.id.content_tab)
     TabLayout mTabLayout;
+    @Bind(R.id.content_coo)
+    View mRoot;
 
+    Menu mMenu;
     View mHeadView;
     ImageView mHeadImageView;
     TextView mHeadNameTextView;
     MaterialSheetFab mSheetMaterialSheetFab;
-    Menu mMenu;
-    MainPresenter mMainPresenter;
     NavFragmentAdapter mNavFragmentAdapter;
+    MainPresenter mMainPresenter;
+    MaterialDialog mMaterialDialog;
 
     Student mCurrentStudent;
     private int mCurrentFragId;
@@ -56,6 +61,11 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     @Override
     protected int getContentViewLayoutResID() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    protected View getLoadingTargetView() {
+        return mRoot;
     }
 
     @Override
@@ -87,16 +97,17 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        NetStatusReceiver.unRegisterNetStatusReceiver(this);
-        mMainPresenter.detachView();
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
-    protected void setToolbar() {
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    protected void onDestroy() {
+        super.onDestroy();
+        NetStatusReceiver.unRegisterNetStatusReceiver(this);
+        if (mMainPresenter != null) {
+            mMainPresenter.detachView();
+        }
     }
 
     @Override
@@ -106,6 +117,12 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
             return;
         }
         super.onBackPressed();
+    }
+
+    @Override
+    protected void setToolbar() {
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -127,8 +144,14 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onNetDisConnected() {
+        super.onNetDisConnected();
+        MLog.i(TAG, "你的网络连接断开了");
+        showToast("你的网络连接断开了");
+    }
 
-    //===================impl
+//===================impl
 
     @Override
     public void setHeadImageView(String headIconUrl, String userName) {
@@ -165,24 +188,30 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
             @Override
             public void onSwitchFragmentSuccess(int currentItemId) {
                 mCurrentFragId = currentItemId;
-                switch (currentItemId) {
-//                    case R.id.nav_school:
-//                        mTabLayout.setVisibility(View.VISIBLE);
-//                        break;
-//                    case R.id.nav_verbose:
-//                        mTabLayout.setVisibility(View.VISIBLE);
-//                        break;
-                    case R.id.nav_daily:
-                        mTabLayout.setVisibility(View.GONE);
-                        break;
-                    case R.id.nav_resume:
-                        mTabLayout.setVisibility(View.GONE);
-                        break;
-                }
+                handleSwitchNavFragment();
             }
 
         });
-        mNavFragmentAdapter.switchToItem(R.id.nav_verbose);
+    }
+
+    private void handleSwitchNavFragment() {
+        if (mCurrentFragId == R.id.nav_daily || mCurrentFragId == R.id.nav_resume) {
+            if (mTabLayout.getVisibility() == View.VISIBLE) {
+                mTabLayout.setVisibility(View.GONE);
+            }
+        } else if (mCurrentFragId == R.id.nav_school || mCurrentFragId == R.id.nav_verbose) {
+            if (mNavFragmentAdapter != null) {
+                        if (mTabLayout.getVisibility() == View.GONE) {
+                            mTabLayout.setVisibility(View.VISIBLE);
+                        }
+                UseTabFragment itemFragment = (UseTabFragment) mNavFragmentAdapter.getItemFragment(mCurrentFragId);
+                if (itemFragment != null) {
+                    if (itemFragment.isResumed()) {
+                        itemFragment.setAdapter();
+                    }
+                }
+            }
+        }
     }
 
     private void setNav() {

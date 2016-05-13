@@ -34,7 +34,6 @@ public class PersonalCenterActivity extends BaseActivity {
     @Override
     protected void initViewsAndEvents() {
         super.initViewsAndEvents();
-//        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
         this.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
         mPersonalCollapsingToolbar.setTitle("YY");
 

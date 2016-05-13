@@ -42,7 +42,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile project(':icemung')
-    compile 'cn.bmob.android:bmob-sdk:3.4.5'
+    compile 'cn.bmob.android:bmob-sdk:3.4.6'
     //SCViewPager for welcome page
     compile 'com.dev.sacot41:scviewpager:0.0.4'
     //datetime picker

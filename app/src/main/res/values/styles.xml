@@ -21,8 +21,23 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
-
-    <!--TextView-->
+    <!--Button-->
+    <style name="IceMung.Widget.Button" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">?attr/primaryTextColor</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="IceMung.Widget.Button.WhiteText" parent="IceMung.Widget.Button">
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="IceMung.Widget.Button.Login" parent="IceMung.Widget.Button.WhiteText">
+        <item name="android:background">@drawable/selector_button_login</item>
+    </style>
+    <style name="IceMung.Widget.Button.Register" parent="IceMung.Widget.Button.WhiteText">
+        <item name="android:background">@drawable/selector_button_register</item>
+    </style>
+    <!--Material TextView-->
     <style name="IceMung.Widget.TextView" parent="">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

@@ -108,7 +108,7 @@ public class UseTabFragment extends BaseFragment implements IFragUseMainTabView 
     @Override
     public void onResume() {
         super.onResume();
-        setAdapter();
+//        setAdapter();
     }
 
     @Override
@@ -131,17 +131,16 @@ public class UseTabFragment extends BaseFragment implements IFragUseMainTabView 
         setAdapter();
     }
 
-    private void setAdapter() {
+    public void setAdapter() {
         mViewPager.setAdapter(mBasePageAdapter);
         //必须在viewpager.setAdapter之后
         mTabLayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(currentViewpagerPage);
-//        mBasePageAdapter.notifyDataSetChanged();
         if (isUseMainTabLayout) {
             if (mTabLayout.getVisibility() == View.GONE) {
                 mTabLayout.setVisibility(View.VISIBLE);
+                mTabLayout.invalidate();
             }
-            mTabLayout.invalidate();
         }
     }
 }

@@ -40,18 +40,16 @@
 
             <Button
                 android:id="@+id/login_btn_login"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:layout_weight="1"
+                style="@style/IceMung.Widget.Button.Login"
                 android:text="@string/login"/>
 
             <Button
                 android:id="@+id/login_btn_register"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:layout_weight="1"
+                style="@style/IceMung.Widget.Button.Register"
                 android:text="@string/register"/>
         </LinearLayout>
 

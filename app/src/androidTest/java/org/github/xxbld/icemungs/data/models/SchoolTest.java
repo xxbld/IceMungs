@@ -34,7 +34,7 @@ public class SchoolTest extends AndroidTestCase {
         mSchool.setSchoolAddress("江西省赣州市红旗大道86号");
         mSchool.setSchoolPhoneNumber("0797-8312161");
         mSchool.setSchoolEmail(null);
-        mSchool.setSchoolLogoImUrl(null);
+        mSchool.setSchoolLogoImgUrl(null);
         BmobRelation relation = new BmobRelation();
         relation.add(getAcademiesRelation(mSchool));
         mSchool.setAcademies(relation);

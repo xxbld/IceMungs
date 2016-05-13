@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.github.xxbld.icemung.utils.MLog;
@@ -17,6 +18,7 @@ import org.github.xxbld.icemungs.data.models.Student;
 import org.github.xxbld.icemungs.listeners.OnLoginFinishedListener;
 import org.github.xxbld.icemungs.presenters.LoginPresenter;
 import org.github.xxbld.icemungs.ui.base.BaseActivity;
+import org.github.xxbld.icemungs.ui.widgets.materialdialogs.MaterialDialogHelper;
 import org.github.xxbld.icemungs.views.ILoginView;
 
 import butterknife.Bind;
@@ -33,7 +35,6 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
     MaterialEditText mEdtUsername;
     @Bind(R.id.login_edt_password)
     MaterialEditText mEdtPassword;
-
     @Bind(R.id.login_btn_login)
     Button mBtnLogin;
     @Bind(R.id.login_btn_register)
@@ -41,6 +42,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
 
     RegisterSuccessReceiver mRegisterSuccessReceiver;
     LoginPresenter loginPresenter;
+    MaterialDialog mMaterialDialog;
 
     @Override
     protected int getContentViewLayoutResID() {
@@ -62,7 +64,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
         mEdtPassword.setText("123065");
         mBtnLogin.setOnClickListener(this);
         mBtnRegister.setOnClickListener(this);
-        queryUser();
+//        queryUser();
     }
 
     @Override
@@ -98,7 +100,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
         bmobQuery.getObject(this, "e40489eba1", new GetListener<School>() {
             @Override
             public void onSuccess(School school) {
-                MLog.i(TAG, "school:" + school.toString());
+                MLog.i(TAG, "school:" + school.getSchoolIntroduction());
             }
 
             @Override
@@ -124,8 +126,9 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
         int vId = v.getId();
         switch (vId) {
             case R.id.login_btn_login:
-                goHome();
-//                login();
+                mMaterialDialog = MaterialDialogHelper.getLoginAlertDialog(this);
+                mMaterialDialog.show();
+                login();
                 break;
             case R.id.login_btn_register:
                 loginPresenter.goRegister();
@@ -133,30 +136,39 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
         }
     }
 
+    /**
+     * login
+     */
     private void login() {
         mBtnLogin.setClickable(false);
         loginPresenter.login(LoginActivity.this, mEdtUsername.getText().toString(), mEdtPassword.getText().toString(), new OnLoginFinishedListener() {
             @Override
             public void onSuccess(Student student) {
-                //before goHome
+                mMaterialDialog.dismiss();
+                loginPresenter.goHome();
             }
 
             @Override
             public void onUserNameErr(String msg) {
+                mMaterialDialog.dismiss();
                 showToast(msg);
                 mBtnLogin.setClickable(true);
             }
 
             @Override
             public void onPasswordErr(String msg) {
+                mMaterialDialog.dismiss();
                 showToast(msg);
                 mBtnLogin.setClickable(true);
             }
 
             @Override
             public void onFailure(int failureCode, String msg) {
+                mMaterialDialog.dismiss();
                 showToast(msg);
                 mBtnLogin.setClickable(true);
+                //TODO 测试用
+                loginPresenter.goHome();
             }
         });
     }
