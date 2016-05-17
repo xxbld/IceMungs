@@ -41,10 +41,10 @@
 
         <Button
             android:id="@+id/register_btn_register"
+            style="@style/IceMung.Widget.Button.Register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/IceMung.Widget.Button.Register"
-            android:layout_margin="24dp"
+            android:layout_marginTop="8dp"
             android:text="@string/register"/>
     </LinearLayout>
 

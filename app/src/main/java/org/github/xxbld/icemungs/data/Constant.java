@@ -28,11 +28,11 @@ public class Constant {
     public static final SpatialReference SR_WWMAS10 = SpatialReference.create(SpatialReference.WKID_WGS84_WEB_MERCATOR_AUXILIARY_SPHERE_10);
 
     /**
-     * ArcGis Onlie 矢量地图
+     * ArcGis Onlie 切片地图  http://www.arcgisonline.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer
      */
     public static final String ARCGIS_MAPSERVER_TITLE_URL = "http://cache1.arcgisonline.cn/arcgis/rest/services/ChinaOnlineCommunity_Mobile/MapServer";
     /**
-     * ArcGis Onlie 栅格地图
+     * ArcGis Onlie 影像地图
      */
     public static final String ACRGIS_MAPSERVER_TITLE_IMAGE_URL = "http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer";
 }

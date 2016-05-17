@@ -17,4 +17,58 @@ public class Major extends BmobObject {
 
     private Student student;
     private Speciality speciality;
+
+    public Major() {
+    }
+
+    public BmobDate getInDate() {
+        return inDate;
+    }
+
+    public void setInDate(BmobDate inDate) {
+        this.inDate = inDate;
+    }
+
+    public BmobDate getOutDate() {
+        return outDate;
+    }
+
+    public void setOutDate(BmobDate outDate) {
+        this.outDate = outDate;
+    }
+
+    public Boolean getMainMajor() {
+        return isMainMajor;
+    }
+
+    public void setMainMajor(Boolean mainMajor) {
+        isMainMajor = mainMajor;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Speciality getSpeciality() {
+        return speciality;
+    }
+
+    public void setSpeciality(Speciality speciality) {
+        this.speciality = speciality;
+    }
+
+    @Override
+    public String toString() {
+        return "Major{" +
+                "inDate=" + inDate +
+                ", outDate=" + outDate +
+                ", isMainMajor=" + isMainMajor +
+                ", student=" + student +
+                ", speciality=" + speciality +
+                '}';
+    }
 }

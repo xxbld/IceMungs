@@ -20,10 +20,22 @@ public class BitmapUtil {
      * @return
      */
     public static RoundedBitmapDrawable getCircleDrawable(Context context, Bitmap bitmapResource) {
-        RoundedBitmapDrawable circularBitmapDrawable =
-                RoundedBitmapDrawableFactory.create(context.getResources(), bitmapResource);
-        circularBitmapDrawable.setCornerRadius(Math.max(bitmapResource.getWidth(), bitmapResource.getHeight()) / 2.0f);
-        circularBitmapDrawable.setAntiAlias(true); //设置反走样
+//        RoundedBitmapDrawable circularBitmapDrawable =
+//                RoundedBitmapDrawableFactory.create(context.getResources(), bitmapResource);
+//        circularBitmapDrawable.setCornerRadius(Math.max(bitmapResource.getWidth(), bitmapResource.getHeight()) / 2.0f);
+//        circularBitmapDrawable.setAntiAlias(true); //设置反走样
+        RoundedBitmapDrawable circularBitmapDrawable = getRoundDrawable(
+                context,
+                bitmapResource,
+                Math.max(bitmapResource.getWidth(), bitmapResource.getHeight()) / 2.0f);
         return circularBitmapDrawable;
+    }
+
+    public static RoundedBitmapDrawable getRoundDrawable(Context context, Bitmap bitmapResource, float radius) {
+        RoundedBitmapDrawable roundBitmapDrawable =
+                RoundedBitmapDrawableFactory.create(context.getResources(), bitmapResource);
+        roundBitmapDrawable.setCornerRadius(radius);
+        roundBitmapDrawable.setAntiAlias(true); //设置反走样
+        return roundBitmapDrawable;
     }
 }

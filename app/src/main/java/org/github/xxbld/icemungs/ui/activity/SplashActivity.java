@@ -84,7 +84,8 @@ public class SplashActivity extends BaseActivity implements ISplashView {
     public void initViews(String copyright, String versionName, int bgResId) {
         mTxtCopyright.setText(copyright);
         mTxtVersioncode.setText(versionName);
-        mImgBg.setBackgroundResource(bgResId);
+        mImgBg.setImageResource(bgResId);
+//        mImgBg.setBackgroundResource(bgResId);
     }
 
     @Override
@@ -94,6 +95,6 @@ public class SplashActivity extends BaseActivity implements ISplashView {
             public void run() {
                 goThenKill(WelcomeActivity.class);
             }
-        }, 1500);
+        }, 2000);
     }
 }

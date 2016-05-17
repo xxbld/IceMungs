@@ -59,4 +59,38 @@ public class GlideHelper {
             }
         });
     }
+
+    /**
+     * 圆角图片
+     *
+     * @param context
+     * @param resId
+     * @param imageView
+     */
+    public static void tranRoundImage(final Context context, int resId, final float radius, final ImageView imageView) {
+        Glide.with(context).load(resId).asBitmap().centerCrop().into(new BitmapImageViewTarget(imageView) {
+            @Override
+            protected void setResource(Bitmap resource) {
+                RoundedBitmapDrawable roundDrawable= BitmapUtil.getRoundDrawable(context, resource, radius);
+                imageView.setImageDrawable(roundDrawable);
+            }
+        });
+    }
+
+    /**
+     * 圆角图片
+     *
+     * @param context
+     * @param url
+     * @param imageView
+     */
+    public static void tranRoundImage(final Context context, String url,  final float radius,final ImageView imageView) {
+        Glide.with(context).load(url).asBitmap().centerCrop().into(new BitmapImageViewTarget(imageView) {
+            @Override
+            protected void setResource(Bitmap resource) {
+                RoundedBitmapDrawable roundDrawable= BitmapUtil.getRoundDrawable(context, resource, radius);
+                imageView.setImageDrawable(roundDrawable);
+            }
+        });
+    }
 }

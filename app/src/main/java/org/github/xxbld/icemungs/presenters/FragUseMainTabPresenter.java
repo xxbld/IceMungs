@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import org.github.xxbld.icemung.base.mvp.BasePresenter;
 import org.github.xxbld.icemungs.R;
 import org.github.xxbld.icemungs.ui.fragment.FlashFragment;
+import org.github.xxbld.icemungs.ui.schoolnews.NewsFragment;
 import org.github.xxbld.icemungs.views.IFragUseMainTabView;
 
 import java.util.ArrayList;
@@ -39,15 +40,12 @@ public class FragUseMainTabPresenter extends BasePresenter<IFragUseMainTabView> 
         super.initialized();
     }
 
-    public void initTabLayout(boolean isUseTabs) {
-        if (!isUseTabs) {
-            return;
-        }
+    public void initTabLayout(String studentID) {
         List<String> titles = null;
         List<Fragment> frags = null;
         if (fragTitleNameResId == R.string.nav_menu_school) {
             titles = getSchoolNewsTitles();
-            frags = getSchoolNewsTabFragments();
+            frags = getSchoolNewsTabFragments(studentID);
         }
         if (fragTitleNameResId == R.string.nav_menu_verbose) {
             titles = getVerboseTitles();
@@ -75,15 +73,19 @@ public class FragUseMainTabPresenter extends BasePresenter<IFragUseMainTabView> 
         List<String> titles = new ArrayList<>();
         titles.add("最新");
         titles.add("本周最热");
-        titles.add("美图");
+        titles.add("校级新闻");
+        titles.add("学院新闻");
+        titles.add("专业动态");
         return titles;
     }
 
-    private List<Fragment> getSchoolNewsTabFragments() {
+    private List<Fragment> getSchoolNewsTabFragments(String studentID) {
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new FlashFragment());
-        fragments.add(new FlashFragment());
-        fragments.add(new FlashFragment());
+        fragments.add(NewsFragment.newInstance(studentID, FragNewsPresenter.NewsType.NEW.getValue()));
+        fragments.add(NewsFragment.newInstance(studentID, FragNewsPresenter.NewsType.HOT.getValue()));
+        fragments.add(NewsFragment.newInstance(studentID, FragNewsPresenter.NewsType.SCHOOL.getValue()));
+        fragments.add(NewsFragment.newInstance(studentID, FragNewsPresenter.NewsType.ACADEMY.getValue()));
+        fragments.add(NewsFragment.newInstance(studentID, FragNewsPresenter.NewsType.SPECIALITY.getValue()));
         return fragments;
     }
 }

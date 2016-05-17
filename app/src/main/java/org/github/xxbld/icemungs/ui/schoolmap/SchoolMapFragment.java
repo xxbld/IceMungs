@@ -3,6 +3,7 @@ package org.github.xxbld.icemungs.ui.schoolmap;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -51,7 +52,10 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
 
     MapViewHelper mMapViewHelper;
     ArcGISTiledMapServiceLayer mBaseTiledLayer;
+    ArcGISTiledMapServiceLayer mBaseImageTiledLayer;
     LocationDisplayManager mLocationDisplayManager;
+
+    SearchView mSearchView;
 
     public SchoolMapFragment() {
     }
@@ -100,6 +104,8 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
         super.initViewsAndEvents();
         if (getArguments() != null) {
             mMapServerUrl = getArguments().getString(FRAG_MAP_SERVER_URL);
+            mMapServerUrl = "http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer";
+//            mMapServerUrl = "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer";
             mMapImageServerUrl = getArguments().getString(FRAG_IMG_MAP_SERVER_URL);
         }
         initMap();
@@ -116,6 +122,7 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
 //        toggleShowLoading(true, "正在初始化地图...");
         mMapViewHelper = new MapViewHelper(mMapView);
         mBaseTiledLayer = new ArcGISTiledMapServiceLayer(mMapServerUrl);
+        mBaseImageTiledLayer = new ArcGISTiledMapServiceLayer(mMapImageServerUrl);
         mMapView.addLayer(mBaseTiledLayer, 0);
         // //设置地图初始范围：赣州章贡区
         Point p1 = GeometryEngine.project(114.8560242878, 25.8817603219, Constant.SR_WWMAS10);
@@ -127,7 +134,11 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
             @Override
             public void onStatusChanged(Object o, STATUS status) {
                 MLog.i(TAG, "status:" + status);
-                if (status == STATUS.LAYER_LOADED) {
+                if (status == STATUS.INITIALIZED) {
+                    MLog.i(TAG, "SR:" + mMapView.getSpatialReference().getID());
+                } else if (status == STATUS.INITIALIZATION_FAILED) {
+
+                } else if (status == STATUS.LAYER_LOADED) {
 //                    toggleShowLoading(false, null);
                 } else if (status == STATUS.LAYER_LOADING_FAILED) {
 //                    showError("加载图层失败！！");
@@ -137,7 +148,7 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
     }
 
     /**
-     * 定位
+     * 定位设置
      */
     private void initLocationManager() {
         mLocationDisplayManager = mMapView.getLocationDisplayManager();
@@ -184,7 +195,37 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
                 mMapView.zoomout();
                 break;
             case R.id.map_switch_layer:
+                if (mMapView.getLayerByURL(mMapServerUrl) != null) {
+                    mMapView.removeLayer(0);
+                    mMapView.addLayer(mBaseImageTiledLayer, 0);
+                } else {
+                    mMapView.removeLayer(0);
+                    mMapView.addLayer(mBaseTiledLayer, 0);
+                }
                 break;
         }
+    }
+
+    /**
+     * 处理toolbar search view
+     *
+     * @param searchView
+     */
+    public void initSearchView(SearchView searchView) {
+        this.mSearchView = searchView;
+//        mSearchView.setIconified(true);
+//        mSearchView.setIconifiedByDefault(true);
+//        mSearchView.setSubmitButtonEnabled(true);
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 }

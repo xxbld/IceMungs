@@ -7,5 +7,6 @@
         <meta-data
             android:name="org.github.xxbld.icemung.glide.GlideConfiguration"
             android:value="GlideModule" />
+        <activity android:name=".base.BaseWebActivity"/>
     </application>
 </manifest>

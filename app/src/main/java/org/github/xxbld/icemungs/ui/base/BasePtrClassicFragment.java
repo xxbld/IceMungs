@@ -60,15 +60,19 @@ public abstract class BasePtrClassicFragment extends BaseFragment {
 //            mPtrClassicFrameLayout.setPullToRefresh(false);
 //            // default is true
 //            mPtrClassicFrameLayout.setKeepHeaderWhenRefresh(true);
-            if (isPtrAutoRefresh()) {
-                long delayMillis = getPtrAutoRefreshDelayMillis() >= DEFAULT_DELAY_MILLIS ? getPtrAutoRefreshDelayMillis() : DEFAULT_DELAY_MILLIS;
-                mPtrClassicFrameLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mPtrClassicFrameLayout.autoRefresh();
-                    }
-                }, delayMillis);
-            }
+            setAutoRefresh();
+        }
+    }
+    
+    private void setAutoRefresh() {
+        if (isPtrAutoRefresh()) {
+            long delayMillis = getPtrAutoRefreshDelayMillis() >= DEFAULT_DELAY_MILLIS ? getPtrAutoRefreshDelayMillis() : DEFAULT_DELAY_MILLIS;
+            mPtrClassicFrameLayout.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mPtrClassicFrameLayout.autoRefresh();
+                }
+            }, delayMillis);
         }
     }
 

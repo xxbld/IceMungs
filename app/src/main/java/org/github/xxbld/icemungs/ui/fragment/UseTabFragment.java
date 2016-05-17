@@ -7,15 +7,18 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import org.github.xxbld.icemungs.R;
+import org.github.xxbld.icemungs.data.models.Student;
 import org.github.xxbld.icemungs.presenters.FragUseMainTabPresenter;
-import org.github.xxbld.icemungs.ui.base.BaseFragment;
 import org.github.xxbld.icemungs.ui.adapter.BasePageAdapter;
+import org.github.xxbld.icemungs.ui.base.BaseFragment;
 import org.github.xxbld.icemungs.views.IFragUseMainTabView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cn.bmob.v3.BmobUser;
 
 /**
  * Created by xxbld on 2016/4/28.
@@ -38,7 +41,10 @@ public class UseTabFragment extends BaseFragment implements IFragUseMainTabView 
     ViewPager mViewPager;
     BasePageAdapter mBasePageAdapter;
 
+    Student mStudent;
     FragUseMainTabPresenter mFragUseMainTabPresenter;
+    List<Fragment> mFragments = new ArrayList<>();
+    List<String> mTitles = new ArrayList<>();
 
     public UseTabFragment() {
     }
@@ -73,6 +79,7 @@ public class UseTabFragment extends BaseFragment implements IFragUseMainTabView 
     @Override
     protected void initViewsAndEvents() {
         super.initViewsAndEvents();
+        mStudent = BmobUser.getCurrentUser(getActivity(), Student.class);
         mTabLayout = ButterKnife.findById(getActivity(), R.id.content_tab);
         mFragUseMainTabPresenter = new FragUseMainTabPresenter(fragTitleNameResId);
         mFragUseMainTabPresenter.attachView(this);
@@ -80,7 +87,11 @@ public class UseTabFragment extends BaseFragment implements IFragUseMainTabView 
         if (isUseMainTabLayout) {
             //使用tabs
             mTabLayout.setVisibility(View.VISIBLE);
-            mFragUseMainTabPresenter.initTabLayout(isUseMainTabLayout);
+            mBasePageAdapter = new UseTabFragmentAdapter(getChildFragmentManager(), mTitles, mFragments);
+            mViewPager.setAdapter(mBasePageAdapter);
+            //必须在viewpager.setAdapter之后
+            mTabLayout.setupWithViewPager(mViewPager);
+            mViewPager.setOffscreenPageLimit(5);
             mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -97,6 +108,9 @@ public class UseTabFragment extends BaseFragment implements IFragUseMainTabView 
 
                 }
             });
+
+            //在 mBasePageAdapter 实例化之后
+            mFragUseMainTabPresenter.initTabLayout(mStudent.getObjectId());
         }
     }
 
@@ -108,7 +122,6 @@ public class UseTabFragment extends BaseFragment implements IFragUseMainTabView 
     @Override
     public void onResume() {
         super.onResume();
-//        setAdapter();
     }
 
     @Override
@@ -122,25 +135,31 @@ public class UseTabFragment extends BaseFragment implements IFragUseMainTabView 
     //======
     @Override
     public void initTabLayout(List<String> tabTitles, final List<Fragment> fragments) {
-        mBasePageAdapter = new BasePageAdapter(getChildFragmentManager(), tabTitles) {
-            @Override
-            public Fragment getItem(int position) {
-                return fragments.get(position);
-            }
-        };
-        setAdapter();
+//        mBasePageAdapter = new BasePageAdapter(getChildFragmentManager(), tabTitles) {
+//            @Override
+//            public Fragment getItem(int position) {
+//                return fragments.get(position);
+//            }
+//        };
+        if (mTitles.size() == 0) {
+            mTitles.addAll(tabTitles);
+            mFragments.addAll(fragments);
+        }
+        updateTabLayout();
     }
 
-    public void setAdapter() {
-        mViewPager.setAdapter(mBasePageAdapter);
-        //必须在viewpager.setAdapter之后
+    /**
+     * 更新tab layout
+     */
+    public void updateTabLayout() {
         mTabLayout.setupWithViewPager(mViewPager);
+        mBasePageAdapter.notifyDataSetChanged();
         mViewPager.setCurrentItem(currentViewpagerPage);
-        if (isUseMainTabLayout) {
-            if (mTabLayout.getVisibility() == View.GONE) {
-                mTabLayout.setVisibility(View.VISIBLE);
-                mTabLayout.invalidate();
-            }
-        }
+//        if (isUseMainTabLayout) {
+//            if (mTabLayout.getVisibility() == View.GONE) {
+//                mTabLayout.setVisibility(View.VISIBLE);
+//                mTabLayout.invalidate();
+//            }
+//        }
     }
 }

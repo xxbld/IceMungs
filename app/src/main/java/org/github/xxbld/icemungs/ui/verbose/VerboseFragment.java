@@ -14,6 +14,7 @@ import java.util.List;
  *
  * @description :
  */
+@Deprecated
 public class VerboseFragment extends BaseUseMainTabFragment {
 
     public VerboseFragment() {

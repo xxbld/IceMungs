@@ -1,6 +1,7 @@
 package org.github.xxbld.icemungs.data.models;
 
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 
 /**
@@ -17,6 +18,10 @@ public class News extends BmobObject {
     private String newsIntroduction;
     //内容
     private String newsContent;
+    //链接
+    private String newsUrl;
+    //日期
+    private BmobDate newsDate;
     //位置
     private BmobGeoPoint newsLocation;
     //大图
@@ -46,6 +51,22 @@ public class News extends BmobObject {
 
     public void setNewsContent(String newsContent) {
         this.newsContent = newsContent;
+    }
+
+    public String getNewsUrl() {
+        return newsUrl;
+    }
+
+    public void setNewsUrl(String newsUrl) {
+        this.newsUrl = newsUrl;
+    }
+
+    public BmobDate getNewsDate() {
+        return newsDate;
+    }
+
+    public void setNewsDate(BmobDate newsDate) {
+        this.newsDate = newsDate;
     }
 
     public BmobGeoPoint getNewsLocation() {

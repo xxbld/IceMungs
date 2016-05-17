@@ -24,6 +24,7 @@ public class School extends BmobObject {
     private String schoolBgImgUrl;
     private BmobGeoPoint schoolLocation;
 
+    private NewsLevel newsLevel;
     private BmobRelation schoolMaps;  //1：多，一个学校可以有多个地图服务
     private BmobRelation academies;  //1：多，一个学校可以有多个学院
 
@@ -89,6 +90,14 @@ public class School extends BmobObject {
 
     public void setSchoolLocation(BmobGeoPoint schoolLocation) {
         this.schoolLocation = schoolLocation;
+    }
+
+    public NewsLevel getNewsLevel() {
+        return newsLevel;
+    }
+
+    public void setNewsLevel(NewsLevel newsLevel) {
+        this.newsLevel = newsLevel;
     }
 
     public BmobRelation getSchoolMaps() {

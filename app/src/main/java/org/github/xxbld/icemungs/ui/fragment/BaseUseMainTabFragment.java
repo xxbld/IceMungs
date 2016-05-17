@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
  *
  * @description : 侧边的 Fragment 并使用tab <p> un Use</p>
  */
+@Deprecated
 public abstract class BaseUseMainTabFragment extends BaseFragment implements IFragUseMainTabView {
 
     //    private static final String FRAG_USE_MAIN_TAB_LAYOUT = "use_main_tab_layout";
@@ -68,7 +69,7 @@ public abstract class BaseUseMainTabFragment extends BaseFragment implements IFr
         if (isUseMainTabLayout) {
             //使用tabs
 //            mTabLayout.setVisibility(View.VISIBLE);
-            mFragUseMainTabPresenter.initTabLayout(isUseMainTabLayout);
+            mFragUseMainTabPresenter.initTabLayout(null);
             mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -96,12 +97,6 @@ public abstract class BaseUseMainTabFragment extends BaseFragment implements IFr
     @Override
     public void onResume() {
         super.onResume();
-//        if (isUseMainTabLayout) {
-////            if (mTabLayout.getVisibility() == View.GONE) {
-////                mTabLayout.setVisibility(View.VISIBLE);
-////            }
-//            setAdapter();
-//        }
     }
 
     @Override
@@ -110,6 +105,9 @@ public abstract class BaseUseMainTabFragment extends BaseFragment implements IFr
         if (mFragUseMainTabPresenter != null) {
             mFragUseMainTabPresenter.detachView();
         }
+//        if (getChildFragmentManager().getFragments() != null) {
+//            getChildFragmentManager().getFragments().clear();
+//        }
     }
 
     //======

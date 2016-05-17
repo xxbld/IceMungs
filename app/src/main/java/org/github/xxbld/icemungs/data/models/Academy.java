@@ -20,6 +20,7 @@ public class Academy extends BmobObject {
     private String academyBgImgUrl;
     private BmobGeoPoint academyLocation;
 
+    private NewsLevel newsLevel;
     private School school;
     private BmobRelation specialities;
 
@@ -85,6 +86,14 @@ public class Academy extends BmobObject {
 
     public void setAcademyLocation(BmobGeoPoint academyLocation) {
         this.academyLocation = academyLocation;
+    }
+
+    public NewsLevel getNewsLevel() {
+        return newsLevel;
+    }
+
+    public void setNewsLevel(NewsLevel newsLevel) {
+        this.newsLevel = newsLevel;
     }
 
     public School getSchool() {

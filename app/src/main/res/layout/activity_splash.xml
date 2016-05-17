@@ -5,30 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="org.github.xxbld.icemungs.ui.activity.SplashActivity">
+
     <FrameLayout
         android:id="@+id/splash_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ImageView
             android:id="@+id/splash_img_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/material_design_0"/>
+            android:src="@drawable/bg_afternoon"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+            android:layout_gravity="center"
+            android:layout_margin="16dp"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/splash_txt_versioncode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textColor="@color/white"
                 android:text="V1.3"/>
+
             <TextView
                 android:id="@+id/splash_txt_copyright"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:gravity="center"
                 android:text="@string/splash_copyright"/>
         </LinearLayout>

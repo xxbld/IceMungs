@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="AppTheme.Base" />
+    <style name="AppTheme" parent="AppTheme.Base"/>
 
     <style name="AppTheme.NoneTranslucent" parent="AppTheme.Base">
         <item name="android:windowIsTranslucent">false</item>
@@ -22,15 +22,15 @@
     </style>
 
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
     <style name="Theme.SmoothProgressBarDefaults" parent="Theme.AppCompat">
         <item name="cpbStyle">@style/CircularProgressBar</item>
     </style>
 
-    <style name="CPB" parent="Widget.AppCompat.ProgressBar" />
+    <style name="CPB" parent="Widget.AppCompat.ProgressBar"/>
 
     <style name="CircularProgressBar" parent="CPB">
         <item name="cpb_color">@color/cpb_default_color</item>
@@ -39,5 +39,9 @@
         <item name="cpb_max_sweep_angle">@integer/cpb_default_max_sweep_angle</item>
         <item name="cpb_sweep_speed">@string/cpb_default_sweep_speed</item>
         <item name="cpb_rotation_speed">@string/cpb_default_rotation_speed</item>
+    </style>
+
+    <style name="SwipeBackLayout">
+        <item name="edge_size">0dp</item>
     </style>
 </resources>

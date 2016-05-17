@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/nav_daily_menu"
+        android:id="@+id/action_daily_item1"
         android:orderInCategory="100"
-        android:title="@string/nav_menu_daily"
+        android:title="@string/nav_menu_verbose"
         app:showAsAction="never"
-    />
+        />
 </menu>

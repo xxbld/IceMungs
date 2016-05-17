@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +26,7 @@ import org.github.xxbld.icemungs.presenters.MainPresenter;
 import org.github.xxbld.icemungs.ui.adapter.NavFragmentAdapter;
 import org.github.xxbld.icemungs.ui.base.BaseActivity;
 import org.github.xxbld.icemungs.ui.fragment.UseTabFragment;
+import org.github.xxbld.icemungs.ui.schoolmap.SchoolMapFragment;
 import org.github.xxbld.icemungs.ui.widgets.SheetFloatActionButton;
 import org.github.xxbld.icemungs.views.IMainView;
 
@@ -141,6 +144,13 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
             MLog.i(TAG, "Action Setting Clicked !");
             return true;
         }
+        if (id == R.id.action_school_map_search) {
+            if (mNavFragmentAdapter != null) {
+                SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+                SchoolMapFragment schoolMapFragment = (SchoolMapFragment) mNavFragmentAdapter.getItemFragment(mCurrentFragId);
+                schoolMapFragment.initSearchView(searchView);
+            }
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -201,13 +211,13 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
             }
         } else if (mCurrentFragId == R.id.nav_school || mCurrentFragId == R.id.nav_verbose) {
             if (mNavFragmentAdapter != null) {
-                        if (mTabLayout.getVisibility() == View.GONE) {
-                            mTabLayout.setVisibility(View.VISIBLE);
-                        }
+                if (mTabLayout.getVisibility() == View.GONE) {
+                    mTabLayout.setVisibility(View.VISIBLE);
+                }
                 UseTabFragment itemFragment = (UseTabFragment) mNavFragmentAdapter.getItemFragment(mCurrentFragId);
                 if (itemFragment != null) {
                     if (itemFragment.isResumed()) {
-                        itemFragment.setAdapter();
+                        itemFragment.updateTabLayout();
                     }
                 }
             }

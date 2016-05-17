@@ -1,6 +1,7 @@
 package org.github.xxbld.icemungs.data.models;
 
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BmobGeoPoint;
 
 /**
  * Created by xxbld on 2016/5/3.
@@ -17,7 +18,9 @@ public class SchoolMap extends BmobObject {
     //地图服务uri
     private String mapServerUri;
     //简介
-    private String mapServerIntroduction;
+    private String mapServerIntroduct;
+    //位置
+    private BmobGeoPoint mapLocation;
     //类型
     private String mapServerType;
     //所属学校
@@ -47,12 +50,12 @@ public class SchoolMap extends BmobObject {
         this.mapServerUri = mapServerUri;
     }
 
-    public String getMapServerIntroduction() {
-        return mapServerIntroduction;
+    public String getMapServerIntroduct() {
+        return mapServerIntroduct;
     }
 
-    public void setMapServerIntroduction(String mapServerIntroduction) {
-        this.mapServerIntroduction = mapServerIntroduction;
+    public void setMapServerIntroduct(String mapServerIntroduct) {
+        this.mapServerIntroduct = mapServerIntroduct;
     }
 
     public String getMapServerType() {
@@ -61,5 +64,13 @@ public class SchoolMap extends BmobObject {
 
     public void setMapServerType(String mapServerType) {
         this.mapServerType = mapServerType;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
     }
 }

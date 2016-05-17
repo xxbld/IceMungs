@@ -7,13 +7,12 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
-import org.github.xxbld.icemung.utils.MLog;
 import org.github.xxbld.icemungs.R;
-import org.github.xxbld.icemungs.data.models.School;
 import org.github.xxbld.icemungs.data.models.Student;
 import org.github.xxbld.icemungs.listeners.OnLoginFinishedListener;
 import org.github.xxbld.icemungs.presenters.LoginPresenter;
@@ -22,8 +21,6 @@ import org.github.xxbld.icemungs.ui.widgets.materialdialogs.MaterialDialogHelper
 import org.github.xxbld.icemungs.views.ILoginView;
 
 import butterknife.Bind;
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.listener.GetListener;
 
 public class LoginActivity extends BaseActivity implements ILoginView, View.OnClickListener {
 
@@ -38,7 +35,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
     @Bind(R.id.login_btn_login)
     Button mBtnLogin;
     @Bind(R.id.login_btn_register)
-    Button mBtnRegister;
+    TextView mBtnRegister;
 
     RegisterSuccessReceiver mRegisterSuccessReceiver;
     LoginPresenter loginPresenter;
@@ -92,22 +89,6 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
         if (mRegisterSuccessReceiver != null) {
             unregisterReceiver(mRegisterSuccessReceiver);
         }
-    }
-
-
-    private void queryUser() {
-        BmobQuery<School> bmobQuery = new BmobQuery<>();
-        bmobQuery.getObject(this, "e40489eba1", new GetListener<School>() {
-            @Override
-            public void onSuccess(School school) {
-                MLog.i(TAG, "school:" + school.getSchoolIntroduction());
-            }
-
-            @Override
-            public void onFailure(int i, String s) {
-                MLog.i(TAG, "codeQuery: " + i + " meg: " + s);
-            }
-        });
     }
 
     //================impls

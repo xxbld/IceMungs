@@ -41,6 +41,8 @@ public class Student extends BmobUser {
     private String address;  //联系地址
     private String iconUrl;  //头像
 
+    private School school;
+    private Academy academy;
     private BmobRelation majors;
 
     public Integer getSex() {
@@ -97,6 +99,22 @@ public class Student extends BmobUser {
 
     public void setIconUrl(String iconUrl) {
         this.iconUrl = iconUrl;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+    }
+
+    public Academy getAcademy() {
+        return academy;
+    }
+
+    public void setAcademy(Academy academy) {
+        this.academy = academy;
     }
 
     public BmobRelation getMajors() {

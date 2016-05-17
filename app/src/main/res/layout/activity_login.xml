@@ -36,21 +36,38 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/login_btn_login"
-                android:layout_margin="16dp"
-                android:layout_weight="1"
                 style="@style/IceMung.Widget.Button.Login"
+                android:layout_width="match_parent"
+                android:layout_marginTop="16dp"
                 android:text="@string/login"/>
 
-            <Button
-                android:id="@+id/login_btn_register"
-                android:layout_margin="16dp"
-                android:layout_weight="1"
-                style="@style/IceMung.Widget.Button.Register"
-                android:text="@string/register"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/login_btn_register"
+                    style="@style/IceMung.Widget.TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="新用户注册"
+                    android:textColor="@color/colorPrimary"/>
+
+                <TextView
+                    style="@style/IceMung.Widget.TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:text="忘记密码？"/>
+
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

@@ -52,13 +52,13 @@ public class SplashPresenter extends BasePresenter<ISplashView> {
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         if (6 <= hour && hour <= 12) {
 //            早上
-            resId = R.drawable.material_design_2;
+            resId = R.drawable.bg_morning;
         } else if (12 <= hour && hour <= 18) {
 //            中午
-            resId = R.drawable.material_design_3;
+            resId = R.drawable.bg_afternoon;
         } else {
 //            晚上
-            resId = R.drawable.material_design_4;
+            resId = R.drawable.bg_night;
         }
         return resId;
     }

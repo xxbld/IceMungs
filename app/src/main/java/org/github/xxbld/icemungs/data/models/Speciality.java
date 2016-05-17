@@ -22,6 +22,7 @@ public class Speciality extends BmobObject {
     private BmobGeoPoint specialLocation;
 
     private Academy academy;
+    private NewsLevel newsLevel;
     private BmobRelation majors;
 
     public String getSpecialName() {
@@ -94,6 +95,14 @@ public class Speciality extends BmobObject {
 
     public void setAcademy(Academy academy) {
         this.academy = academy;
+    }
+
+    public NewsLevel getNewsLevel() {
+        return newsLevel;
+    }
+
+    public void setNewsLevel(NewsLevel newsLevel) {
+        this.newsLevel = newsLevel;
     }
 
     public BmobRelation getMajors() {
