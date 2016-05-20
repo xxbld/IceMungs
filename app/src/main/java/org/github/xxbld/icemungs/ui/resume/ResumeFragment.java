@@ -9,7 +9,7 @@ import org.github.xxbld.icemung.base.BaseWebActivity;
 import org.github.xxbld.icemung.utils.MLog;
 import org.github.xxbld.icemungs.R;
 import org.github.xxbld.icemungs.data.models.News;
-import org.github.xxbld.icemungs.ui.adapter.NewsAdapter;
+import org.github.xxbld.icemungs.ui.schoolnews.adapter.NewsAdapter;
 import org.github.xxbld.icemungs.ui.base.BasePtrClassicFragment;
 
 import java.util.ArrayList;

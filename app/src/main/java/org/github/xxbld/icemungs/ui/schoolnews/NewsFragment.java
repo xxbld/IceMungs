@@ -13,8 +13,8 @@ import org.github.xxbld.icemungs.data.models.News;
 import org.github.xxbld.icemungs.data.models.Student;
 import org.github.xxbld.icemungs.listeners.OnNewsLoadListener;
 import org.github.xxbld.icemungs.presenters.FragNewsPresenter;
-import org.github.xxbld.icemungs.ui.adapter.NewsAdapter;
 import org.github.xxbld.icemungs.ui.base.BasePtrClassicFragment;
+import org.github.xxbld.icemungs.ui.schoolnews.adapter.NewsAdapter;
 import org.github.xxbld.icemungs.views.IFragNewsView;
 
 import java.util.ArrayList;
@@ -84,21 +84,6 @@ public class NewsFragment extends BasePtrClassicFragment implements IFragNewsVie
     @Override
     protected void initViewsAndEvents() {
         super.initViewsAndEvents();
-        //        BmobQuery<Student> studentBmobQuery = new BmobQuery<>();
-//        studentBmobQuery.include("school.newsLevel,academy.newsLevel");
-//        studentBmobQuery.getObject(mContext, mStudentId, new GetListener<Student>() {
-//            @Override
-//            public void onSuccess(Student student) {
-//                MLog.i(TAG, "S:" + student.getSchool().getNewsLevel().toString());
-//                mPtrClassicFrameLayout.autoRefresh();
-//                mStudent = student;
-//            }
-//
-//            @Override
-//            public void onFailure(int i, String s) {
-//
-//            }
-//        });
         MLog.i(TAG, "mPtrClassicFrameLayout:" + mPtrClassicFrameLayout.toString());
         mStudent = new Student();
         mStudent.setObjectId(mStudentId);

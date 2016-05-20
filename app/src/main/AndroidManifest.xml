@@ -36,7 +36,8 @@
         <activity android:name=".ui.activity.RegisterActivity"/>
         <activity android:name=".ui.activity.MainActivity"/>
         <activity android:name=".ui.activity.TestActivity1"/>
-        <activity android:name=".ui.activity.PersonalCenterActivity"/>
+        <activity android:name=".ui.personalcenter.PersonalCenterActivity"/>
+        <activity android:name=".ui.chooseschool.ChooseSchoolActivity"/>
     </application>
 
 </manifest>

@@ -97,6 +97,7 @@ public class WelcomeActivity extends BaseActivity implements IWelcomeView {
 
     @Override
     public void goLoginOrHome() {
+//        go(ChooseSchoolActivity.class);
         goThenKill(LoginActivity.class);
     }
 

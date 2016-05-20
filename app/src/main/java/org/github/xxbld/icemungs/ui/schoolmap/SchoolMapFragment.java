@@ -1,7 +1,6 @@
 package org.github.xxbld.icemungs.ui.schoolmap;
 
 import android.location.Location;
-import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.view.View;
@@ -78,6 +77,9 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
         super.onResume();
         if (mMapView != null) {
             mMapView.unpause();
+            if (mLocationDisplayManager != null) {
+                mLocationDisplayManager.resume();
+            }
         }
     }
 
@@ -86,6 +88,17 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
         super.onPause();
         if (mMapView != null) {
             mMapView.pause();
+            if (mLocationDisplayManager != null) {
+                mLocationDisplayManager.pause();
+            }
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mLocationDisplayManager != null) {
+            mLocationDisplayManager.stop();
         }
     }
 
@@ -104,7 +117,7 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
         super.initViewsAndEvents();
         if (getArguments() != null) {
             mMapServerUrl = getArguments().getString(FRAG_MAP_SERVER_URL);
-            mMapServerUrl = "http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer";
+//            mMapServerUrl = "http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer";
 //            mMapServerUrl = "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer";
             mMapImageServerUrl = getArguments().getString(FRAG_IMG_MAP_SERVER_URL);
         }
@@ -125,10 +138,12 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
         mBaseImageTiledLayer = new ArcGISTiledMapServiceLayer(mMapImageServerUrl);
         mMapView.addLayer(mBaseTiledLayer, 0);
         // //设置地图初始范围：赣州章贡区
-        Point p1 = GeometryEngine.project(114.8560242878, 25.8817603219, Constant.SR_WWMAS10);
-        Point p2 = GeometryEngine.project(114.9900673318, 25.7948780447, Constant.SR_WWMAS10);
+        Point p1 = GeometryEngine.project(114.8560242878, 25.8817603219, Constant.SR_WWMAS);
+        Point p2 = GeometryEngine.project(114.9900673318, 25.7948780447, Constant.SR_WWMAS);
         final Envelope initExtent = new Envelope(p1.getX(), p1.getY(), p2.getX(), p2.getY());
         mMapView.setMaxExtent(initExtent);
+        mMapView.centerAt(initExtent.getCenter(), true);
+        mMapView.setScale(16);
         initLocationManager();
         mMapView.setOnStatusChangedListener(new OnStatusChangedListener() {
             @Override
@@ -136,6 +151,7 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
                 MLog.i(TAG, "status:" + status);
                 if (status == STATUS.INITIALIZED) {
                     MLog.i(TAG, "SR:" + mMapView.getSpatialReference().getID());
+                    MLog.i(TAG, "getScale():" + mMapView.getScale());
                 } else if (status == STATUS.INITIALIZATION_FAILED) {
 
                 } else if (status == STATUS.LAYER_LOADED) {
@@ -154,29 +170,37 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
         mLocationDisplayManager = mMapView.getLocationDisplayManager();
         mLocationDisplayManager.setAutoPanMode(LocationDisplayManager.AutoPanMode.LOCATION);
         mLocationDisplayManager.setAllowNetworkLocation(true);
-//        mLocationDisplayManager.start();
-        mLocationDisplayManager.setLocationListener(new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                MLog.i(TAG, "lat:" + location.getLatitude() + "lon:" + location.getLongitude());
-                mLocationDisplayManager.stop();
-            }
+//        PictureMarkerSymbol pictureMarkerSymbol = new PictureMarkerSymbol(getActivity(), BitmapUtil.getCircleDrawable(getActivity(), BitmapFactory.decodeResource(getResources(), R.drawable.ic_user)));
+//        try {
+//            mLocationDisplayManager.setDefaultSymbol(pictureMarkerSymbol);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        mLocationDisplayManager.start();
+    }
 
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
+    /**
+     * get Location
+     *
+     * @return
+     */
+    public Location getLocation() {
+        if (mLocationDisplayManager != null) {
+            return mLocationDisplayManager.getLocation();
+        }
+        return null;
+    }
 
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-
-            }
-        });
+    /**
+     * get location point of map's spatial reference
+     *
+     * @return
+     */
+    public Point getLocPoint() {
+        if (mLocationDisplayManager != null) {
+            return mLocationDisplayManager.getPoint();
+        }
+        return null;
     }
 
     @Override

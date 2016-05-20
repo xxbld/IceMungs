@@ -1,4 +1,4 @@
-package org.github.xxbld.icemungs.ui.adapter;
+package org.github.xxbld.icemungs.ui.schoolnews.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

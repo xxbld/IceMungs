@@ -7,16 +7,13 @@
 
     <include layout="@layout/layout_appbar_parallax_image"/>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/personal_tab"
-            style="@style/IceMung.Widget.TabLayout.Normal"/>
-
-        <include layout="@layout/layout_viewpager"/>
-    </FrameLayout>
-
+        <include
+            layout="@layout/layout_viewpager"/>
+    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

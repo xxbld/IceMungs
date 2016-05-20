@@ -91,6 +91,8 @@
     </style>
 
     <style name="IceMung.Widget.TabLayout.Normal" parent="IceMung.Widget.TabLayout">
+        <item name="tabMode">fixed</item>
+        <item name="tabGravity">fill</item>
         <item name="android:visibility">visible</item>
     </style>
 
@@ -100,7 +102,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">@dimen/fab_margin</item>
         <item name="android:elevation" tools:ignore="NewApi">@dimen/fab_elevation</item>
-        <item name="android:src">@android:drawable/ic_dialog_email</item>
+        <item name="android:src">@drawable/ic_menu_white_24dp</item>
         <item name="fabSize">normal</item>
         <item name="borderWidth">0dp</item>
     </style>

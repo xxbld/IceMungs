@@ -82,10 +82,14 @@ public class FragUseMainTabPresenter extends BasePresenter<IFragUseMainTabView> 
     private List<Fragment> getSchoolNewsTabFragments(String studentID) {
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(NewsFragment.newInstance(studentID, FragNewsPresenter.NewsType.NEW.getValue()));
-        fragments.add(NewsFragment.newInstance(studentID, FragNewsPresenter.NewsType.HOT.getValue()));
-        fragments.add(NewsFragment.newInstance(studentID, FragNewsPresenter.NewsType.SCHOOL.getValue()));
-        fragments.add(NewsFragment.newInstance(studentID, FragNewsPresenter.NewsType.ACADEMY.getValue()));
-        fragments.add(NewsFragment.newInstance(studentID, FragNewsPresenter.NewsType.SPECIALITY.getValue()));
+        fragments.add(new FlashFragment());
+        fragments.add(new FlashFragment());
+        fragments.add(new FlashFragment());
+        fragments.add(new FlashFragment());
+//        fragments.add(NewsFragment.newInstance(studentID, FragNewsPresenter.NewsType.HOT.getValue()));
+//        fragments.add(NewsFragment.newInstance(studentID, FragNewsPresenter.NewsType.SCHOOL.getValue()));
+//        fragments.add(NewsFragment.newInstance(studentID, FragNewsPresenter.NewsType.ACADEMY.getValue()));
+//        fragments.add(NewsFragment.newInstance(studentID, FragNewsPresenter.NewsType.SPECIALITY.getValue()));
         return fragments;
     }
 }

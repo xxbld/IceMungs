@@ -1,5 +1,7 @@
 package org.github.xxbld.icemungs.data.models;
 
+import java.util.List;
+
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.datatype.BmobGeoPoint;
@@ -22,6 +24,7 @@ public class Vote extends BmobObject {
     //大图
     private String voteBigImageUrl;
     private BmobDate startDate;  //开始日期
-    private BmobDate endDate;  //结束日期
-    private String voteType;
+    private BmobDate endDate;    //结束日期
+    private Boolean voteIsMutil; // 是否多选
+    private List<String> voteItem; //选项
 }

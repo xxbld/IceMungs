@@ -4,9 +4,9 @@
     <string name="main_tab_title">新鲜事</string>
 
     <string name="nav_menu_school">校园新闻</string>
-    <string name="nav_menu_daily">校园地图</string>
+    <string name="nav_menu_schoolmap">校园地图</string>
     <string name="nav_menu_verbose">碎碎念</string>
-    <string name="nav_menu_resume">履历</string>
+    <string name="nav_menu_resume">生活记录</string>
     <string name="nav_about">关于</string>
     <string name="nav_theme">主题</string>
     <string name="nav_setting">设置</string>

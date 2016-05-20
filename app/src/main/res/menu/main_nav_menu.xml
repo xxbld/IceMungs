@@ -8,27 +8,27 @@
             android:icon="@drawable/selector_ic_school"
             android:title="@string/nav_menu_school"/>
         <item
-            android:id="@+id/nav_daily"
-            android:icon="@drawable/selector_ic_school"
-            android:title="@string/nav_menu_daily"/>
+            android:id="@+id/nav_schoolmap"
+            android:icon="@drawable/selector_ic_schoolmap"
+            android:title="@string/nav_menu_schoolmap"/>
         <item
             android:id="@+id/nav_verbose"
-            android:icon="@drawable/selector_ic_school"
+            android:icon="@drawable/selector_ic_verbose"
             android:title="@string/nav_menu_verbose"/>
         <item
             android:id="@+id/nav_resume"
-            android:icon="@drawable/selector_ic_school"
+            android:icon="@drawable/selector_ic_resume"
             android:title="@string/nav_menu_resume"/>
 
         <item android:title="@string/nav_about">
             <menu>
                 <item
                     android:id="@+id/nav_theme"
-                    android:icon="@drawable/selector_ic_school"
+                    android:icon="@drawable/selector_ic_theme"
                     android:title="@string/nav_theme"/>
                 <item
                     android:id="@+id/nav_setting"
-                    android:icon="@drawable/selector_ic_school"
+                    android:icon="@drawable/selector_ic_setting"
                     android:title="@string/nav_setting"/>
             </menu>
         </item>

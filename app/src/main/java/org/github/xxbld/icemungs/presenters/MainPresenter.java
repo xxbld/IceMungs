@@ -61,8 +61,8 @@ public class MainPresenter extends BasePresenter<IMainView> {
      * @return
      */
     private Map<Integer, Object[]> getNavFragmentItems() {
-        int[] keys = {R.id.nav_school, R.id.nav_daily, R.id.nav_verbose, R.id.nav_resume};
-        int[] titles = {R.string.nav_menu_school, R.string.nav_menu_daily, R.string.nav_menu_verbose, R.string.nav_menu_resume};
+        int[] keys = {R.id.nav_school, R.id.nav_schoolmap, R.id.nav_verbose, R.id.nav_resume};
+        int[] titles = {R.string.nav_menu_school, R.string.nav_menu_schoolmap, R.string.nav_menu_verbose, R.string.nav_menu_resume};
 //        Object[] titles = {R.string.nav_menu_school, "null", null, "履历a"};
         int[] menuIds = {R.menu.main_nav_menu_school, R.menu.main_nav_menu_schoolmap, 0, 0};
         Object[] fragments = new Object[]{

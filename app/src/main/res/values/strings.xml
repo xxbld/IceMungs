@@ -11,7 +11,7 @@
     <string name="navigation_drawer_close">navigation_drawer_close</string>
     <!--nav menu-->
     <string name="nav_menu_school">SchoolNews</string>
-    <string name="nav_menu_daily">SchoolMap</string>
+    <string name="nav_menu_schoolmap">SchoolMap</string>
     <string name="nav_menu_verbose">Verbose</string>
     <string name="nav_menu_resume">Resume</string>
     <string name="nav_about">About</string>

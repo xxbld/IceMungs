@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import org.github.xxbld.icemung.R;
+
 /**
  * Created by xxbld on 2016/1/19.
  * you can contact me at: 1024920618@qq.com
@@ -90,6 +94,8 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder {
      * @return
      */
     public BaseRecyclerHolder setImageByUrl(int viewId, String url) {
+        ImageView view = getView(viewId);
+        Glide.with(view.getContext()).load(url).error(R.drawable.ic_error).centerCrop().crossFade().into(view);
         return this;
     }
 }

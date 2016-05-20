@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.gordonwong.materialsheetfab.MaterialSheetFab;
 
 import org.github.xxbld.icemung.glide.GlideHelper;
@@ -26,6 +25,7 @@ import org.github.xxbld.icemungs.presenters.MainPresenter;
 import org.github.xxbld.icemungs.ui.adapter.NavFragmentAdapter;
 import org.github.xxbld.icemungs.ui.base.BaseActivity;
 import org.github.xxbld.icemungs.ui.fragment.UseTabFragment;
+import org.github.xxbld.icemungs.ui.personalcenter.PersonalCenterActivity;
 import org.github.xxbld.icemungs.ui.schoolmap.SchoolMapFragment;
 import org.github.xxbld.icemungs.ui.widgets.SheetFloatActionButton;
 import org.github.xxbld.icemungs.views.IMainView;
@@ -38,16 +38,25 @@ import cn.bmob.v3.BmobUser;
 
 public class MainActivity extends BaseActivity implements IMainView, View.OnClickListener {
 
+    @Bind(R.id.content_coo)
+    View mRoot;
     @Bind(R.id.main_nav)
     NavigationView mNavigationView;
     @Bind(R.id.main_drawer)
     DrawerLayout mDrawerLayout;
-    @Bind(R.id.fab)
-    SheetFloatActionButton mFab;
     @Bind(R.id.content_tab)
     TabLayout mTabLayout;
-    @Bind(R.id.content_coo)
-    View mRoot;
+    //sheet items
+    @Bind(R.id.main_sheet_fab)
+    SheetFloatActionButton mFab;
+    @Bind(R.id.fab_sheet_item_school)
+    TextView mFabSheetItemSchool;
+    @Bind(R.id.fab_sheet_item_nearby)
+    TextView mFabSheetItemNearby;
+    @Bind(R.id.fab_sheet_item_personal)
+    TextView mFabSheetItemPersonal;
+    @Bind(R.id.fab_sheet_item_talk)
+    TextView mFabSheetItemTalk;
 
     Menu mMenu;
     View mHeadView;
@@ -56,7 +65,7 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     MaterialSheetFab mSheetMaterialSheetFab;
     NavFragmentAdapter mNavFragmentAdapter;
     MainPresenter mMainPresenter;
-    MaterialDialog mMaterialDialog;
+//    MaterialDialog mMaterialDialog;
 
     Student mCurrentStudent;
     private int mCurrentFragId;
@@ -78,30 +87,33 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
         if (mCurrentStudent == null) {
             //TODO handle null
             mCurrentStudent = new Student();
-            mCurrentStudent.setUsername("YY");
+            mCurrentStudent.setObjectId("c2ff436109");
+            mCurrentStudent.setUsername("小小冰绿豆");
         }
         this.setStatusBarColorWithDrawer(mDrawerLayout, getResources().getColor(R.color.colorPrimary));
+        setSheetFAB();
         mMainPresenter = new MainPresenter(mCurrentStudent);
         mMainPresenter.attachView(this);
         mMainPresenter.initialized();
-        setSheetFAB();
     }
 
+    /**
+     * set sheet fab
+     */
     private void setSheetFAB() {
         View overlay = ButterKnife.findById(this, R.id.overlay);
         View sheetCardView = ButterKnife.findById(this, R.id.fab_sheet);
         mSheetMaterialSheetFab = new MaterialSheetFab<>(mFab, sheetCardView, overlay, getResources().getColor(R.color.white), 0);
+        mFabSheetItemSchool.setOnClickListener(this);
+        mFabSheetItemPersonal.setOnClickListener(this);
+        mFabSheetItemNearby.setOnClickListener(this);
+        mFabSheetItemTalk.setOnClickListener(this);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         NetStatusReceiver.registerNetStatusReceiver(this);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 
     @Override
@@ -117,6 +129,10 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawers();
+            return;
+        }
+        if (mSheetMaterialSheetFab.isSheetVisible()) {
+            mSheetMaterialSheetFab.hideSheet();
             return;
         }
         super.onBackPressed();
@@ -150,6 +166,7 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
                 SchoolMapFragment schoolMapFragment = (SchoolMapFragment) mNavFragmentAdapter.getItemFragment(mCurrentFragId);
                 schoolMapFragment.initSearchView(searchView);
             }
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -185,10 +202,10 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
                 int itemId = item.getItemId();
                 switch (itemId) {
                     case R.id.nav_theme:
-                        MLog.i(TAG, "Theme Clicked");
+                        //TODO theme Activity
                         break;
                     case R.id.nav_setting:
-                        MLog.i(TAG, "Setting Clicked");
+                        //TODO setting Activity
                         break;
                 }
                 mDrawerLayout.closeDrawers();
@@ -205,7 +222,7 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     }
 
     private void handleSwitchNavFragment() {
-        if (mCurrentFragId == R.id.nav_daily || mCurrentFragId == R.id.nav_resume) {
+        if (mCurrentFragId == R.id.nav_schoolmap || mCurrentFragId == R.id.nav_resume) {
             if (mTabLayout.getVisibility() == View.VISIBLE) {
                 mTabLayout.setVisibility(View.GONE);
             }
@@ -247,8 +264,19 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
         int viewId = v.getId();
         switch (viewId) {
             case R.id.main_head_img:
-                //to personal center
                 this.go(PersonalCenterActivity.class);
+                break;
+            case R.id.fab_sheet_item_school:
+                //我的学校主页
+                break;
+            case R.id.fab_sheet_item_personal:
+                //个人主页
+                break;
+            case R.id.fab_sheet_item_nearby:
+                //附近的人
+                break;
+            case R.id.fab_sheet_item_talk:
+                //我有话说
                 break;
             default:
                 break;

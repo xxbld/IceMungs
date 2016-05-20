@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <org.github.xxbld.icemungs.ui.widgets.SheetFloatActionButton
-        android:id="@+id/fab"
+        android:id="@+id/main_sheet_fab"
         style="@style/Widget.MaterialSheetFab.Fab"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
@@ -34,42 +34,34 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Recording -->
                 <TextView
-                    android:id="@+id/fab_sheet_item_recording"
+                    android:id="@+id/fab_sheet_item_school"
                     style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
                     android:drawableLeft="@drawable/ic_school_green_600_24dp"
-                    android:drawableStart="@drawable/ic_school_grey_600_24dp"
-                    android:text="Recording"/>
+                    android:text="我的学校"/>
 
-                <!-- Reminder -->
                 <TextView
-                    android:id="@+id/fab_sheet_item_reminder"
+                    android:id="@+id/fab_sheet_item_nearby"
                     style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
-                    android:drawableLeft="@drawable/ic_school_green_600_24dp"
-                    android:drawableStart="@drawable/ic_school_grey_600_24dp"
-                    android:text="Reminder"/>
+                    android:drawableLeft="@drawable/ic_room_green_600_24dp"
+                    android:text="附近的人"/>
 
-                <!-- Photo -->
                 <TextView
-                    android:id="@+id/fab_sheet_item_photo"
+                    android:id="@+id/fab_sheet_item_personal"
                     style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
-                    android:drawableLeft="@drawable/ic_school_green_600_24dp"
-                    android:drawableStart="@drawable/ic_school_grey_600_24dp"
-                    android:text="Photo"/>
+                    android:drawableLeft="@drawable/ic_person_green_600_24dp"
+                    android:text="个人中心"/>
 
-                <!-- Note -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/colorAccent">
 
                     <TextView
-                        android:id="@+id/fab_sheet_item_note"
+                        android:id="@+id/fab_sheet_item_talk"
                         style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
-                        android:drawableLeft="@drawable/ic_school_green_600_24dp"
-                        android:drawableStart="@drawable/ic_school_grey_600_24dp"
-                        android:text="CreateNote"/>
+                        android:drawableLeft="@drawable/ic_edit_green_600_24dp"
+                        android:text="我有话说"/>
                 </LinearLayout>
 
             </LinearLayout>

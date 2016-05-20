@@ -67,7 +67,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
     @Override
     protected void setToolbar() {
         mToolbar.setTitle(R.string.login);
-        mToolbar.setLogo(R.mipmap.ic_launcher);
+//        mToolbar.setLogo(R.mipmap.ic_launcher);
         setSupportActionBar(mToolbar);
     }
 

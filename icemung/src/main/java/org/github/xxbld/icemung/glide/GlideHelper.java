@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
+import org.github.xxbld.icemung.R;
 import org.github.xxbld.icemung.utils.BitmapUtil;
 
 /**
@@ -51,7 +52,7 @@ public class GlideHelper {
      * @param imageView
      */
     public static void tranCircleImage(final Context context, String url, final ImageView imageView) {
-        Glide.with(context).load(url).asBitmap().centerCrop().into(new BitmapImageViewTarget(imageView) {
+        Glide.with(context).load(url).asBitmap().error(R.drawable.ic_error).centerCrop().into(new BitmapImageViewTarget(imageView) {
             @Override
             protected void setResource(Bitmap resource) {
                 RoundedBitmapDrawable circularBitmapDrawable = BitmapUtil.getCircleDrawable(context, resource);
@@ -71,7 +72,7 @@ public class GlideHelper {
         Glide.with(context).load(resId).asBitmap().centerCrop().into(new BitmapImageViewTarget(imageView) {
             @Override
             protected void setResource(Bitmap resource) {
-                RoundedBitmapDrawable roundDrawable= BitmapUtil.getRoundDrawable(context, resource, radius);
+                RoundedBitmapDrawable roundDrawable = BitmapUtil.getRoundDrawable(context, resource, radius);
                 imageView.setImageDrawable(roundDrawable);
             }
         });
@@ -84,11 +85,11 @@ public class GlideHelper {
      * @param url
      * @param imageView
      */
-    public static void tranRoundImage(final Context context, String url,  final float radius,final ImageView imageView) {
-        Glide.with(context).load(url).asBitmap().centerCrop().into(new BitmapImageViewTarget(imageView) {
+    public static void tranRoundImage(final Context context, String url, final float radius, final ImageView imageView) {
+        Glide.with(context).load(url).asBitmap().centerCrop().error(R.drawable.ic_error).into(new BitmapImageViewTarget(imageView) {
             @Override
             protected void setResource(Bitmap resource) {
-                RoundedBitmapDrawable roundDrawable= BitmapUtil.getRoundDrawable(context, resource, radius);
+                RoundedBitmapDrawable roundDrawable = BitmapUtil.getRoundDrawable(context, resource, radius);
                 imageView.setImageDrawable(roundDrawable);
             }
         });

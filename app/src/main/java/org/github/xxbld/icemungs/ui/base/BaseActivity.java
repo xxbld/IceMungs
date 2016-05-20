@@ -109,6 +109,7 @@ public abstract class BaseActivity extends BaseAppCompatActivity implements IMvp
 
     /**
      * setStatusBarColor
+     *
      * @param color getResource().getColor()
      */
     protected void setStatusBarColor(int color) {

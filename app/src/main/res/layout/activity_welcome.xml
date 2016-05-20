@@ -167,5 +167,5 @@
         style="@style/IceMung.Widget.Button.Register"
         android:layout_above="@+id/welcome_dotsview"
         android:layout_centerHorizontal="true"
-        android:text="to main activity"/>
+        android:text="去主页"/>
 </RelativeLayout>
