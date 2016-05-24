@@ -1,11 +1,17 @@
 package org.github.xxbld.icemungs.ui.schoolmap;
 
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.esri.android.map.GraphicsLayer;
 import com.esri.android.map.LocationDisplayManager;
 import com.esri.android.map.MapView;
 import com.esri.android.map.ags.ArcGISTiledMapServiceLayer;
@@ -14,13 +20,22 @@ import com.esri.android.toolkit.map.MapViewHelper;
 import com.esri.core.geometry.Envelope;
 import com.esri.core.geometry.GeometryEngine;
 import com.esri.core.geometry.Point;
+import com.esri.core.map.Graphic;
+import com.esri.core.symbol.PictureMarkerSymbol;
 
+import org.github.xxbld.icemung.utils.BitmapUtil;
 import org.github.xxbld.icemung.utils.MLog;
 import org.github.xxbld.icemungs.R;
 import org.github.xxbld.icemungs.data.Constant;
+import org.github.xxbld.icemungs.data.models.Student;
+import org.github.xxbld.icemungs.presenters.FragSchoolMapPresenter;
 import org.github.xxbld.icemungs.ui.base.BaseFragment;
+import org.github.xxbld.icemungs.views.IFragSchoolMapView;
+
+import java.util.List;
 
 import butterknife.Bind;
+import cn.bmob.v3.datatype.BmobGeoPoint;
 
 /**
  * Created by xxbld on 2016/5/6.
@@ -28,7 +43,7 @@ import butterknife.Bind;
  *
  * @description :
  */
-public class SchoolMapFragment extends BaseFragment implements View.OnClickListener {
+public class SchoolMapFragment extends BaseFragment implements View.OnClickListener, IFragSchoolMapView {
 
     private static final String FRAG_MAP_SERVER_URL = "MapServer_REST";
     private static final String FRAG_IMG_MAP_SERVER_URL = "Img_MapServer_REST";
@@ -52,9 +67,11 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
     MapViewHelper mMapViewHelper;
     ArcGISTiledMapServiceLayer mBaseTiledLayer;
     ArcGISTiledMapServiceLayer mBaseImageTiledLayer;
+    GraphicsLayer mNearPersonLayer;//附近的人
     LocationDisplayManager mLocationDisplayManager;
 
     SearchView mSearchView;
+    FragSchoolMapPresenter mFragSchoolMapPresenter;
 
     public SchoolMapFragment() {
     }
@@ -97,6 +114,9 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        if (mFragSchoolMapPresenter != null) {
+            mFragSchoolMapPresenter.detachView();
+        }
         if (mLocationDisplayManager != null) {
             mLocationDisplayManager.stop();
         }
@@ -121,6 +141,10 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
 //            mMapServerUrl = "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer";
             mMapImageServerUrl = getArguments().getString(FRAG_IMG_MAP_SERVER_URL);
         }
+        mFragSchoolMapPresenter = new FragSchoolMapPresenter(getActivity());
+        mFragSchoolMapPresenter.attachView(this);
+        mFragSchoolMapPresenter.initialized();
+
         initMap();
         mMapZoomIn.setOnClickListener(this);
         mMapZoomOut.setOnClickListener(this);
@@ -136,14 +160,15 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
         mMapViewHelper = new MapViewHelper(mMapView);
         mBaseTiledLayer = new ArcGISTiledMapServiceLayer(mMapServerUrl);
         mBaseImageTiledLayer = new ArcGISTiledMapServiceLayer(mMapImageServerUrl);
+        mNearPersonLayer = new GraphicsLayer();
         mMapView.addLayer(mBaseTiledLayer, 0);
+        mMapView.addLayer(mNearPersonLayer);
         // //设置地图初始范围：赣州章贡区
         Point p1 = GeometryEngine.project(114.8560242878, 25.8817603219, Constant.SR_WWMAS);
         Point p2 = GeometryEngine.project(114.9900673318, 25.7948780447, Constant.SR_WWMAS);
         final Envelope initExtent = new Envelope(p1.getX(), p1.getY(), p2.getX(), p2.getY());
         mMapView.setMaxExtent(initExtent);
         mMapView.centerAt(initExtent.getCenter(), true);
-        mMapView.setScale(16);
         initLocationManager();
         mMapView.setOnStatusChangedListener(new OnStatusChangedListener() {
             @Override
@@ -168,24 +193,21 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
      */
     private void initLocationManager() {
         mLocationDisplayManager = mMapView.getLocationDisplayManager();
-        mLocationDisplayManager.setAutoPanMode(LocationDisplayManager.AutoPanMode.LOCATION);
+        mLocationDisplayManager.setAutoPanMode(LocationDisplayManager.AutoPanMode.OFF);
         mLocationDisplayManager.setAllowNetworkLocation(true);
-//        PictureMarkerSymbol pictureMarkerSymbol = new PictureMarkerSymbol(getActivity(), BitmapUtil.getCircleDrawable(getActivity(), BitmapFactory.decodeResource(getResources(), R.drawable.ic_user)));
-//        try {
-//            mLocationDisplayManager.setDefaultSymbol(pictureMarkerSymbol);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
         mLocationDisplayManager.start();
     }
 
     /**
-     * get Location
+     * get Location GPS
      *
      * @return
      */
     public Location getLocation() {
         if (mLocationDisplayManager != null) {
+            if (!mLocationDisplayManager.isStarted()) {
+                mLocationDisplayManager.start();
+            }
             return mLocationDisplayManager.getLocation();
         }
         return null;
@@ -198,6 +220,9 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
      */
     public Point getLocPoint() {
         if (mLocationDisplayManager != null) {
+            if (!mLocationDisplayManager.isStarted()) {
+                mLocationDisplayManager.start();
+            }
             return mLocationDisplayManager.getPoint();
         }
         return null;
@@ -230,12 +255,25 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
         }
     }
 
+
+    /**
+     * 搜索附近的人
+     */
+    public void searchNearPerson() {
+        if (mFragSchoolMapPresenter != null) {
+            Location location = getLocation();
+            BmobGeoPoint bPoint = new BmobGeoPoint(location.getLongitude(), location.getLatitude());
+            mFragSchoolMapPresenter.getNearPerson(bPoint);
+        }
+    }
+
     /**
      * 处理toolbar search view
      *
      * @param searchView
      */
     public void initSearchView(SearchView searchView) {
+
         this.mSearchView = searchView;
 //        mSearchView.setIconified(true);
 //        mSearchView.setIconifiedByDefault(true);
@@ -251,5 +289,27 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
                 return false;
             }
         });
+    }
+
+    //=================
+    @Override
+    public void showNearPerson(List<Student> students) {
+        mNearPersonLayer.removeAll();
+        for (final Student student : students) {
+            Glide.with(this).load(student.getIconUrl()).asBitmap().fitCenter().into(new SimpleTarget<Bitmap>(50, 50) {
+                @Override
+                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                    RoundedBitmapDrawable circleDrawable = BitmapUtil.getCircleDrawable(getActivity(), resource);
+                    final PictureMarkerSymbol pictureMarkerSymbol = new PictureMarkerSymbol(circleDrawable);
+//            pictureMarkerSymbol.setUrl(student.getIconUrl());
+                    BmobGeoPoint studentGPSLocation = student.getLocation();
+                    Point personLoc = GeometryEngine.project(studentGPSLocation.getLongitude(),
+                            studentGPSLocation.getLatitude(), Constant.SR_WWMAS);
+                    Graphic graphic = new Graphic(personLoc, pictureMarkerSymbol);
+                    mNearPersonLayer.addGraphic(graphic);
+                }
+            });
+        }
+        mMapView.zoomToScale(getLocPoint(), mNearPersonLayer.getMaxScale());
     }
 }

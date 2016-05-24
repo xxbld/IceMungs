@@ -71,7 +71,7 @@ public class PersonalCenterActivity extends BaseActivity {
                 } else {
                     if (state != CollapsingToolbarLayoutState.INTERNEDIATE) {
                         if (state == CollapsingToolbarLayoutState.COLLAPSED) {
-//                            由折叠变为中间状态
+                            //由折叠变为中间状态
                             mPersonalTab.setBackgroundColor(getResources().getColor(R.color.transparent));
                             mToolbar.setBackgroundColor(getResources().getColor(R.color.transparent));
                         }

@@ -15,6 +15,7 @@
             android:id="@+id/splash_img_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scaleType="fitXY"
             android:src="@drawable/bg_afternoon"/>
 
         <LinearLayout
@@ -29,16 +30,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/white"
-                android:text="V1.3"/>
+                android:text="V1.3"
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/splash_txt_copyright"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:gravity="center"
-                android:text="@string/splash_copyright"/>
+                android:text="@string/splash_copyright"
+                android:textColor="@color/white"/>
         </LinearLayout>
     </FrameLayout>
 </io.codetail.widget.RevealFrameLayout>

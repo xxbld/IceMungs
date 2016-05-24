@@ -221,6 +221,9 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
         });
     }
 
+    /**
+     * 处理Fragment切换
+     */
     private void handleSwitchNavFragment() {
         if (mCurrentFragId == R.id.nav_schoolmap || mCurrentFragId == R.id.nav_resume) {
             if (mTabLayout.getVisibility() == View.VISIBLE) {
@@ -264,18 +267,31 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
         int viewId = v.getId();
         switch (viewId) {
             case R.id.main_head_img:
-                this.go(PersonalCenterActivity.class);
+                go(PersonalCenterActivity.class);
                 break;
             case R.id.fab_sheet_item_school:
+                mSheetMaterialSheetFab.hideSheet();
                 //我的学校主页
+                go(SchoolPageActivity.class);
                 break;
             case R.id.fab_sheet_item_personal:
+                mSheetMaterialSheetFab.hideSheet();
                 //个人主页
+                go(PersonalCenterActivity.class);
                 break;
             case R.id.fab_sheet_item_nearby:
                 //附近的人
+                if (mNavFragmentAdapter != null) {
+                    if (mCurrentFragId != R.id.nav_schoolmap) {
+                        mNavFragmentAdapter.switchToItem(R.id.nav_schoolmap);
+                    }
+                    SchoolMapFragment schoolMapFragment = (SchoolMapFragment) mNavFragmentAdapter.getItemFragment(R.id.nav_schoolmap);
+                    schoolMapFragment.searchNearPerson();
+                }
+                mSheetMaterialSheetFab.hideSheet();
                 break;
             case R.id.fab_sheet_item_talk:
+                mSheetMaterialSheetFab.hideSheet();
                 //我有话说
                 break;
             default:
