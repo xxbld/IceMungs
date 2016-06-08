@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/layout_appbar_parallax_image"/>
+    <include layout="@layout/layout_personal_center_top"/>
 
     <LinearLayout
         android:layout_width="match_parent"

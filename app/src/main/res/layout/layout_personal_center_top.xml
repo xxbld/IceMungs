@@ -34,12 +34,40 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/bamboo"/>
 
-            <ImageView
-                android:id="@+id/personal_icon"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/ic_user"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+
+                <ImageView
+                    android:id="@+id/personal_icon"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_user"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/personal_icon"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="14dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/personal_addr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="江西-南昌 | 21"
+                        android:textColor="@color/white"/>
+
+                    <ImageView
+                        android:id="@+id/personal_sex"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/userinfo_icon_male"/>
+                </LinearLayout>
+            </RelativeLayout>
         </RelativeLayout>
 
         <android.support.v7.widget.Toolbar
@@ -47,8 +75,8 @@
             style="@style/IceMung.Widget.Toolbar"
             android:layout_height="96dp"
             android:layout_gravity="top"
-            app:layout_collapseMode="pin"
             android:gravity="top"
+            app:layout_collapseMode="pin"
             app:titleMarginTop="14dp"/>
 
         <android.support.design.widget.TabLayout

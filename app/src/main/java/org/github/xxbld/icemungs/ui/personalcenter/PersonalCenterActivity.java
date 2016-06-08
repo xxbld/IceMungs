@@ -1,5 +1,6 @@
 package org.github.xxbld.icemungs.ui.personalcenter;
 
+import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
@@ -9,15 +10,20 @@ import android.view.View;
 import android.widget.ImageView;
 
 import org.github.xxbld.icemung.glide.GlideHelper;
+import org.github.xxbld.icemung.utils.MLog;
 import org.github.xxbld.icemungs.R;
+import org.github.xxbld.icemungs.data.models.Student;
 import org.github.xxbld.icemungs.ui.adapter.BasePageAdapter;
 import org.github.xxbld.icemungs.ui.base.BaseActivity;
-import org.github.xxbld.icemungs.ui.schoolnews.NewsFragment;
+import org.github.xxbld.icemungs.ui.verbose.ITalkFragment1;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.listener.GetListener;
 
 /**
  * Created by xxbld on 2016/5/2.
@@ -39,7 +45,10 @@ public class PersonalCenterActivity extends BaseActivity {
     TabLayout mPersonalTab;
     @Bind(R.id.layout_viewpager)
     ViewPager mLayoutViewpager;
+
     private CollapsingToolbarLayoutState state;
+    private Student mStudent;
+    private String mStudentId;
 
     private enum CollapsingToolbarLayoutState {
         //展开、折叠、中间
@@ -49,10 +58,18 @@ public class PersonalCenterActivity extends BaseActivity {
     }
 
     @Override
+    protected void handleBundleExtras(Bundle extras) {
+        super.handleBundleExtras(extras);
+        if (extras != null) {
+            mStudentId = extras.getString("studentId");
+            MLog.i(TAG, "studentId:" + mStudentId);
+        }
+    }
+
+    @Override
     protected void initViewsAndEvents() {
-        this.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
         super.initViewsAndEvents();
-        GlideHelper.tranCircleImage(this, R.drawable.ic_user, mPersonalIcon);
+        this.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
         mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
@@ -80,17 +97,47 @@ public class PersonalCenterActivity extends BaseActivity {
                 }
             }
         });
+        Student currentUser = BmobUser.getCurrentUser(this, Student.class);
+        if (mStudentId == null || mStudentId.equals(currentUser.getObjectId())) {
+            mStudent = currentUser;
+            loadPersonalCenter();
+        } else {
+            BmobQuery<Student> studentBmobQuery = new BmobQuery<>();
+            studentBmobQuery.getObject(this, mStudentId, new GetListener<Student>() {
+                @Override
+                public void onSuccess(Student student) {
+                    mStudent = student;
+                    loadPersonalCenter();
+                }
+
+                @Override
+                public void onFailure(int i, String s) {
+
+                }
+            });
+        }
+//        loadPersonalCenter();
+    }
+
+    private void loadPersonalCenter() {
+        mStudent = BmobUser.getCurrentUser(this, Student.class);
+        GlideHelper.tranCircleImage(this, mStudent.getIconUrl(), mPersonalIcon);
         List<String> titles = new ArrayList<>();
+        titles.add("资料");
         titles.add("我说");
-        titles.add("我关注的");
+        titles.add("关注");
+        final List<Fragment> fragments = new ArrayList<>();
+        fragments.add(PersonalDataFragment.newInstance(mStudent.getObjectId()));
+        fragments.add(new ITalkFragment1());
+        fragments.add(PersonalNoticeFragment.newInstance(mStudent.getObjectId()));
         BasePageAdapter basePageAdapter = new BasePageAdapter(getSupportFragmentManager(), titles) {
             @Override
             public Fragment getItem(int position) {
-                return NewsFragment.newInstance(null, 0);
+                return fragments.get(position);
             }
         };
         mLayoutViewpager.setAdapter(basePageAdapter);
-        mLayoutViewpager.setOffscreenPageLimit(2);
+        mLayoutViewpager.setOffscreenPageLimit(3);
         mPersonalTab.setupWithViewPager(mLayoutViewpager);
     }
 
@@ -106,7 +153,7 @@ public class PersonalCenterActivity extends BaseActivity {
 
     @Override
     protected void setToolbar() {
-        mToolbar.setTitle("YY");
+        mToolbar.setTitle("小小冰绿豆");
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

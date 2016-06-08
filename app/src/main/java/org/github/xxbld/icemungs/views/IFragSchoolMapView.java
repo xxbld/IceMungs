@@ -19,4 +19,6 @@ public interface IFragSchoolMapView extends IMvpView {
      * @param students
      */
     void showNearPerson(List<Student> students);
+
+    void showTextQuery(String queryStr, Object list);
 }

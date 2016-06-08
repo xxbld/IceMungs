@@ -50,7 +50,7 @@ public class Student extends BmobUser {
     }
 
     public void setSex(Integer sex) {
-//        boolean sexOk = sex == 0 || sex == 1;
+//        Boolean sexOk = sex == 0 || sex == 1;
 //        if (!sexOk) {
 //            sex = 0;
 //        }
@@ -62,7 +62,7 @@ public class Student extends BmobUser {
     }
 
     public void setAge(Integer age) {
-//        boolean ageOk = MIN_AGE <= age && age <= MAX_AGE;
+//        Boolean ageOk = MIN_AGE <= age && age <= MAX_AGE;
 //        if (!ageOk) {
 //            age = Integer.valueOf((int) (Math.random() * MAX_AGE));
 //        }

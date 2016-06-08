@@ -35,7 +35,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/material_design_1"/>
+                    android:src="@drawable/bg_jxust1"/>
                 <!--page2-->
                 <ImageView
                     android:id="@+id/school_page2"
@@ -44,7 +44,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/material_design_2"/>
+                    android:src="@drawable/bg_jxust2"/>
                 <!--page3-->
                 <ImageView
                     android:id="@+id/school_page3"
@@ -53,14 +53,14 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/material_design_3"/>
+                    android:src="@drawable/bg_jxust3"/>
 
                 <com.dev.sacot41.scviewpager.DotsView
                     android:id="@+id/school_page_dotsview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center_horizontal"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="8dp"
                     android:orientation="horizontal"/>
             </FrameLayout>
 

@@ -3,8 +3,8 @@ package org.github.xxbld.icemungs.presenters;
 import android.content.Context;
 
 import org.github.xxbld.icemung.base.mvp.BasePresenter;
-import org.github.xxbld.icemungs.data.models.Academy;
 import org.github.xxbld.icemungs.data.models.School;
+import org.github.xxbld.icemungs.data.models.Speciality;
 import org.github.xxbld.icemungs.listeners.OnLoadDataListener;
 import org.github.xxbld.icemungs.views.IChooseSchoolView;
 
@@ -12,7 +12,6 @@ import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobGeoPoint;
-import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.listener.FindListener;
 
 /**
@@ -36,17 +35,15 @@ public class ChooseSchoolPresenter extends BasePresenter<IChooseSchoolView> {
     }
 
 
-    public void loadAcademy(String schoolID) {
-        if (schoolID == null) {
-            return;
-        }
-        School school = new School();
-        school.setObjectId(schoolID);
-        BmobQuery<Academy> academyBmobQuery = new BmobQuery<>();
-        academyBmobQuery.addWhereEqualTo("school", new BmobPointer(school));
-        academyBmobQuery.findObjects(mContext, new FindListener<Academy>() {
+    public void loadSpeciality() {
+        BmobQuery<Speciality> specialityBmobQuery = new BmobQuery<>();
+//        BmobQuery<Academy> academyInnerQuery = new BmobQuery<>();
+//        specialityBmobQuery.addWhereMatchesQuery("academy", "Academy", academyInnerQuery);
+        specialityBmobQuery.include("academy.school");
+        specialityBmobQuery.setLimit(10);
+        specialityBmobQuery.findObjects(mContext, new FindListener<Speciality>() {
             @Override
-            public void onSuccess(List<Academy> list) {
+            public void onSuccess(List<Speciality> list) {
                 if (mOnLoadDataListener != null) {
                     mOnLoadDataListener.onSuccess();
                 }

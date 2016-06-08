@@ -5,7 +5,8 @@ import android.support.v4.app.Fragment;
 import org.github.xxbld.icemung.base.mvp.BasePresenter;
 import org.github.xxbld.icemungs.R;
 import org.github.xxbld.icemungs.ui.fragment.FlashFragment;
-import org.github.xxbld.icemungs.ui.schoolnews.NewsFragment;
+import org.github.xxbld.icemungs.ui.schoolnews.NewsFragment1;
+import org.github.xxbld.icemungs.ui.verbose.ITalkFragment1;
 import org.github.xxbld.icemungs.views.IFragUseMainTabView;
 
 import java.util.ArrayList;
@@ -56,8 +57,10 @@ public class FragUseMainTabPresenter extends BasePresenter<IFragUseMainTabView> 
 
     private List<Fragment> getVerboseTabFragments() {
         List<Fragment> fragments = new ArrayList<>();
+        fragments.add(new ITalkFragment1());
         fragments.add(new FlashFragment());
-        fragments.add(new FlashFragment());
+//        TODO gai le
+//        fragments.add(new FlashFragment());
         return fragments;
     }
 
@@ -81,15 +84,21 @@ public class FragUseMainTabPresenter extends BasePresenter<IFragUseMainTabView> 
 
     private List<Fragment> getSchoolNewsTabFragments(String studentID) {
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(NewsFragment.newInstance(studentID, FragNewsPresenter.NewsType.NEW.getValue()));
-        fragments.add(new FlashFragment());
-        fragments.add(new FlashFragment());
-        fragments.add(new FlashFragment());
-        fragments.add(new FlashFragment());
-//        fragments.add(NewsFragment.newInstance(studentID, FragNewsPresenter.NewsType.HOT.getValue()));
-//        fragments.add(NewsFragment.newInstance(studentID, FragNewsPresenter.NewsType.SCHOOL.getValue()));
-//        fragments.add(NewsFragment.newInstance(studentID, FragNewsPresenter.NewsType.ACADEMY.getValue()));
-//        fragments.add(NewsFragment.newInstance(studentID, FragNewsPresenter.NewsType.SPECIALITY.getValue()));
+//        fragments.add(NewsFragment.newInstance(studentID, FragNewsPresenter.NewsType.NEW.getValue()));
+//        fragments.add(new FlashFragment());
+//        fragments.add(new FlashFragment());
+//        fragments.add(new FlashFragment());
+//        fragments.add(new FlashFragment());
+//        TODO 改了
+        fragments.add(NewsFragment1.newInstance(studentID, FragNewsPresenter.NewsType.NEW.getValue()));
+        fragments.add(NewsFragment1.newInstance(studentID, FragNewsPresenter.NewsType.NEW.getValue()));
+        fragments.add(NewsFragment1.newInstance(studentID, FragNewsPresenter.NewsType.NEW.getValue()));
+        fragments.add(NewsFragment1.newInstance(studentID, FragNewsPresenter.NewsType.NEW.getValue()));
+        fragments.add(NewsFragment1.newInstance(studentID, FragNewsPresenter.NewsType.NEW.getValue()));
+//        fragments.add(NewsFragment1.newInstance(studentID, FragNewsPresenter.NewsType.HOT.getValue()));
+//        fragments.add(NewsFragment1.newInstance(studentID, FragNewsPresenter.NewsType.SCHOOL.getValue()));
+//        fragments.add(NewsFragment1.newInstance(studentID, FragNewsPresenter.NewsType.ACADEMY.getValue()));
+//        fragments.add(NewsFragment1.newInstance(studentID, FragNewsPresenter.NewsType.SPECIALITY.getValue()));
         return fragments;
     }
 }

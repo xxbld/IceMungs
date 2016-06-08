@@ -50,9 +50,8 @@ public class ChooseSchoolActivity extends BasePtrClassicActivity implements ICho
         mChooseSchoolPresenter.initialized();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mSchoolChooseAdapter = new SchoolChooseAdapter(mRecyclerView, mSchools, mChooseSchoolPresenter);
+        mSchoolChooseAdapter = new SchoolChooseAdapter(mRecyclerView, mSchools);
         mRecyclerView.setAdapter(mSchoolChooseAdapter);
-
     }
 
     @Override
@@ -87,9 +86,9 @@ public class ChooseSchoolActivity extends BasePtrClassicActivity implements ICho
 
     @Override
     protected void setToolbar() {
-//        mToolbar.setTitle("选择学校");
-//        setSupportActionBar(mToolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mToolbar.setTitle("选择学校");
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     //====================
@@ -100,6 +99,5 @@ public class ChooseSchoolActivity extends BasePtrClassicActivity implements ICho
             mSchools.addAll(schools);
             mSchoolChooseAdapter.notifyDataSetChanged();
         }
-
     }
 }

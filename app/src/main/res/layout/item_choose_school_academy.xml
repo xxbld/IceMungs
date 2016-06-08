@@ -16,7 +16,7 @@
         android:gravity="center_vertical"
         android:orientation="vertical">
 
-        <include layout="@layout/item_school_layout"/>
+        <include layout="@layout/item_choose_school_layout"/>
 
         <com.github.aakira.expandablelayout.ExpandableRelativeLayout
             android:id="@+id/school_expand_layout"

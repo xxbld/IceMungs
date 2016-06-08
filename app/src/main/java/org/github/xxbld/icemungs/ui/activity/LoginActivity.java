@@ -148,8 +148,8 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
                 mMaterialDialog.dismiss();
                 showToast(msg);
                 mBtnLogin.setClickable(true);
-                //TODO 测试用
-                loginPresenter.goHome();
+//                //TODO 测试用
+//                loginPresenter.goHome();
             }
         });
     }

@@ -150,23 +150,34 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
         getMenuInflater().inflate(R.menu.menu_main, menu);
         this.mMenu = menu;
         mMainPresenter.initNav();
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_school_item) {
             MLog.i(TAG, "Action Setting Clicked !");
             return true;
         }
         if (id == R.id.action_school_map_search) {
-            if (mNavFragmentAdapter != null) {
-                SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-                SchoolMapFragment schoolMapFragment = (SchoolMapFragment) mNavFragmentAdapter.getItemFragment(mCurrentFragId);
-                schoolMapFragment.initSearchView(searchView);
-            }
+            MLog.i(TAG, "mSearchView Clicked !");
+//            if (mNavFragmentAdapter != null) {
+//                SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+//                boolean a = searchView == null;
+//                MLog.i(TAG, "mSearchView:" + a);
+//                if (searchView != null) {
+//                    SchoolMapFragment schoolMapFragment = (SchoolMapFragment) mNavFragmentAdapter.getItemFragment(mCurrentFragId);
+//                    schoolMapFragment.initSearchView(searchView);
+//                }
+//            }
             return true;
+        }
+        if (id == R.id.action_school_map_clear) {
+            if (mNavFragmentAdapter != null) {
+                SchoolMapFragment schoolMapFragment = (SchoolMapFragment) mNavFragmentAdapter.getItemFragment(mCurrentFragId);
+                schoolMapFragment.removeAllGraphics();
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -213,9 +224,18 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
             }
 
             @Override
-            public void onSwitchFragmentSuccess(int currentItemId) {
+            public void onSwitchFragmentSuccess(int currentItemId, Menu menu) {
                 mCurrentFragId = currentItemId;
                 handleSwitchNavFragment();
+                //set SearchView
+                MenuItem item = menu.findItem(R.id.action_school_map_search);
+                if (mNavFragmentAdapter != null && item != null) {
+                    SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+                    if (searchView != null) {
+                        SchoolMapFragment schoolMapFragment = (SchoolMapFragment) mNavFragmentAdapter.getItemFragment(mCurrentFragId);
+                        schoolMapFragment.initSearchView(searchView);
+                    }
+                }
             }
 
         });
@@ -267,6 +287,7 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
         int viewId = v.getId();
         switch (viewId) {
             case R.id.main_head_img:
+                mDrawerLayout.closeDrawers();
                 go(PersonalCenterActivity.class);
                 break;
             case R.id.fab_sheet_item_school:
@@ -280,15 +301,17 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
                 go(PersonalCenterActivity.class);
                 break;
             case R.id.fab_sheet_item_nearby:
+                mSheetMaterialSheetFab.hideSheet();
                 //附近的人
                 if (mNavFragmentAdapter != null) {
                     if (mCurrentFragId != R.id.nav_schoolmap) {
                         mNavFragmentAdapter.switchToItem(R.id.nav_schoolmap);
                     }
                     SchoolMapFragment schoolMapFragment = (SchoolMapFragment) mNavFragmentAdapter.getItemFragment(R.id.nav_schoolmap);
-                    schoolMapFragment.searchNearPerson();
+                    if (schoolMapFragment.isResumed()) {
+                        schoolMapFragment.searchNearPerson();
+                    }
                 }
-                mSheetMaterialSheetFab.hideSheet();
                 break;
             case R.id.fab_sheet_item_talk:
                 mSheetMaterialSheetFab.hideSheet();

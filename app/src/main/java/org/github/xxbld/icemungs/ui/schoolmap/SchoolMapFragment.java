@@ -15,8 +15,10 @@ import com.esri.android.map.GraphicsLayer;
 import com.esri.android.map.LocationDisplayManager;
 import com.esri.android.map.MapView;
 import com.esri.android.map.ags.ArcGISTiledMapServiceLayer;
+import com.esri.android.map.event.OnSingleTapListener;
 import com.esri.android.map.event.OnStatusChangedListener;
 import com.esri.android.toolkit.map.MapViewHelper;
+import com.esri.android.toolkit.map.OnGraphicClickListener;
 import com.esri.core.geometry.Envelope;
 import com.esri.core.geometry.GeometryEngine;
 import com.esri.core.geometry.Point;
@@ -27,12 +29,16 @@ import org.github.xxbld.icemung.utils.BitmapUtil;
 import org.github.xxbld.icemung.utils.MLog;
 import org.github.xxbld.icemungs.R;
 import org.github.xxbld.icemungs.data.Constant;
+import org.github.xxbld.icemungs.data.models.School;
 import org.github.xxbld.icemungs.data.models.Student;
 import org.github.xxbld.icemungs.presenters.FragSchoolMapPresenter;
 import org.github.xxbld.icemungs.ui.base.BaseFragment;
+import org.github.xxbld.icemungs.ui.personalcenter.PersonalCenterActivity;
 import org.github.xxbld.icemungs.views.IFragSchoolMapView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import cn.bmob.v3.datatype.BmobGeoPoint;
@@ -41,12 +47,15 @@ import cn.bmob.v3.datatype.BmobGeoPoint;
  * Created by xxbld on 2016/5/6.
  * you can contact me at: 1024920618@qq.com
  *
- * @description :
+ * @description :校园地图
  */
 public class SchoolMapFragment extends BaseFragment implements View.OnClickListener, IFragSchoolMapView {
 
     private static final String FRAG_MAP_SERVER_URL = "MapServer_REST";
     private static final String FRAG_IMG_MAP_SERVER_URL = "Img_MapServer_REST";
+    /*附近的人图层属性 TAG */
+    private static final String NEAR_PERSON_LAYER_ATTRIBUTES = "Near_Person_Layer_Attributes";
+    private static final String TEXT_QUERY_ATTRIBUTES = "Text_Query_Attributes";
 
     @Bind(R.id.common_mapview)
     MapView mMapView;
@@ -144,7 +153,6 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
         mFragSchoolMapPresenter = new FragSchoolMapPresenter(getActivity());
         mFragSchoolMapPresenter.attachView(this);
         mFragSchoolMapPresenter.initialized();
-
         initMap();
         mMapZoomIn.setOnClickListener(this);
         mMapZoomOut.setOnClickListener(this);
@@ -186,6 +194,58 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
                 }
             }
         });
+        //        This is SketchLayer GraphicClick
+        mMapViewHelper.setShowGraphicCallout(true);
+        mMapViewHelper.setOnGraphicClickListener(new OnGraphicClickListener() {
+            @Override
+            public void onGraphicClick(Graphic graphic) {
+                MLog.i(TAG, "school click !");
+            }
+        });
+        mMapView.setOnSingleTapListener(new OnSingleTapListener() {
+            @Override
+            public void onSingleTap(float v, float v1) {
+                Point point1 = mMapView.toMapPoint(v, v1);
+                Point pLoc = (Point) GeometryEngine.project(point1, Constant.SR_WWMAS, Constant.SR_W);
+                MLog.i(TAG, "Point:" + pLoc.toString());
+                onNearPersonGraphicClicked(v, v1);
+            }
+        });
+
+        /*MapViewHelper中已经设置了onTouchListener*/
+//        mMapView.setOnTouchListener(new MapOnTouchListener(getActivity(), mMapView) {
+//            @Override
+//            public boolean onSingleTap(MotionEvent point) {
+//                Point point1 = mMapView.toMapPoint(point.getX(), point.getY());
+//                Point pLoc = (Point) GeometryEngine.project(point1, Constant.SR_WWMAS, Constant.SR_W);
+//                MLog.i(TAG, "Point:" + pLoc.toString());
+//                onNearPersonGraphicClicked(point.getX(), point.getY());
+//                return super.onSingleTap(point);
+//            }
+//        });
+    }
+
+    /**
+     * 附近的人被点击了
+     *
+     * @param x screen x
+     * @param y screen x
+     */
+    private void onNearPersonGraphicClicked(float x, float y) {
+        if (mNearPersonLayer != null && mNearPersonLayer.getGraphicIDs() != null) {
+            int[] graphicIDs = mNearPersonLayer.getGraphicIDs(x, y, 10, 1);
+            if (graphicIDs != null && graphicIDs.length > 0) {
+                MLog.i(TAG, "nearPerson Id :" + graphicIDs[0]);
+                Graphic graphic = mNearPersonLayer.getGraphic(graphicIDs[0]);
+//                Map<String, Object> attributes = graphic.getAttributes();
+//                Student attributeValue = (Student) attributes.get(NEAR_PERSON_LAYER_ATTRIBUTES);
+                String attributeValue = (String) graphic.getAttributeValue(NEAR_PERSON_LAYER_ATTRIBUTES);
+                Bundle bundle = new Bundle();
+//                bundle.putString("studentId", attributeValue.getObjectId());
+                bundle.putString("studentId", attributeValue);
+                go(PersonalCenterActivity.class, bundle);
+            }
+        }
     }
 
     /**
@@ -193,7 +253,7 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
      */
     private void initLocationManager() {
         mLocationDisplayManager = mMapView.getLocationDisplayManager();
-        mLocationDisplayManager.setAutoPanMode(LocationDisplayManager.AutoPanMode.OFF);
+        mLocationDisplayManager.setAutoPanMode(LocationDisplayManager.AutoPanMode.LOCATION);
         mLocationDisplayManager.setAllowNetworkLocation(true);
         mLocationDisplayManager.start();
     }
@@ -236,6 +296,7 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
                 if (!mLocationDisplayManager.isStarted()) {
                     mLocationDisplayManager.start();
                 }
+                mLocationDisplayManager.setAutoPanMode(LocationDisplayManager.AutoPanMode.LOCATION);
                 break;
             case R.id.map_zoom_in:
                 mMapView.zoomin();
@@ -256,16 +317,29 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
     }
 
 
+    public void removeAllGraphics() {
+        if (mMapViewHelper != null) {
+            mMapViewHelper.removeAllGraphics();
+        }
+        if (mNearPersonLayer != null) {
+            mNearPersonLayer.removeAll();
+        }
+    }
+
     /**
      * 搜索附近的人
      */
     public void searchNearPerson() {
         if (mFragSchoolMapPresenter != null) {
             Location location = getLocation();
-            BmobGeoPoint bPoint = new BmobGeoPoint(location.getLongitude(), location.getLatitude());
-            mFragSchoolMapPresenter.getNearPerson(bPoint);
+            if (location != null) {
+                BmobGeoPoint bPoint = new BmobGeoPoint(location.getLongitude(), location.getLatitude());
+                mFragSchoolMapPresenter.queryNearPerson(bPoint);
+            }
         }
     }
+
+    private SearchView.OnQueryTextListener mOnQueryTextListener;
 
     /**
      * 处理toolbar search view
@@ -273,43 +347,81 @@ public class SchoolMapFragment extends BaseFragment implements View.OnClickListe
      * @param searchView
      */
     public void initSearchView(SearchView searchView) {
+        if (mOnQueryTextListener == null) {
+            this.mSearchView = searchView;
+            mSearchView.setIconified(true);
+            mSearchView.setIconifiedByDefault(true);
+            mSearchView.setSubmitButtonEnabled(true);
+            mOnQueryTextListener = new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    MLog.i(TAG, "query:" + query);
+                    //搜索
+                    if (mFragSchoolMapPresenter != null) {
+                        Location location = getLocation();
+                        if (location != null) {
+                            BmobGeoPoint bPoint = new BmobGeoPoint(location.getLongitude(), location.getLatitude());
+                            mFragSchoolMapPresenter.queryNearSchool(query, bPoint);
+                        } else {
+                            mFragSchoolMapPresenter.queryNearSchool(query, null);
+                        }
+                    }
+                    return false;
+                }
 
-        this.mSearchView = searchView;
-//        mSearchView.setIconified(true);
-//        mSearchView.setIconifiedByDefault(true);
-//        mSearchView.setSubmitButtonEnabled(true);
-        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    MLog.i(TAG, "query:" + newText);
+                    return false;
+                }
+            };
+            mSearchView.setOnQueryTextListener(mOnQueryTextListener);
+        }
     }
 
     //=================
+
+    @Override
+    public void showTextQuery(String queryStr, Object list) {
+        removeAllGraphics();
+        if (queryStr.contains("学校") || queryStr.contains("school")) {
+            List<School> schools = (List<School>) list;
+            for (final School school : schools) {
+                Glide.with(this).load(school.getSchoolLogoImgUrl()).asBitmap().fitCenter().into(new SimpleTarget<Bitmap>(50, 50) {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        RoundedBitmapDrawable circleDrawable = BitmapUtil.getCircleDrawable(getActivity(), resource);
+                        BmobGeoPoint schoolGPSLocation = school.getSchoolLocation();
+                        mMapViewHelper.addMarkerGraphic(schoolGPSLocation.getLatitude(), schoolGPSLocation.getLongitude(), school.getSchoolName(), school.getSchoolAddress(), null, circleDrawable, true, 0);
+                    }
+                });
+            }
+        }
+    }
+
     @Override
     public void showNearPerson(List<Student> students) {
-        mNearPersonLayer.removeAll();
+//        mNearPersonLayer.removeAll();
+        removeAllGraphics();
         for (final Student student : students) {
             Glide.with(this).load(student.getIconUrl()).asBitmap().fitCenter().into(new SimpleTarget<Bitmap>(50, 50) {
                 @Override
                 public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                     RoundedBitmapDrawable circleDrawable = BitmapUtil.getCircleDrawable(getActivity(), resource);
                     final PictureMarkerSymbol pictureMarkerSymbol = new PictureMarkerSymbol(circleDrawable);
-//            pictureMarkerSymbol.setUrl(student.getIconUrl());
                     BmobGeoPoint studentGPSLocation = student.getLocation();
+                    //投影转换
                     Point personLoc = GeometryEngine.project(studentGPSLocation.getLongitude(),
                             studentGPSLocation.getLatitude(), Constant.SR_WWMAS);
-                    Graphic graphic = new Graphic(personLoc, pictureMarkerSymbol);
+                    //setAttributes
+                    Map<String, Object> attributes = new HashMap<>();
+                    attributes.put(NEAR_PERSON_LAYER_ATTRIBUTES, student.getObjectId());
+                    Graphic graphic = new Graphic(personLoc, pictureMarkerSymbol, attributes);
                     mNearPersonLayer.addGraphic(graphic);
                 }
             });
         }
+//        mMapView.addLayer(mNearPersonLayer);
         mMapView.zoomToScale(getLocPoint(), mNearPersonLayer.getMaxScale());
     }
 }

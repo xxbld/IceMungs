@@ -1,13 +1,18 @@
 package org.github.xxbld.icemungs.ui.activity;
 
+import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.dev.sacot41.scviewpager.DotsView;
 import com.dev.sacot41.scviewpager.SCPositionAnimation;
 import com.dev.sacot41.scviewpager.SCViewAnimation;
@@ -17,6 +22,7 @@ import com.dev.sacot41.scviewpager.SCViewPagerAdapter;
 
 import org.github.xxbld.icemung.base.adapter.recyclerview.BaseRecyclerHolder;
 import org.github.xxbld.icemung.base.adapter.recyclerview.BaseRecyclerViewAdapter;
+import org.github.xxbld.icemung.utils.BitmapUtil;
 import org.github.xxbld.icemungs.R;
 import org.github.xxbld.icemungs.data.models.notbmob.SchoolServiceItem;
 import org.github.xxbld.icemungs.ui.base.BaseActivity;
@@ -73,8 +79,8 @@ public class SchoolPageActivity extends BaseActivity {
         datas.add(new SchoolServiceItem("教学", R.drawable.ic_school_service_education));
         datas.add(new SchoolServiceItem("图书", R.drawable.ic_school_service_library));
         datas.add(new SchoolServiceItem("校医", R.drawable.ic_school_service_doctor));
-//        datas.add(new SchoolServiceItem("运动", R.drawable.ic_school_service_sport));
-//        datas.add(new SchoolServiceItem("运动", R.drawable.ic_school_service_sport));
+        datas.add(new SchoolServiceItem("校车", R.drawable.ic_school_service_bus));
+        datas.add(new SchoolServiceItem("食堂", R.drawable.ic_school_service_food));
 //        datas.add(new SchoolServiceItem("运动", R.drawable.ic_school_service_sport));
 //        datas.add(new SchoolServiceItem("运动", R.drawable.ic_school_service_sport));
 //        datas.add(new SchoolServiceItem("运动", R.drawable.ic_school_service_sport));
@@ -130,8 +136,15 @@ public class SchoolPageActivity extends BaseActivity {
 
     @Override
     protected void setToolbar() {
-        mToolbar.setTitle("江西理工大学");
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Glide.with(this).load(R.drawable.logo_jxust).asBitmap().fitCenter().into(new SimpleTarget<Bitmap>(50, 50) {
+            @Override
+            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                RoundedBitmapDrawable circleDrawable = BitmapUtil.getCircleDrawable(SchoolPageActivity.this, resource);
+                mToolbar.setTitle("江西理工大学");
+                mToolbar.setLogo(circleDrawable);
+                setSupportActionBar(mToolbar);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        });
     }
 }

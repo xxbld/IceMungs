@@ -137,7 +137,7 @@ public class NavFragmentAdapter implements NavigationView.OnNavigationItemSelect
         mNav.setCheckedItem(itemId);
         mCurrentSelectedItemId = itemId;
         if (mListener != null) {
-            mListener.onSwitchFragmentSuccess(mCurrentSelectedItemId);
+            mListener.onSwitchFragmentSuccess(mCurrentSelectedItemId, mMenu);
         }
     }
 
@@ -291,6 +291,7 @@ public class NavFragmentAdapter implements NavigationView.OnNavigationItemSelect
          *
          * @param currentItemId
          */
-        void onSwitchFragmentSuccess(int currentItemId);
+        void onSwitchFragmentSuccess(int currentItemId, Menu menu);
+
     }
 }

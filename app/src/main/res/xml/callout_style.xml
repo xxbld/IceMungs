@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resource>
+    <calloutViewStyle
+        anchor="5"
+        backgroundAlpha="255"
+        backgroundColor="#4CAF50"
+        cornerCurveDp="10"
+        frameColor="#B6B6B6"
+        maxHeighetDp="300"
+        maxWidthDp="500"/>
+</resource>

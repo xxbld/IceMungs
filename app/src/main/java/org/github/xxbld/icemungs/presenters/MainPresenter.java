@@ -6,8 +6,8 @@ import org.github.xxbld.icemung.base.mvp.BasePresenter;
 import org.github.xxbld.icemungs.R;
 import org.github.xxbld.icemungs.data.Constant;
 import org.github.xxbld.icemungs.data.models.Student;
+import org.github.xxbld.icemungs.ui.fragment.FlashFragment;
 import org.github.xxbld.icemungs.ui.fragment.UseTabFragment;
-import org.github.xxbld.icemungs.ui.resume.ResumeFragment;
 import org.github.xxbld.icemungs.ui.schoolmap.SchoolMapFragment;
 import org.github.xxbld.icemungs.views.IMainView;
 
@@ -70,7 +70,7 @@ public class MainPresenter extends BasePresenter<IMainView> {
                 SchoolMapFragment.newInstance(Constant.ARCGIS_MAPSERVER_TITLE_URL,
                         Constant.ACRGIS_MAPSERVER_TITLE_IMAGE_URL),
                 UseTabFragment.newInstance(R.string.nav_menu_verbose),
-                new ResumeFragment()};
+                new FlashFragment()};
 //        Object[] fragments = new Object[]{SchoolNewsFragment.newInstance(R.string.nav_menu_school), new ResumeFragment(),
 //                VerboseFragment.newInstance(R.string.nav_menu_verbose), new ResumeFragment()};
         Map<Integer, Object[]> fragMap = new HashMap<>();

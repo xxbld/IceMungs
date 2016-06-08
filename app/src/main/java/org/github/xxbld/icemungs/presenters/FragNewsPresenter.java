@@ -124,7 +124,7 @@ public class FragNewsPresenter extends BasePresenter<IFragNewsView> {
 //        } else if (newsTypeTag == NewsType.HOT.getValue()) {
 //            newsBmobQuery.addWhereGreaterThan("levelCode", 0);
 //        } else if (newsTypeTag == NewsType.SCHOOL.getValue()) {
-//            newsBmobQuery.addWhereEqualTo("levelCode", 1);
+//        newsBmobQuery.addWhereEqualTo("levelCode", 1);
 //        } else if (newsTypeTag == NewsType.ACADEMY.getValue()) {
 //            newsBmobQuery.addWhereEqualTo("levelCode", 2);
 //        } else if (newsTypeTag == NewsType.SPECIALITY.getValue()) {

@@ -1,5 +1,7 @@
 package org.github.xxbld.icemungs.data.models;
 
+import java.util.List;
+
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 
@@ -12,12 +14,52 @@ import cn.bmob.v3.datatype.BmobGeoPoint;
 public class ITalk extends BmobObject {
     //标题
     private String iTalkTitle;
-    //简介
-    private String iTalkIntroduction;
     //内容
     private String iTalkContent;
     //位置
     private BmobGeoPoint iTalkLocation;
-    //大图
-    private String iTalkBigImageUrl;
+    //图
+    private List<String> iTalkImageUrls;
+
+    private Student student;
+
+    public String getiTalkTitle() {
+        return iTalkTitle;
+    }
+
+    public void setiTalkTitle(String iTalkTitle) {
+        this.iTalkTitle = iTalkTitle;
+    }
+
+    public String getiTalkContent() {
+        return iTalkContent;
+    }
+
+    public void setiTalkContent(String iTalkContent) {
+        this.iTalkContent = iTalkContent;
+    }
+
+    public BmobGeoPoint getiTalkLocation() {
+        return iTalkLocation;
+    }
+
+    public void setiTalkLocation(BmobGeoPoint iTalkLocation) {
+        this.iTalkLocation = iTalkLocation;
+    }
+
+    public List<String> getiTalkImageUrls() {
+        return iTalkImageUrls;
+    }
+
+    public void setiTalkImageUrls(List<String> iTalkImageUrls) {
+        this.iTalkImageUrls = iTalkImageUrls;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
 }

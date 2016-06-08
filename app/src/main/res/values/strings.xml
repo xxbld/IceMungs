@@ -9,21 +9,34 @@
     <!--nav setting-->
     <string name="navigation_drawer_open">navigation_drawer_open</string>
     <string name="navigation_drawer_close">navigation_drawer_close</string>
+
+    <string name="nav_menu_school">校园新闻</string>
+    <string name="nav_menu_schoolmap">校园地图</string>
+    <string name="nav_menu_verbose">碎碎念</string>
+    <string name="nav_menu_resume">生活记录</string>
+    <string name="nav_about">关于</string>
+    <string name="nav_theme">主题</string>
+    <string name="nav_setting">设置</string>
+    <string name="login">登录</string>
+    <string name="login_username_error">用户名不能为空！</string>
+    <string name="login_pwd_error">用户密码不能为空！</string>
+    <string name="register">注册</string>
+
     <!--nav menu-->
-    <string name="nav_menu_school">SchoolNews</string>
-    <string name="nav_menu_schoolmap">SchoolMap</string>
-    <string name="nav_menu_verbose">Verbose</string>
-    <string name="nav_menu_resume">Resume</string>
-    <string name="nav_about">About</string>
-    <string name="nav_theme">Theme</string>
-    <string name="nav_setting">Setting</string>
+    <!--<string name="nav_menu_school">SchoolNews</string>-->
+    <!--<string name="nav_menu_schoolmap">SchoolMap</string>-->
+    <!--<string name="nav_menu_verbose">Verbose</string>-->
+    <!--<string name="nav_menu_resume">Resume</string>-->
+    <!--<string name="nav_about">About</string>-->
+    <!--<string name="nav_theme">Theme</string>-->
+    <!--<string name="nav_setting">Setting</string>-->
 
     <!--Login-->
-    <string name="login">Login</string>
-    <string name="login_username_error">user name can not empty！</string>
-    <string name="login_pwd_error">password can not empty！</string>
+    <!--<string name="login">Login</string>-->
+    <!--<string name="login_username_error">user name can not empty！</string>-->
+    <!--<string name="login_pwd_error">password can not empty！</string>-->
 
-    <string name="register">Register</string>
+    <!--<string name="register">Register</string>-->
 
     <!--setting..-->
     <string name="action_settings">Settings</string>

@@ -5,8 +5,6 @@ import android.app.DialogFragment;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
-import org.github.xxbld.icemungs.R;
-
 import java.util.Calendar;
 
 /**
@@ -25,16 +23,16 @@ public class DateTimePickerHelper {
      *
      * @param dialog
      */
-    private static void setDefaultPicker(DialogFragment dialog) {
+    public static void setDefaultPicker(DialogFragment dialog) {
         if (dialog instanceof DatePickerDialog) {
             DatePickerDialog datePickerDialog = (DatePickerDialog) dialog;
-            datePickerDialog.setAccentColor(dialog.getResources().getColor(R.color.colorAccent));
-            datePickerDialog.showYearPickerFirst(true);
+            datePickerDialog.setAccentColor("#4CAF50");
+//            datePickerDialog.showYearPickerFirst(true);
             datePickerDialog.dismissOnPause(true);
         }
         if (dialog instanceof TimePickerDialog) {
             TimePickerDialog timePickerDialog = (TimePickerDialog) dialog;
-            timePickerDialog.setAccentColor(dialog.getResources().getColor(R.color.colorAccent));
+            timePickerDialog.setAccentColor("#4CAF50");
             timePickerDialog.dismissOnPause(true);
         }
 
@@ -72,7 +70,7 @@ public class DateTimePickerHelper {
                 now.get(Calendar.MINUTE),
                 true //24小时制
         );
-        setDefaultPicker(tpd);
+//        setDefaultPicker(tpd);
         return tpd;
     }
 }
